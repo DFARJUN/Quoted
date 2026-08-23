@@ -1,0 +1,1876 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quoted / A price before. Not a surprise after.</title>
+<meta name="description" content="Value-based differential pricing for agentic products. One price list for everyone, a different price per job, set before the run and explained by the rule that set it.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20width%3D%22187%22%20height%3D%22187%22%20viewBox%3D%220%200%20187%20187%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%20%3Crect%20width%3D%22187%22%20height%3D%22187%22%20fill%3D%22%231741D6%22%2F%3E%20%3Cpath%20d%3D%22M122.014%2093C122.701%2094.5283%20123.331%2096.1219%20123.903%2097.7803C126.747%20106.228%20129.287%20111.96%20131.522%20114.977C133.757%20117.994%20137.11%20119.502%20141.58%20119.502C149.301%20119.502%20153.873%20111.457%20155.295%2095.3667L162%2095.97C161.594%20109.244%20157.428%20119.401%20149.504%20126.441C141.58%20133.48%20130.506%20137%20116.284%20137C102.264%20137%2091.3936%20133.48%2083.6726%20126.441C75.9516%20119.602%2070.0593%20109.445%2065.9956%2095.97C65.6638%2094.9339%2065.3382%2093.944%2065.0192%2093H64.9858C64.2986%2091.4717%2063.6692%2089.8781%2063.0971%2088.2197C60.2525%2079.7724%2057.7127%2074.0402%2055.4777%2071.0233C53.2426%2068.0065%2049.8901%2066.498%2045.4201%2066.498C37.6991%2066.498%2033.1274%2074.5432%2031.7051%2090.6333L25%2090.03C25.4064%2076.7557%2029.5716%2066.5987%2037.4957%2059.5592C45.4199%2052.5198%2056.4936%2049%2070.7165%2049C84.7361%2049%2095.6064%2052.5198%20103.327%2059.5592C111.048%2066.3975%20116.941%2076.5545%20121.004%2090.03C121.336%2091.0661%20121.662%2092.056%20121.981%2093H122.014Z%22%20fill%3D%22white%22%2F%3E%20%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Assistant:wght@300;400;500;600;700;800&family=Frank+Ruhl+Libre:wght@500;700;900&display=swap">
+<script>
+document.documentElement.classList.add('js');
+/* Reveal floor. If the layout script never reaches its reveal call, the hero
+   still shows. Nothing above the fold may depend on a 300 line IIFE finishing. */
+setTimeout(function(){
+  var els = document.querySelectorAll('.rise');
+  for (var i=0;i<els.length;i++){ els[i].classList.add('in'); }
+}, 600);
+</script>
+<style>
+/* ============================================================
+   QUOTED one-pager. Single file, no build step, opens from file://
+   Brand system locked 21 August 2026, thesis v5.
+   Grid is structure: every edge is a separate <line>. A window is
+   made by deleting interior edges, never by drawing a box on top.
+   ============================================================ */
+
+:root{
+  /* 1. BRAND CORE */
+  --blue:#1741d6;
+  --blue-deep:#1236b8;
+  --blue-grad:linear-gradient(180deg,#1741d6 0%,#1236b8 100%);
+  --ink:#0d1b3e;
+  --white:#ffffff;
+
+  /* 2. ACCENTS ON BLUE */
+  --acc-yellow:#ffd60a;
+  --acc-cyan:#45e5e0;
+  --acc-pink:#ff85c2;
+
+  /* 3. ACCENTS ON WHITE (headings only) */
+  --acc-amber-lt:#c97a00;
+  --acc-teal-lt:#0fa3b3;
+  --acc-pink-lt:#e54384;
+
+  /* 4. SURFACES */
+  --surface:#ffffff;
+  --surface-tint:#f4f6fb;
+  --surface-tint-2:#eef2fe;
+  --surface-dark:#1741d6;
+  --surface-dark-deep:#1236b8;
+  --surface-ink:#0d1b3e;
+  --hairline:#aab8da;        /* 1.99:1 on white, table row rules */
+  --rule-control:rgba(23,65,214,.60); /* composites to #748de6 = 3.14:1 on white, control boundaries */
+
+  /* 5. TEXT */
+  --text:#0d1b3e;
+  --text-muted:var(--ink); /* one text colour on white: ink. No grays. */
+  --text-on-blue:#ffffff;
+  --text-on-blue-muted:rgba(255,255,255,.82);
+  --link:#1741d6;
+
+  /* 6. GRID LINES */
+  --line-on-dark:rgba(255,255,255,.30);
+  --ctl-on-dark:rgba(255,255,255,.62); /* control chrome, not grid: #a7b7ef on blue = 3.86:1 */
+  --line-on-light:rgba(23,65,214,.40);
+
+  /* 7. THE MODULE
+     --cell-base is the target. --cell is what the page actually draws:
+     the script nudges it by a couple of percent so a whole number of cells
+     spans the screen exactly and no cell is ever cut off at an edge.
+     Without script the two are the same and the base value stands. */
+  --cell-base:60px;
+  --cell:60px;
+
+  /* 8. SPACING */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px;
+  --sp-6:32px; --sp-7:48px; --sp-8:64px; --sp-9:96px; --sp-10:144px;
+  --gutter:clamp(16px,3vw,32px);
+  /* The air inside a merged window. Type never touches a surviving edge.
+     Shared with .wrap, so copy in a window and copy in a plain section
+     start on the same line whichever kind of section it is. */
+  --win-pad:clamp(20px,2.8vw,44px);
+  --win-pad-block:clamp(20px,2.4vw,36px);
+
+  /* 9. RADIUS */
+  --r-grid:0; --r-1:4px; --r-2:8px; --r-3:12px;
+
+  /* 10. TYPE */
+  --f-word:'Abril Fatface',Georgia,serif;
+  --f-head:'Frank Ruhl Libre',Georgia,serif;
+  --f-body:Assistant,system-ui,-apple-system,'Segoe UI',sans-serif;
+
+  --fs-display:clamp(2.5rem,1.55rem + 3.9vw,4.5rem);
+  --fs-h1:clamp(2rem,1.45rem + 2.4vw,3.25rem);
+  --fs-h2:clamp(1.5rem,1.2rem + 1.35vw,2.125rem);
+  --fs-h3:clamp(1.25rem,1.13rem + 0.5vw,1.5rem);
+  --fs-lead:clamp(1.0625rem,1rem + 0.4vw,1.25rem);
+  --fs-body:clamp(1rem,0.965rem + 0.15vw,1.0625rem);
+  --fs-small:0.9375rem;
+  --fs-micro:0.8125rem;
+  --fs-num:clamp(1.75rem,1.35rem + 1.7vw,2.75rem);
+
+  --lh-tight:1.08; --lh-head:1.18; --lh-body:1.65;
+  --tr-tight:-0.02em; --tr-label:0.08em;
+  --measure:66ch;
+
+  /* 11. FOCUS */
+  --focus-on-light:#1741d6;
+  --focus-on-dark:#ffd60a;
+  --focus-w:3px; --focus-off:2px;
+
+  /* 12. MOTION */
+  --dur-1:120ms; --dur-2:220ms; --ease:cubic-bezier(.2,.7,.3,1);
+
+  /* header height, drives scroll-padding so anchors never land under it */
+  --hdr:60px;
+}
+
+@media (max-width:1199px){ :root{ --cell-base:54px; --cell:54px; } }
+@media (max-width:1023px){ :root{ --cell-base:48px; --cell:48px; } }
+@media (max-width:767px) { :root{ --cell-base:42px; --cell:42px; --hdr:56px; } }
+
+@media (prefers-reduced-motion:reduce){
+  :root{ --dur-1:0ms; --dur-2:0ms; }
+}
+
+/* ---------- reset ---------- */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; scroll-padding-top:calc(var(--hdr) + 16px); }
+@media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
+body{
+  margin:0;
+  font-family:var(--f-body);
+  font-size:var(--fs-body);
+  line-height:var(--lh-body);
+  color:var(--text);
+  background:var(--surface);
+  overflow-x:hidden;
+  text-wrap:pretty;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{ margin:0; font-family:var(--f-head); font-weight:700; line-height:var(--lh-head); letter-spacing:var(--tr-tight); text-wrap:balance; hyphens:none; }
+h1{ font-size:var(--fs-display); line-height:var(--lh-tight); }
+h2{ font-size:var(--fs-h2); }
+h3{ font-size:var(--fs-h3); }
+p,ul,ol,dl{ margin:0; }
+img,svg{ max-width:100%; }
+table{ border-collapse:collapse; }
+button{ font:inherit; color:inherit; }
+a{ color:var(--link); text-underline-offset:.12em; text-decoration-thickness:1px; }
+
+/* ---------- focus, never removed ---------- */
+:focus-visible{
+  outline:var(--focus-w) solid var(--focus-on-light);
+  outline-offset:var(--focus-off);
+}
+.surface-dark :focus-visible,
+.surface-deep :focus-visible,
+.hero :focus-visible,
+.hdr :focus-visible{
+  outline-color:var(--focus-on-dark);
+}
+
+.vh{
+  position:absolute; width:1px; height:1px; margin:-1px; padding:0;
+  overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; border:0;
+}
+
+.skip{
+  position:absolute; left:var(--sp-4); top:-100px; z-index:100;
+  background:var(--white); color:var(--blue); font-weight:700;
+  padding:var(--sp-3) var(--sp-4); border-radius:999px;
+  transition:top var(--dur-1) var(--ease);
+}
+.skip:focus{ top:calc(var(--hdr) + 8px); }
+
+/* ---------- page watermark grid (texture only, nothing merged) ---------- */
+.tex{
+  background-image:
+    repeating-linear-gradient(to bottom, rgba(23,65,214,.055) 0 1px, transparent 1px var(--cell)),
+    repeating-linear-gradient(to right,  rgba(23,65,214,.055) 0 1px, transparent 1px var(--cell));
+  background-size:var(--cell) var(--cell);
+}
+
+/* ---------- layout ---------- */
+.wrap{ width:100%; max-width:1440px; margin-inline:auto; padding-inline:var(--gutter); }
+/* Above 768 the grid is the page. Copy in a plain section starts exactly
+   on the third column line, with two empty columns on either side, so the
+   headline is measured by the grid rather than floating free of it. */
+@media (min-width:768px){
+  .wrap{ max-width:none; padding-inline:calc(2 * var(--cell) + var(--win-pad)); }
+}
+section{ padding-block:clamp(48px,7vw,96px); }
+.surface-dark{ background:var(--surface-dark); color:var(--text-on-blue); }
+.surface-deep{ background:var(--surface-dark-deep); color:var(--text-on-blue); }
+.surface-white{ background:var(--surface); color:var(--text); }
+.surface-dark a:not(.btn), .surface-deep a:not(.btn),
+.hero a:not(.btn){ color:var(--white); }
+
+.eyebrow{
+  font-size:var(--fs-micro); font-weight:700; letter-spacing:var(--tr-label);
+  text-transform:uppercase; margin:0 0 var(--sp-4);
+}
+.surface-white .eyebrow{ color:var(--text-muted); }
+.surface-dark .eyebrow, .surface-deep .eyebrow,
+.hero .eyebrow{ color:var(--text-on-blue-muted); }
+
+.deck{ font-size:var(--fs-lead); max-width:var(--measure); margin-top:var(--sp-4); }
+.surface-dark .deck, .surface-deep .deck,
+.hero .deck{ color:var(--text-on-blue-muted); }
+.surface-white .deck{ color:var(--text-muted); }
+.body p{ max-width:var(--measure); }
+.body p + p{ margin-top:var(--sp-4); }
+.mt5{ margin-top:var(--sp-5); } .mt6{ margin-top:var(--sp-6); } .mt7{ margin-top:var(--sp-7); }
+
+/* accent per surface */
+.h-yellow{ color:var(--acc-yellow); }
+.h-cyan{ color:var(--acc-cyan); }
+.h-pink{ color:var(--acc-pink); }
+.h-amber{ color:var(--acc-amber-lt); }
+.h-teal{ color:var(--acc-teal-lt); }
+.h-pinklt{ color:var(--acc-pink-lt); }
+
+/* ---------- sticky header ---------- */
+.hdr{
+  position:sticky; top:0; z-index:60;
+  background:var(--blue);
+  color:var(--white);
+}
+.hdr-in{
+  display:flex; align-items:center; gap:var(--sp-4);
+  min-height:var(--hdr);
+  width:100%; max-width:1440px; margin-inline:auto;
+  padding-inline:var(--gutter);
+}
+.hdr-word{
+  font-family:var(--f-word); font-size:1.375rem; color:var(--white);
+  text-decoration:none; line-height:1; padding-block:var(--sp-3);
+  margin-inline-end:auto;
+}
+.hdr-nav{ display:none; gap:var(--sp-1); }
+.hdr-nav a{
+  display:inline-flex; align-items:center; min-height:44px;
+  padding-inline:var(--sp-3);
+  font-size:var(--fs-small); color:var(--text-on-blue-muted);
+  text-decoration:none; border-bottom:2px solid transparent;
+}
+.hdr-nav a:hover{ color:var(--white); }
+.hdr-nav a[aria-current="true"]{ color:var(--acc-yellow); border-bottom-color:var(--acc-yellow); }
+/* specificity has to beat the later .btn rule, hence .hdr .hdr-cta.
+   The header CTA joins only after the hero, and its own button, scroll away. */
+.hdr .hdr-cta{ display:inline-flex; white-space:nowrap; }
+/* collapsed to zero width while the hero is on screen, so the nav sits flush
+   against the edge; when the CTA joins, the nav slides over in one motion */
+html.js .hdr .hdr-cta{
+  opacity:0; visibility:hidden; overflow:hidden;
+  max-width:0; padding-inline:0; border-width:0;
+  margin-inline-start:calc(-1 * var(--sp-4)); /* cancels the flex gap */
+  transition:opacity var(--dur-1) var(--ease), visibility var(--dur-1) var(--ease),
+             max-width 280ms var(--ease), padding 280ms var(--ease), margin 280ms var(--ease);
+}
+html.js .hdr.past-hero .hdr-cta{
+  opacity:1; visibility:visible;
+  max-width:220px; padding-inline:var(--sp-5); border-width:2px;
+  margin-inline-start:0;
+}
+@media (prefers-reduced-motion:reduce){
+  html.js .hdr .hdr-cta{ transition:none; }
+}
+
+/* ---------- Get Quoted modal ----------
+   An overlay, not a page: dimmed ink backdrop, and only the centre panel
+   is blue. The panel wears the brand grid as a low-opacity texture with a
+   full perimeter frame. Sharp corners: in this brand rectangles are always
+   square-cornered, and the 100% pill is reserved for buttons alone. */
+.gq{
+  position:fixed; inset:0; z-index:200;
+  background:rgba(13,27,62,.72);
+  display:flex; align-items:flex-start; justify-content:center;
+  overflow-y:auto; padding:var(--gutter);
+}
+/* an author display value outranks the UA rule for [hidden], so state it
+   here or the dialog is permanently open and close does nothing */
+.gq[hidden], .mnav[hidden]{ display:none; }
+.gq :focus-visible{ outline-color:var(--focus-on-dark); }
+.gq-in{
+  position:relative; margin:auto;
+  width:100%; max-width:560px;
+  background:var(--blue-grad);
+  border:1px solid var(--line-on-dark);
+  color:var(--text-on-blue);
+  padding:var(--sp-7) var(--sp-6) var(--sp-6);
+}
+/* bare icon, no enclosure: icons never sit in a circle */
+.gq-x{
+  position:absolute; top:var(--sp-4); inset-inline-end:var(--sp-4);
+  width:44px; height:44px; display:grid; place-items:center;
+  background:transparent; border:0; padding:0;
+  color:var(--white); cursor:pointer;
+}
+.gq-x:hover{ color:var(--acc-yellow); }
+.gq h2{ margin:0 0 var(--sp-2); }
+.gq .gq-sub{ color:var(--text-on-blue-muted); margin:0 0 var(--sp-6); }
+.gq-form{ display:grid; gap:var(--sp-4); }
+.gq-form label{
+  display:block;
+  font-size:var(--fs-small); font-weight:700; color:var(--white);
+}
+.gq-form label .opt{ font-weight:400; color:var(--text-on-blue-muted); }
+.gq-form input{
+  display:block; width:100%; margin-top:var(--sp-1);
+  min-height:46px; padding:var(--sp-2) var(--sp-4);
+  background:rgba(255,255,255,.07); color:var(--white);
+  border:1px solid var(--ctl-on-dark); border-radius:0;
+  font-family:var(--f-body); font-size:var(--fs-body);
+}
+.gq-form input::placeholder{ color:rgba(255,255,255,.45); }
+.gq-form input:focus-visible{ border-color:var(--white); }
+.gq-form .btn{ margin-top:var(--sp-3); justify-self:start; }
+.gq-note{ margin-top:var(--sp-4); font-size:var(--fs-small); color:var(--text-on-blue-muted); }
+
+/* ---------- mobile menu ---------- */
+.hdr-burger{
+  display:grid; place-items:center; width:42px; height:42px; flex:0 0 auto;
+  background:transparent; border:0; padding:0;
+  color:var(--white); cursor:pointer;
+}
+.hdr-burger:hover{ color:var(--acc-yellow); }
+.hdr-burger svg{ width:20px; height:20px; }
+@media (min-width:1100px){ .hdr-burger{ display:none; } }
+.mnav{
+  position:fixed; inset:0; z-index:180;
+  background:var(--blue-grad); color:var(--text-on-blue);
+  overflow-y:auto;
+}
+.mnav :focus-visible{ outline-color:var(--focus-on-dark); }
+.mnav-in{
+  min-height:100%; display:flex; flex-direction:column; justify-content:center;
+  gap:var(--sp-5); max-width:520px; margin:0 auto; padding:var(--sp-8) var(--gutter);
+}
+.mnav-in a{
+  color:var(--white); text-decoration:none;
+  font-family:var(--f-head); font-weight:700; font-size:1.75rem; line-height:1.2;
+}
+.mnav-in a:hover{ color:var(--acc-yellow); }
+.mnav-in .btn{ align-self:start; margin-top:var(--sp-4); }
+@media (min-width:1100px){ .hdr .hdr-nav{ display:flex; } }
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:var(--sp-2);
+  min-height:42px; padding:var(--sp-2) var(--sp-6);
+  /* full pill: the one shape on the page the square grid can never make */
+  border-radius:999px; border:2px solid transparent;
+  font-weight:700; font-size:var(--fs-body); text-decoration:none;
+  cursor:pointer; text-align:center;
+  transition:transform var(--dur-1) var(--ease), background-color var(--dur-1) var(--ease), filter var(--dur-1) var(--ease);
+}
+.btn:hover{ transform:translateY(-1px); }
+@media (prefers-reduced-motion:reduce){ .btn:hover{ transform:none; } }
+.btn-primary{ background:var(--acc-yellow); color:var(--ink); }
+.btn-primary:hover{ background:var(--acc-yellow); filter:brightness(1.08); }
+.surface-white .btn-primary{ background:var(--blue); color:var(--white); }
+.surface-white .btn-primary:hover{ background:var(--blue-deep); }
+/* hero runs pink, so its button does too: ink on pink = 6.8:1 */
+.hero .btn-primary{ background:var(--acc-pink); color:var(--ink); }
+.hero .btn-primary:hover{ background:var(--acc-pink); filter:brightness(1.06); }
+.btn-sm{ min-height:38px; padding:var(--sp-1) var(--sp-5); font-size:var(--fs-small); }
+.btn-full{ width:100%; }
+.cta-cost{ font-size:var(--fs-small); margin-top:var(--sp-3); }
+.surface-dark .cta-cost, .surface-deep .cta-cost,
+.hero .cta-cost{ color:var(--text-on-blue-muted); }
+.jump{
+  display:inline-flex; align-items:center; min-height:44px;
+  font-size:var(--fs-small); text-decoration:underline;
+}
+
+/* ============================================================
+   GRID PANELS. Built by JS as real per-edge <line> elements.
+   ============================================================ */
+/* The grid is the page, not a band inside it: it runs edge to edge with no
+   inset on either side. Panels sitting inside a .wrap break out of it here,
+   and panels that are already full-width sections resolve this to zero.
+   --vw is the scrollbar-free viewport width, published once per layout
+   pass; 100vw is only the fallback for the frame before script runs. */
+.gridpanel{
+  position:relative; --cols:19; --rows:6;
+  width:var(--vw,100vw);
+  margin-inline:calc(50% - var(--vw,100vw) / 2);
+  overflow:hidden;
+}
+/* A whole number of cells spans the screen exactly, because the cell was
+   sized to make that true. Anchored at the left edge rather than centred,
+   so the content windows always land at the same inset.
+   overflow:hidden on the panel is only a guard against sub-pixel rounding
+   in the calc, never a crop of real content. */
+.gridpanel .frame{
+  position:relative;
+  width:calc(var(--cols) * var(--cell));
+  height:calc(var(--rows) * var(--cell));
+  margin-inline:0;
+}
+.gridpanel .grid-svg-host{ position:absolute; inset:0; pointer-events:none; }
+.gridpanel .grid-svg-host svg{ display:block; }
+.cellbox{ position:absolute; }
+
+.hero-win{
+  display:flex; flex-direction:column; justify-content:center;
+  padding-inline:var(--win-pad);
+  padding-block:clamp(40px,6vh,72px);
+}
+.hero-word{
+  display:grid; place-items:center;
+  font-family:var(--f-word); color:var(--white);
+  font-size:clamp(1.25rem,1.6vw,1.75rem); line-height:1;
+}
+.foot-word{
+  display:grid; place-items:center;
+  font-family:var(--f-word); color:var(--blue);
+  font-size:clamp(1.375rem,1.8vw,1.875rem); line-height:1;
+}
+
+/* no-JS: sanctioned flat, unmerged band fallback (brand spec F.3) */
+.nojs-flat .frame{ width:100%; height:auto; }
+.nojs-flat .grid-svg-host{ display:none; }
+.nojs-flat .cellbox{ position:static; width:auto !important; height:auto !important; }
+.nojs-flat .hero-win, .nojs-flat .close-win{ padding:var(--sp-7) 0; }
+.nojs-flat .hero-word, .nojs-flat .foot-word{ place-items:start; padding-block:var(--sp-5); }
+
+/* ---------- hero ---------- */
+.hero{ background:var(--blue-grad); color:var(--text-on-blue); padding-block:0; overflow:hidden; }
+/* no bare blue around the grid at all: the grid is the hero, and its
+   first and last row lines are the seams with the header and the section
+   below. The breathing room is two empty grid rows, not a margin. */
+.hero .frame{ margin-block:0; }
+.hero h1{ max-width:22ch; margin-bottom:var(--sp-4); }
+.hero .def{ max-width:58ch; color:var(--text-on-blue-muted); font-size:var(--fs-lead); }
+.hero-actions{ display:flex; flex-wrap:wrap; align-items:center; gap:var(--sp-4); margin-top:var(--sp-5); }
+
+/* ---------- the four ways: three walls and an open seat ---------- */
+/* ---------- the ways panel: one closed grid, five merged windows ----------
+   Built by fitWays() with the same engine as the hero: every edge is a real
+   line, a window is made by deleting interior edges, stacked windows share
+   the single surviving line between them, and icons land only in the closed
+   frame cells around them. */
+.ways-grid .way-box{
+  display:flex; flex-direction:column; justify-content:flex-start;
+  padding:var(--win-pad-block) var(--win-pad);
+}
+.ways-grid .way-box.way-open{ justify-content:center; }
+.way-box .feat-q{ margin:0; }
+.way-box h3{ margin:var(--sp-1) 0 var(--sp-2); font-size:1.25rem; color:var(--ink); }
+.way-box .feat-b{ margin:0; max-width:78ch; }
+.way-box.way-open{ background:var(--acc-teal-lt); flex-direction:row; align-items:center; gap:var(--sp-5); }
+.way-open .way-mark{ flex:0 0 auto; width:56px; height:56px; }
+.way-open .feat-q{ color:var(--white); }
+.way-open h3{ color:var(--white); }
+.way-open .feat-b{ color:var(--white); font-weight:700; }
+@media (max-width:599.98px){
+  .way-box.way-open{ flex-direction:column; align-items:flex-start; gap:var(--sp-3); }
+  .way-open .way-mark{ width:40px; height:40px; }
+}
+@media (min-width:768px){
+  .feat.feat-open{ display:grid; grid-template-columns:auto 1fr; gap:var(--sp-2) var(--sp-6); align-items:start; }
+  .feat.feat-open .chip{ grid-row:1 / span 3; }
+  .feat.feat-open .feat-q{ margin-top:0; }
+}
+
+/* ---------- the four components, on the light surface ----------
+   Three inputs sit side by side, a bus converges them into the decision
+   panel, and the explanation closes the section. Sharp corners throughout:
+   only buttons are pills. */
+.feats{ display:grid; gap:var(--sp-5); margin-top:var(--sp-7); }
+@media (min-width:900px){ .feats{ grid-template-columns:repeat(3,1fr); gap:var(--sp-6); } }
+@media (min-width:900px){ .feats.c4{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1200px){ .feats.c4{ grid-template-columns:repeat(4,1fr); } }
+.mech-note{ max-width:var(--measure); }
+.feat{ border:1px solid var(--line-on-light); padding:var(--sp-5); }
+.feat h3{ margin:var(--sp-1) 0 var(--sp-3); font-size:1.25rem; color:var(--ink); }
+.feat-q{
+  margin:var(--sp-4) 0 0; font-size:var(--fs-micro); font-weight:700;
+  letter-spacing:var(--tr-label); text-transform:uppercase; color:var(--blue);
+}
+.feat-b{ margin:0; color:var(--text); font-size:var(--fs-small); line-height:1.6; }
+.feat-b + .feat-b{ margin-top:var(--sp-3); }
+.feat-out{
+  margin:var(--sp-4) 0 0; padding-top:var(--sp-3);
+  border-top:1px solid var(--line-on-light);
+  font-weight:700; color:var(--ink); font-size:var(--fs-small);
+}
+.feat-out span{ font-weight:400; color:var(--text); }
+/* the bus: three stubs into one trunk. Hidden below 900, where the cards
+   stack and a converging diagram would describe a layout that is not there */
+.converge{ display:none; }
+@media (min-width:900px){
+  .converge{ display:block; width:100%; height:56px; margin-top:var(--sp-2); }
+}
+@media (prefers-reduced-motion:no-preference){
+  .converge .current{ stroke-dasharray:2 22; animation:stream-current 1.1s linear infinite; }
+}
+.eng-label{ margin-top:0; }
+.eng-title{
+  margin:var(--sp-1) 0 0; font-size:clamp(1.5rem,2.4vw,2rem);
+  font-family:var(--f-head); font-weight:700; color:var(--acc-amber-lt);
+}
+/* the sample explanation: a receipt, not a callout */
+.feat-wide{
+  margin-top:var(--sp-8); padding-top:var(--sp-7);
+  border-top:1px solid var(--line-on-light);
+  display:grid; gap:var(--sp-5);
+}
+@media (min-width:768px){ .feat-wide{ grid-template-columns:auto 1fr; gap:var(--sp-6); } }
+.feat-wide .feat-q{ margin-top:0; }
+.feat-wide h3{ margin:var(--sp-1) 0 var(--sp-3); font-size:1.5rem; color:var(--ink); }
+.explain{
+  margin-top:var(--sp-5); border:1px solid var(--line-on-light);
+  padding:var(--sp-4); max-width:52ch; background:var(--surface-tint);
+}
+.explain-h{
+  margin:0 0 var(--sp-3); padding-bottom:var(--sp-3);
+  border-bottom:1px solid var(--line-on-light);
+  display:flex; justify-content:space-between; gap:var(--sp-4);
+  font-size:var(--fs-small); color:var(--text);
+}
+.explain-h b{ color:var(--blue); white-space:nowrap; }
+.explain ul{ margin:0; padding:0; list-style:none; display:grid; gap:var(--sp-2); }
+.explain li{
+  font-size:var(--fs-small); color:var(--ink); padding-inline-start:var(--sp-4);
+  position:relative;
+}
+.explain li::before{
+  content:""; position:absolute; inset-inline-start:0; top:.6em;
+  width:6px; height:6px; border:1px solid var(--blue);
+}
+
+/* ---------- chips: a closed square with one icon ---------- */
+/* the chip is a cell: it takes the live --cell, never a hardcoded 72 */
+.chip{ display:block; flex:0 0 auto; width:calc(var(--cell) + 1px); height:calc(var(--cell) + 1px); }
+.statgrid{
+  display:grid; gap:var(--sp-5);
+  grid-template-columns:1fr;
+  margin-top:var(--sp-7);
+}
+@media (min-width:600px){ .statgrid{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1024px){ .statgrid.c4{ grid-template-columns:repeat(4,1fr); } }
+@media (min-width:1024px){ .statgrid.c5{ grid-template-columns:repeat(5,1fr); } }
+@media (min-width:1024px){ .statgrid.c3{ grid-template-columns:repeat(3,1fr); } }
+
+/* ---------- process stream ----------
+   A continuous current flowing left to right under the five steps.
+   Two dash layers on one line at different speeds and weights give it
+   depth, like water moving over water. No stops, no per-step beats.
+   Dash motion is stroke-dashoffset on a fixed geometry: cheap to paint,
+   deterministic, and it degrades to a static dashed line under reduced
+   motion. The stream only exists at 1024px+, where the five steps sit
+   on one row. */
+/* The stream runs through the middle of the icons, behind the chips, and
+   ends at the last icon. railFlow() in the layout script measures the first
+   and last chip and sets the box: horizontal when the steps share a row,
+   vertical when they stack. Chips sit above it on an opaque background. */
+.flow{ position:relative; }
+.flow-rail{ display:none; position:absolute; z-index:0; }
+.flow-rail svg{ display:none; width:100%; height:100%; }
+.flow-rail.h .rail-h{ display:block; }
+.flow-rail.v .rail-v{ display:block; }
+.flow .chip{ position:relative; z-index:1; background:var(--white); }
+/* the flow never runs two-up: one column until all five fit on one row,
+   so the stream is always a single straight line through every icon */
+@media (min-width:600px) and (max-width:1023.98px){
+  .statgrid.flow{ grid-template-columns:1fr; }
+}
+.flow-rail .base{ stroke:var(--line-on-dark); stroke-width:1; }
+.flow-rail .drift{
+  stroke:var(--white); stroke-opacity:.30; stroke-width:3;
+  stroke-linecap:round; stroke-dasharray:22 26;
+}
+.flow-rail .current{
+  stroke:var(--acc-yellow); stroke-opacity:.95; stroke-width:3;
+  stroke-linecap:round; stroke-dasharray:2 22;
+}
+@media (prefers-reduced-motion:no-preference){
+  .flow-rail .drift{ animation:stream-drift 2.6s linear infinite; }
+  .flow-rail .current{ animation:stream-current 1.1s linear infinite; }
+}
+/* negative offset moves the dashes in the +x direction: left to right */
+@keyframes stream-drift{ to{ stroke-dashoffset:-48; } }
+@keyframes stream-current{ to{ stroke-dashoffset:-24; } }
+.stat .num{
+  font-weight:700; font-size:var(--fs-num); line-height:1.1;
+  font-variant-numeric:tabular-nums; font-feature-settings:'tnum';
+  direction:ltr; unicode-bidi:isolate;
+  margin-top:var(--sp-4);
+}
+.surface-dark .stat .num{ color:var(--acc-cyan); }
+/* on white, numbers inherit ink from the surface */
+.stat .lbl{ font-weight:700; margin-top:var(--sp-2); }
+.stat .sub{ font-size:var(--fs-small); margin-top:var(--sp-2); max-width:44ch; }
+.surface-dark .stat .sub, .surface-deep .stat .sub{ color:var(--text-on-blue-muted); }
+.surface-white .stat .sub{ color:var(--text-muted); }
+
+/* ---------- formula ---------- */
+.formula{
+  font-family:var(--f-body); font-weight:400;
+  font-size:clamp(.9375rem,.85rem + .4vw,1.125rem);
+  font-variant-numeric:tabular-nums; font-feature-settings:'tnum';
+  letter-spacing:0; line-height:1.9; padding-block:var(--sp-2);
+  /* wraps between terms instead of scrolling: no clipped tail, no dead tab stop */
+  white-space:normal; overflow-wrap:break-word;
+}
+.formula .nb{ white-space:nowrap; }
+.formula b{ color:var(--blue); font-weight:700; }
+.formula-note{ font-size:var(--fs-small); color:var(--text-muted); margin-top:var(--sp-3); }
+
+/* ---------- axis blocks ---------- */
+.axes{ display:grid; gap:var(--sp-6); margin-top:var(--sp-7); }
+@media (min-width:900px){ .axes{ grid-template-columns:repeat(2,1fr); gap:var(--sp-8); } }
+.axis h3{ margin-bottom:var(--sp-3); }
+.axis .kicker{
+  font-size:var(--fs-micro); font-weight:700; letter-spacing:var(--tr-label);
+  text-transform:uppercase; color:var(--text-muted); display:block; margin-bottom:var(--sp-2);
+}
+.axis p{ max-width:52ch; }
+.axis p + p{ margin-top:var(--sp-3); }
+
+/* ---------- tables ---------- */
+.tablewrap{ overflow-x:auto; margin-top:var(--sp-6); -webkit-overflow-scrolling:touch; }
+.tablewrap:focus-visible{ outline:var(--focus-w) solid var(--focus-on-light); outline-offset:2px; }
+table.t{ width:100%; min-width:520px; font-size:var(--fs-small); text-align:left; }
+table.t caption{
+  text-align:left; font-size:var(--fs-micro); font-weight:700; letter-spacing:var(--tr-label);
+  text-transform:uppercase; color:var(--text-muted); padding-bottom:var(--sp-3);
+}
+table.t th, table.t td{
+  padding:var(--sp-3) var(--sp-4);
+  border-bottom:1px solid var(--hairline);
+  vertical-align:top;
+}
+table.t thead th{ border-bottom:2px solid var(--blue); font-weight:700; }
+table.t tbody th{ font-weight:700; }
+table.t td.n{ font-variant-numeric:tabular-nums; font-feature-settings:'tnum'; direction:ltr; unicode-bidi:isolate; font-weight:700; }
+.ledger td.done{ color:var(--blue); font-weight:700; }
+.ledger td.open{ color:var(--text-muted); font-weight:700; }
+
+/* ---------- numbered steps ---------- */
+.steps{ list-style:none; padding:0; counter-reset:s; display:grid; gap:var(--sp-5); margin-top:var(--sp-7); }
+@media (min-width:900px){ .steps{ grid-template-columns:repeat(3,1fr); } }
+.steps li{ counter-increment:s; border-top:1px solid var(--line-on-dark); padding-top:var(--sp-4); }
+.steps li::before{
+  content:counter(s); display:block;
+  font-weight:700; font-size:var(--fs-num); line-height:1;
+  color:var(--acc-yellow); font-variant-numeric:tabular-nums;
+  margin-bottom:var(--sp-3);
+}
+.steps h3{ margin-bottom:var(--sp-2); }
+.steps p{ color:var(--text-on-blue-muted); font-size:var(--fs-small); }
+
+.bounds{ list-style:none; padding:0; margin-top:var(--sp-7); display:grid; gap:var(--sp-3); max-width:var(--measure); }
+.bounds li{ padding-left:var(--sp-5); position:relative; }
+.bounds li::before{
+  content:""; position:absolute; left:0; top:.62em;
+  width:10px; height:10px; border:1.7px solid var(--acc-yellow);
+}
+
+/* ---------- objections ---------- */
+.objs{ margin-top:var(--sp-6); max-width:78ch; border-top:1px solid var(--ctl-on-dark); }
+.obj{ border-bottom:1px solid var(--ctl-on-dark); }
+.obj > summary{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--sp-4);
+  min-height:56px; padding:var(--sp-3) 0;
+  cursor:pointer; list-style:none; font-weight:700; font-size:var(--fs-lead);
+  font-family:var(--f-body);
+}
+.obj > summary::-webkit-details-marker{ display:none; }
+.obj > summary::marker{ content:""; }
+.obj > summary::after{
+  content:""; flex:0 0 auto; width:11px; height:11px;
+  border-right:2px solid var(--white); border-bottom:2px solid var(--white);
+  transform:rotate(45deg) translate(-2px,-2px);
+  transition:transform var(--dur-2) var(--ease);
+}
+.obj[open] > summary::after{ transform:rotate(-135deg) translate(-2px,-2px); }
+.obj .ans{ padding:0 0 var(--sp-5); max-width:var(--measure); color:var(--text-on-blue-muted); }
+.obj .ans p + p{ margin-top:var(--sp-3); }
+
+/* ---------- close panel ---------- */
+.close-sec{ background:var(--surface); color:var(--text); padding-block:0; overflow:hidden; }
+/* no bare white around the grid: it ends where the surface ends */
+.close-sec .frame{ margin-block:0; }
+.close-sec .btn-primary{ background:var(--blue); color:var(--white); }
+.close-sec .btn-primary:hover{ background:var(--blue-deep); filter:none; }
+.close-win{
+  display:flex; flex-direction:column; justify-content:center;
+  padding-inline:var(--win-pad);
+  padding-block:clamp(32px,5vh,56px);
+}
+.close-win h2{ margin-bottom:var(--sp-3); }
+.close-win p{ color:var(--text); max-width:60ch; }
+.close-win p.cta-row{ max-width:none; margin-top:var(--sp-5); }
+/* the pill is a pill, not a bar: full width only where the column is narrow */
+@media (min-width:600px){
+  .close-win .btn-full{ width:auto; padding-inline:var(--sp-8); }
+}
+.fit{ border-top:1px solid var(--line-on-dark); padding-block:var(--sp-6) var(--sp-8); }
+.fit dl{ display:grid; gap:var(--sp-5); }
+@media (min-width:900px){ .fit dl{ grid-template-columns:repeat(2,1fr); gap:var(--sp-8); } }
+.fit dt{
+  font-size:var(--fs-micro); font-weight:700; letter-spacing:var(--tr-label);
+  text-transform:uppercase; color:var(--acc-yellow); margin-bottom:var(--sp-2);
+}
+.fit dd{ margin:0; color:var(--text-on-blue-muted); max-width:52ch; }
+
+/* ---------- footer ---------- */
+.foot{ background:var(--surface); color:var(--text); padding-block:var(--sp-7) var(--sp-6); overflow:hidden; }
+.foot-meta{
+  display:flex; flex-wrap:wrap; gap:var(--sp-3) var(--sp-6);
+  padding-top:var(--sp-5); font-size:var(--fs-small); color:var(--text-muted);
+}
+.foot-meta a{ min-height:44px; display:inline-flex; align-items:center; }
+
+
+/* ---------- one animation: hero content settles in on load ---------- */
+@media (prefers-reduced-motion:no-preference){
+  html.js .rise{ opacity:0; transform:translateY(10px); }
+  html.js .rise.in{ opacity:1; transform:none; transition:opacity 260ms var(--ease), transform 260ms var(--ease); }
+}
+
+/* Vertical rhythm on the module. 96px was 1.52 cells at 1512, so every
+   section pushed the grid a little further off the row line than the one
+   above it. Two cells of padding, one cell between a section intro and
+   the block under it, and snapSections() below tops each section up to a
+   whole number of cells so the row rhythm survives the whole page. */
+@media (min-width:768px){
+  section{ padding-block:calc(2 * var(--cell)); }
+  .foot{ padding-block:var(--cell) var(--cell); }
+  .feats, .statgrid, .axes, .steps, .bounds, .objs,
+  .gridpanel.mt7, .gridpanel.mt5, .mt7{ margin-top:var(--cell); }
+}
+
+/* One left edge for the whole page. A window already starts on the third
+   column line, so it carries no inset of its own and the copy inside sits
+   on the column, flush to the surviving edge, exactly like the copy in a
+   plain section above it. Below 768 the windows go full width and the
+   ordinary gutter takes over again. */
+@media (min-width:768px){
+  .ways-grid .way-box{ padding-block:var(--win-pad-block); }
+  /* the header is on the same grid as the page under it: the wordmark
+     starts on the third column line, the nav ends on its mirror, and the
+     bar is exactly one cell tall so the vertical rhythm starts on a row
+     line rather than 12px short of one */
+  :root{ --hdr:var(--cell); }
+  .hdr-in{ max-width:none; padding-inline:calc(2 * var(--cell) + var(--win-pad)); }
+  /* the last item ends on the line, not a text-padding short of it */
+  .hdr-nav a:last-child{ padding-inline-end:0; }
+  .hdr.past-hero .hdr-nav a:last-child{ padding-inline-end:var(--sp-3); }
+}
+
+/* ---------- small screens ---------- */
+@media (max-width:767px){
+  .hero h1{ max-width:100%; margin-bottom:var(--sp-3); }
+  /* the above-the-fold contract at 375 is four things: headline, definition,
+     the action, and the cost of the action. The eyebrow is not one of them. */
+  .hero-win .eyebrow{ display:none; }
+  .hero .def{ font-size:var(--fs-body); line-height:1.5; }
+  .hero-actions{ margin-top:var(--sp-4); gap:var(--sp-3); }
+  .hero .cta-cost{ margin-top:var(--sp-2); }
+  .stat{ display:grid; grid-template-columns:auto 1fr; gap:0 var(--sp-4); align-items:start; }
+  .stat .chip{ grid-row:1 / span 3; }
+  .stat .num{ margin-top:0; }
+  .hdr-word{ font-size:1.25rem; }
+}
+</style>
+<noscript><style>
+  /* Flat, unmerged band fallback. Permitted by the brand spec only in this case. */
+  .gridpanel .frame{ width:100%; height:auto; }
+  .gridpanel .grid-svg-host{ display:none; }
+  .gridpanel .cellbox{ position:static; }
+  /* A flat, unmerged band (spec F.3). The lines here are a watermark at .08
+     (spec F.1), never structure: structure is the inline SVG, which needs
+     measurement to place. No full-strength rule may cross the headline. */
+  .hero{
+    background-image:
+      repeating-linear-gradient(to bottom, rgba(255,255,255,.08) 0 1px, transparent 1px var(--cell)),
+      repeating-linear-gradient(to right,  rgba(255,255,255,.08) 0 1px, transparent 1px var(--cell)),
+      var(--blue-grad);
+    background-size:var(--cell) var(--cell), var(--cell) var(--cell), auto;
+  }
+  .close-sec{
+    background-image:
+      repeating-linear-gradient(to bottom, rgba(23,65,214,.08) 0 1px, transparent 1px var(--cell)),
+      repeating-linear-gradient(to right,  rgba(23,65,214,.08) 0 1px, transparent 1px var(--cell)),
+      linear-gradient(var(--surface), var(--surface));
+    background-size:var(--cell) var(--cell), var(--cell) var(--cell), auto;
+  }
+  .hero-win, .close-win{ padding:var(--sp-8) 0; }
+  .hero-word{ place-items:start; padding-bottom:var(--sp-6); }
+  .foot-word{ place-items:start; padding-bottom:var(--sp-5); }
+</style></noscript>
+</head>
+<body class="tex">
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============================ HEADER ============================ -->
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="hdr-word" href="#top">Quoted</a>
+
+    <nav class="hdr-nav" aria-label="Sections">
+      <a href="#dispersion">The opportunity</a>
+      <a href="#process">How it works</a>
+      <a href="#mechanism">Mechanism</a>
+      <a href="#objections">Questions</a>
+    </nav>
+
+    <button type="button" class="btn btn-primary btn-sm hdr-cta js-getquoted">Get Quoted</button>
+
+    <button type="button" class="hdr-burger" id="mnav-open" aria-label="Menu" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M1 4 H17 M1 9 H17 M1 14 H17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="mnav" id="mnav" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <button type="button" class="gq-x" id="mnav-x" aria-label="Close">
+    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M2 2 L16 16 M16 2 L2 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+  </button>
+  <nav class="mnav-in" aria-label="Sections">
+    <a href="#dispersion">The opportunity</a>
+    <a href="#process">How it works</a>
+    <a href="#mechanism">Mechanism</a>
+    <a href="#objections">Questions</a>
+    <button type="button" class="btn btn-primary js-getquoted">Get Quoted</button>
+  </nav>
+</div>
+
+<main id="main" tabindex="-1">
+
+<!-- ============================ 1. HERO ============================ -->
+<section class="hero gridpanel" id="top"
+         data-rows="8" data-rows-sm="8" data-mincols="6"
+         data-merges="2,2,c-4,r-4"
+         data-merges-sm="0,1,c,r-2">
+  <div class="frame">
+    <div class="grid-svg-host" aria-hidden="true">
+      <!-- Static desktop grid, 20x6 at CELL 72 (1440/72), window and wordmark
+         already merged by deleting interior edges. Ships in the HTML so the
+         page is correct before, and without, scripting. layoutAll() replaces
+         it on load when the measured column count differs. -->
+      <svg width="1441" height="433" viewBox="0 0 1441 433" aria-hidden="true" focusable="false" style="pointer-events:none">
+        <g id="grid" transform="translate(0.5,0.5)">
+          <g id="vertical-edges" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1" shape-rendering="crispEdges">
+            <line x1="0" y1="0" x2="0" y2="72"/><line x1="72" y1="0" x2="72" y2="72"/><line x1="144" y1="0" x2="144" y2="72"/><line x1="216" y1="0" x2="216" y2="72"/><line x1="288" y1="0" x2="288" y2="72"/><line x1="360" y1="0" x2="360" y2="72"/><line x1="432" y1="0" x2="432" y2="72"/><line x1="504" y1="0" x2="504" y2="72"/><line x1="576" y1="0" x2="576" y2="72"/><line x1="648" y1="0" x2="648" y2="72"/><line x1="720" y1="0" x2="720" y2="72"/><line x1="792" y1="0" x2="792" y2="72"/><line x1="864" y1="0" x2="864" y2="72"/><line x1="936" y1="0" x2="936" y2="72"/><line x1="1008" y1="0" x2="1008" y2="72"/><line x1="1080" y1="0" x2="1080" y2="72"/><line x1="1152" y1="0" x2="1152" y2="72"/><line x1="1224" y1="0" x2="1224" y2="72"/><line x1="1296" y1="0" x2="1296" y2="72"/><line x1="1368" y1="0" x2="1368" y2="72"/><line x1="1440" y1="0" x2="1440" y2="72"/>
+            <line x1="0" y1="72" x2="0" y2="144"/><line x1="72" y1="72" x2="72" y2="144"/><line x1="1368" y1="72" x2="1368" y2="144"/><line x1="1440" y1="72" x2="1440" y2="144"/>
+            <line x1="0" y1="144" x2="0" y2="216"/><line x1="72" y1="144" x2="72" y2="216"/><line x1="1368" y1="144" x2="1368" y2="216"/><line x1="1440" y1="144" x2="1440" y2="216"/>
+            <line x1="0" y1="216" x2="0" y2="288"/><line x1="72" y1="216" x2="72" y2="288"/><line x1="1368" y1="216" x2="1368" y2="288"/><line x1="1440" y1="216" x2="1440" y2="288"/>
+            <line x1="0" y1="288" x2="0" y2="360"/><line x1="72" y1="288" x2="72" y2="360"/><line x1="1368" y1="288" x2="1368" y2="360"/><line x1="1440" y1="288" x2="1440" y2="360"/>
+            <line x1="0" y1="360" x2="0" y2="432"/><line x1="72" y1="360" x2="72" y2="432"/><line x1="144" y1="360" x2="144" y2="432"/><line x1="1368" y1="360" x2="1368" y2="432"/><line x1="216" y1="360" x2="216" y2="432"/><line x1="288" y1="360" x2="288" y2="432"/><line x1="360" y1="360" x2="360" y2="432"/><line x1="432" y1="360" x2="432" y2="432"/><line x1="504" y1="360" x2="504" y2="432"/><line x1="576" y1="360" x2="576" y2="432"/><line x1="648" y1="360" x2="648" y2="432"/><line x1="720" y1="360" x2="720" y2="432"/><line x1="792" y1="360" x2="792" y2="432"/><line x1="864" y1="360" x2="864" y2="432"/><line x1="936" y1="360" x2="936" y2="432"/><line x1="1008" y1="360" x2="1008" y2="432"/><line x1="1080" y1="360" x2="1080" y2="432"/><line x1="1152" y1="360" x2="1152" y2="432"/><line x1="1224" y1="360" x2="1224" y2="432"/><line x1="1296" y1="360" x2="1296" y2="432"/><line x1="1440" y1="360" x2="1440" y2="432"/>
+          </g>
+          <g id="horizontal-edges" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1" shape-rendering="crispEdges">
+            <line x1="0" y1="0" x2="72" y2="0"/><line x1="72" y1="0" x2="144" y2="0"/><line x1="144" y1="0" x2="216" y2="0"/><line x1="216" y1="0" x2="288" y2="0"/><line x1="288" y1="0" x2="360" y2="0"/><line x1="360" y1="0" x2="432" y2="0"/><line x1="432" y1="0" x2="504" y2="0"/><line x1="504" y1="0" x2="576" y2="0"/><line x1="576" y1="0" x2="648" y2="0"/><line x1="648" y1="0" x2="720" y2="0"/><line x1="720" y1="0" x2="792" y2="0"/><line x1="792" y1="0" x2="864" y2="0"/><line x1="864" y1="0" x2="936" y2="0"/><line x1="936" y1="0" x2="1008" y2="0"/><line x1="1008" y1="0" x2="1080" y2="0"/><line x1="1080" y1="0" x2="1152" y2="0"/><line x1="1152" y1="0" x2="1224" y2="0"/><line x1="1224" y1="0" x2="1296" y2="0"/><line x1="1296" y1="0" x2="1368" y2="0"/><line x1="1368" y1="0" x2="1440" y2="0"/>
+            <line x1="0" y1="72" x2="72" y2="72"/><line x1="72" y1="72" x2="144" y2="72"/><line x1="144" y1="72" x2="216" y2="72"/><line x1="216" y1="72" x2="288" y2="72"/><line x1="288" y1="72" x2="360" y2="72"/><line x1="360" y1="72" x2="432" y2="72"/><line x1="432" y1="72" x2="504" y2="72"/><line x1="504" y1="72" x2="576" y2="72"/><line x1="576" y1="72" x2="648" y2="72"/><line x1="648" y1="72" x2="720" y2="72"/><line x1="720" y1="72" x2="792" y2="72"/><line x1="792" y1="72" x2="864" y2="72"/><line x1="864" y1="72" x2="936" y2="72"/><line x1="936" y1="72" x2="1008" y2="72"/><line x1="1008" y1="72" x2="1080" y2="72"/><line x1="1080" y1="72" x2="1152" y2="72"/><line x1="1152" y1="72" x2="1224" y2="72"/><line x1="1224" y1="72" x2="1296" y2="72"/><line x1="1296" y1="72" x2="1368" y2="72"/><line x1="1368" y1="72" x2="1440" y2="72"/>
+            <line x1="0" y1="144" x2="72" y2="144"/><line x1="1368" y1="144" x2="1440" y2="144"/>
+            <line x1="0" y1="216" x2="72" y2="216"/><line x1="1368" y1="216" x2="1440" y2="216"/>
+            <line x1="0" y1="288" x2="72" y2="288"/><line x1="1368" y1="288" x2="1440" y2="288"/>
+            <line x1="0" y1="360" x2="72" y2="360"/><line x1="72" y1="360" x2="144" y2="360"/><line x1="144" y1="360" x2="216" y2="360"/><line x1="216" y1="360" x2="288" y2="360"/><line x1="288" y1="360" x2="360" y2="360"/><line x1="360" y1="360" x2="432" y2="360"/><line x1="432" y1="360" x2="504" y2="360"/><line x1="504" y1="360" x2="576" y2="360"/><line x1="576" y1="360" x2="648" y2="360"/><line x1="648" y1="360" x2="720" y2="360"/><line x1="720" y1="360" x2="792" y2="360"/><line x1="792" y1="360" x2="864" y2="360"/><line x1="864" y1="360" x2="936" y2="360"/><line x1="936" y1="360" x2="1008" y2="360"/><line x1="1008" y1="360" x2="1080" y2="360"/><line x1="1080" y1="360" x2="1152" y2="360"/><line x1="1152" y1="360" x2="1224" y2="360"/><line x1="1224" y1="360" x2="1296" y2="360"/><line x1="1296" y1="360" x2="1368" y2="360"/><line x1="1368" y1="360" x2="1440" y2="360"/>
+            <line x1="0" y1="432" x2="72" y2="432"/><line x1="72" y1="432" x2="144" y2="432"/><line x1="144" y1="432" x2="216" y2="432"/><line x1="216" y1="432" x2="288" y2="432"/><line x1="288" y1="432" x2="360" y2="432"/><line x1="360" y1="432" x2="432" y2="432"/><line x1="432" y1="432" x2="504" y2="432"/><line x1="504" y1="432" x2="576" y2="432"/><line x1="576" y1="432" x2="648" y2="432"/><line x1="648" y1="432" x2="720" y2="432"/><line x1="720" y1="432" x2="792" y2="432"/><line x1="792" y1="432" x2="864" y2="432"/><line x1="864" y1="432" x2="936" y2="432"/><line x1="936" y1="432" x2="1008" y2="432"/><line x1="1008" y1="432" x2="1080" y2="432"/><line x1="1080" y1="432" x2="1152" y2="432"/><line x1="1152" y1="432" x2="1224" y2="432"/><line x1="1224" y1="432" x2="1296" y2="432"/><line x1="1296" y1="432" x2="1368" y2="432"/><line x1="1368" y1="432" x2="1440" y2="432"/>
+          </g>
+          <g id="icons">
+            <svg x="165" y="21" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 3 L8 20 H17 L15 33 L28 15 H19 Z"/></g></svg>
+            <svg x="597" y="21" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15 L15 4 H30 V19 L19 30 Z"/><circle cx="24" cy="10" r="2.6"/></g></svg>
+            <svg x="1101" y="21" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 29 C13 29 15 8 31 8"/><circle cx="20" cy="17.5" r="2.6"/></g></svg>
+            <svg x="309" y="381" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="18" cy="9" rx="11" ry="4"/><path d="M7 9 V18 C7 20.2 11.9 22 18 22 C24.1 22 29 20.2 29 18 V9"/><path d="M7 18 V27 C7 29.2 11.9 31 18 31 C24.1 31 29 29.2 29 27 V18"/></g></svg>
+            <svg x="957" y="381" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="13"/><path d="M18 10 V18 L24 21"/></g></svg>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <div class="cellbox hero-win rise" data-cell="2,2,c-4,r-4" data-cell-sm="0,1,c,r-2">
+      <h1 class="h-pink">Your agents can earn what their work is worth.</h1>
+      <p class="def">Quoted is a value-based differential pricing platform for agentic products: a different price per job, set before the run and explained by the rule that set it.</p>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary js-getquoted">Get Quoted</button>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ============================ 1. OPPORTUNITY ============================ -->
+<section class="surface-white" id="dispersion">
+  <div class="wrap">
+    <p class="eyebrow">01 / The opportunity</p>
+    <h2 class="h-teal">Today you price effort. Your users buy worth.</h2>
+    <p class="deck">That is the whole opportunity: price each job on the value it delivers, and collect the spread. Today every agentic platform, in any vertical, prices one of these four ways instead, and each one caps what the agent can earn.</p>
+
+    </div>
+
+  <div class="gridpanel ways-grid mt7" data-ways data-mode="light" data-mincols="6">
+    <div class="frame">
+      <div class="grid-svg-host" aria-hidden="true"></div>
+      <div class="cellbox way-box">
+        <p class="feat-q">Cost-plus</p>
+        <h3>Tokens burned, plus a margin.</h3>
+        <p class="feat-b">Revenue tracks the cost curve, not the value delivered. Every efficiency win cuts your own price, and the model vendor sets your profit.</p>
+      </div>
+      <div class="cellbox way-box">
+        <p class="feat-q">Flat price</p>
+        <h3>One price for every job.</h3>
+        <p class="feat-b">A button tweak and an app that replaces a subscription go out at the same number. The 1,000x jobs are sold at a 1x price.</p>
+      </div>
+      <div class="cellbox way-box">
+        <p class="feat-q">Priced by size</p>
+        <h3>Bigger job, bigger bill.</h3>
+        <p class="feat-b">Steps, tokens and tiers measure effort, not worth. A 400-step run that fails is expensive. A one-shot that replaces a SaaS is cheap.</p>
+      </div>
+      <div class="cellbox way-box">
+        <p class="feat-q">Subscription</p>
+        <h3>One price a month, no matter what.</h3>
+        <p class="feat-b">A flat fee, blind to how much the agent was used and to what its work was worth. The user who fixed one button and the user who shipped ten apps pay the same.</p>
+      </div>
+      <div class="cellbox way-box way-open">
+        <svg class="way-mark" viewBox="0 0 187 187" aria-hidden="true" focusable="false"><g fill="#1741d6"><path d="M122.014 93C122.701 94.5283 123.331 96.1219 123.903 97.7803C126.747 106.228 129.287 111.96 131.522 114.977C133.757 117.994 137.11 119.502 141.58 119.502C149.301 119.502 153.873 111.457 155.295 95.3667L162 95.97C161.594 109.244 157.428 119.401 149.504 126.441C141.58 133.48 130.506 137 116.284 137C102.264 137 91.3936 133.48 83.6726 126.441C75.9516 119.602 70.0593 109.445 65.9956 95.97C65.6638 94.9339 65.3382 93.944 65.0192 93H64.9858C64.2986 91.4717 63.6692 89.8781 63.0971 88.2197C60.2525 79.7724 57.7127 74.0402 55.4777 71.0233C53.2426 68.0065 49.8901 66.498 45.4201 66.498C37.6991 66.498 33.1274 74.5432 31.7051 90.6333L25 90.03C25.4064 76.7557 29.5716 66.5987 37.4957 59.5592C45.4199 52.5198 56.4936 49 70.7165 49C84.7361 49 95.6064 52.5198 103.327 59.5592C111.048 66.3975 116.941 76.5545 121.004 90.03C121.336 91.0661 121.662 92.056 121.981 93H122.014Z"/></g></svg>
+        <div>
+          <p class="feat-q">Priced by value</p>
+          <h3>This is where Quoted comes in.</h3>
+          <p class="feat-b">Quoted prices every job on the value it delivers, exactly the way a human professional quotes work: what is it worth to the client, what will it cost to deliver, and the price lands between the two. Agents took over the professional's work. Quoted gives them the professional's pricing.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 2. PROCESS ============================ -->
+<section class="surface-deep" id="process">
+  <div class="wrap">
+    <p class="eyebrow">02 / How it works</p>
+    <h2 class="h-yellow">Job in. Smarter price out.</h2>
+    <p class="deck">One API call before the run. Quoted reads the job, prices it on the value it carries, and hands back a number your user can understand. All of it in under a second.</p>
+
+    <div class="statgrid c5 flow">
+      <div class="flow-rail" aria-hidden="true">
+        <svg class="rail-h" aria-hidden="true" focusable="false">
+          <line class="base" x1="0" y1="6" x2="100%" y2="6"/>
+          <line class="drift" x1="0" y1="6" x2="100%" y2="6"/>
+          <line class="current" x1="0" y1="6" x2="100%" y2="6"/>
+        </svg>
+        <svg class="rail-v" aria-hidden="true" focusable="false">
+          <line class="base" x1="6" y1="0" x2="6" y2="100%"/>
+          <line class="drift" x1="6" y1="0" x2="6" y2="100%"/>
+          <line class="current" x1="6" y1="0" x2="6" y2="100%"/>
+        </svg>
+      </div>
+      <div class="stat">
+        <svg class="chip" width="73" height="73" viewBox="0 0 73 73" aria-hidden="true" focusable="false"><g transform="translate(.5,.5)" stroke="#1741d6" stroke-opacity="0.4" stroke-width="1" shape-rendering="crispEdges"><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="72" y2="0"/><line vector-effect="non-scaling-stroke" x1="0" y1="72" x2="72" y2="72"/><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="0" y2="72"/><line vector-effect="non-scaling-stroke" x1="72" y1="0" x2="72" y2="72"/></g><svg x="21" y="21" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#1741d6" stroke-opacity="0.75" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7 H31 V24 H16 L9 30 V24 H5 Z"/><path d="M11 13 H25 M11 18 H21"/></g></svg></svg>
+        <p class="lbl">1 &middot; A job comes in</p>
+        <p class="sub">Your user asks for something. You send Quoted the job and its metadata, before the run.</p>
+      </div>
+      <div class="stat">
+        <svg class="chip" width="73" height="73" viewBox="0 0 73 73" aria-hidden="true" focusable="false"><g transform="translate(.5,.5)" stroke="#1741d6" stroke-opacity="0.4" stroke-width="1" shape-rendering="crispEdges"><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="72" y2="0"/><line vector-effect="non-scaling-stroke" x1="0" y1="72" x2="72" y2="72"/><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="0" y2="72"/><line vector-effect="non-scaling-stroke" x1="72" y1="0" x2="72" y2="72"/></g><svg x="21" y="21" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#1741d6" stroke-opacity="0.75" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4 H28 V29 L24.6 26.5 21.2 29 17.8 26.5 14.4 29 11 26.5 8 29 Z"/><path d="M12 11 H24 M12 16 H24 M12 21 H19"/></g></svg></svg>
+        <p class="lbl">2 &middot; We estimate your cost</p>
+        <p class="sub">What serving this job will cost you, learned from jobs like it, tail included. This sets the floor.</p>
+      </div>
+      <div class="stat">
+        <svg class="chip" width="73" height="73" viewBox="0 0 73 73" aria-hidden="true" focusable="false"><g transform="translate(.5,.5)" stroke="#1741d6" stroke-opacity="0.4" stroke-width="1" shape-rendering="crispEdges"><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="72" y2="0"/><line vector-effect="non-scaling-stroke" x1="0" y1="72" x2="72" y2="72"/><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="0" y2="72"/><line vector-effect="non-scaling-stroke" x1="72" y1="0" x2="72" y2="72"/></g><svg x="21" y="21" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#1741d6" stroke-opacity="0.75" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 V30"/><path d="M8 11 H28"/><path d="M8 11 L4 21 H12 Z"/><path d="M28 11 L24 21 H32 Z"/></g></svg></svg>
+        <p class="lbl">3 &middot; We estimate the value</p>
+        <p class="sub">What the result is worth to this user: the scope of the ask, and the declared attributes of who is asking. This sets the ceiling.</p>
+      </div>
+      <div class="stat">
+        <svg class="chip" width="73" height="73" viewBox="0 0 73 73" aria-hidden="true" focusable="false"><g transform="translate(.5,.5)" stroke="#1741d6" stroke-opacity="0.4" stroke-width="1" shape-rendering="crispEdges"><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="72" y2="0"/><line vector-effect="non-scaling-stroke" x1="0" y1="72" x2="72" y2="72"/><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="0" y2="72"/><line vector-effect="non-scaling-stroke" x1="72" y1="0" x2="72" y2="72"/></g><svg x="21" y="21" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#1741d6" stroke-opacity="0.75" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 29 C13 29 15 8 31 8"/><circle cx="20" cy="17.5" r="2.6"/></g></svg></svg>
+        <p class="lbl">4 &middot; We pick the price between them</p>
+        <p class="sub">Never below your cost plus your margin. As close to the value as this user will accept, learned from every yes and no before.</p>
+      </div>
+      <div class="stat">
+        <svg class="chip" width="73" height="73" viewBox="0 0 73 73" aria-hidden="true" focusable="false"><g transform="translate(.5,.5)" stroke="#1741d6" stroke-opacity="0.4" stroke-width="1" shape-rendering="crispEdges"><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="72" y2="0"/><line vector-effect="non-scaling-stroke" x1="0" y1="72" x2="72" y2="72"/><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="0" y2="72"/><line vector-effect="non-scaling-stroke" x1="72" y1="0" x2="72" y2="72"/></g><svg x="21" y="21" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#1741d6" stroke-opacity="0.75" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15 L15 4 H30 V19 L19 30 Z"/><circle cx="24" cy="10" r="2.6"/></g></svg></svg>
+        <p class="lbl">5 &middot; You get a price and the reason</p>
+        <p class="sub">A value-based price plus an explanation you can show your user, returned before the run starts.</p>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+
+<!-- ============================ 3. MECHANISM ============================ -->
+<section class="surface-white" id="mechanism">
+  <div class="wrap">
+    <p class="eyebrow">03 / The mechanism</p>
+    <h2 class="h-amber">How a price gets set.</h2>
+    <p class="deck">Four parts behind a single call. Three of them each answer one question about the job. The fourth picks the number, and says why.</p>
+
+    <div class="feats c4">
+      <div class="feat">
+        <svg class="chip" width="73" height="73" viewBox="0 0 73 73" aria-hidden="true" focusable="false"><g transform="translate(.5,.5)" stroke="#1741d6" stroke-opacity="0.4" stroke-width="1" shape-rendering="crispEdges"><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="72" y2="0"/><line vector-effect="non-scaling-stroke" x1="0" y1="72" x2="72" y2="72"/><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="0" y2="72"/><line vector-effect="non-scaling-stroke" x1="72" y1="0" x2="72" y2="72"/></g><svg x="21" y="21" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#1741d6" stroke-opacity="0.75" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4 H28 V29 L24.6 26.5 21.2 29 17.8 26.5 14.4 29 11 26.5 8 29 Z"/><path d="M12 11 H24 M12 16 H24 M12 21 H19"/></g></svg></svg>
+        <p class="feat-q">What will this cost us?</p>
+        <h3>Cost prediction</h3>
+        <p class="feat-b">Finds the jobs that look like this one and returns what they actually cost, tail included. The tail sets the number, not the average, so the floor holds on the expensive runs too.</p>
+        <p class="feat-out"><span>Returns</span> the floor</p>
+      </div>
+      <div class="feat">
+        <svg class="chip" width="73" height="73" viewBox="0 0 73 73" aria-hidden="true" focusable="false"><g transform="translate(.5,.5)" stroke="#1741d6" stroke-opacity="0.4" stroke-width="1" shape-rendering="crispEdges"><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="72" y2="0"/><line vector-effect="non-scaling-stroke" x1="0" y1="72" x2="72" y2="72"/><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="0" y2="72"/><line vector-effect="non-scaling-stroke" x1="72" y1="0" x2="72" y2="72"/></g><svg x="21" y="21" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#1741d6" stroke-opacity="0.75" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 V30"/><path d="M8 11 H28"/><path d="M8 11 L4 21 H12 Z"/><path d="M28 11 L24 21 H32 Z"/></g></svg></svg>
+        <p class="feat-q">What is it worth to them?</p>
+        <h3>Value prediction</h3>
+        <p class="feat-b">Reads the scope of the ask and the declared attributes of who is asking. A whole campaign is worth more than the sum of its images, because the specification is the part they came to buy.</p>
+        <p class="feat-out"><span>Returns</span> the ceiling</p>
+      </div>
+      <div class="feat">
+        <svg class="chip" width="73" height="73" viewBox="0 0 73 73" aria-hidden="true" focusable="false"><g transform="translate(.5,.5)" stroke="#1741d6" stroke-opacity="0.4" stroke-width="1" shape-rendering="crispEdges"><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="72" y2="0"/><line vector-effect="non-scaling-stroke" x1="0" y1="72" x2="72" y2="72"/><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="0" y2="72"/><line vector-effect="non-scaling-stroke" x1="72" y1="0" x2="72" y2="72"/></g><svg x="21" y="21" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#1741d6" stroke-opacity="0.75" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="4"/><circle cx="26" cy="26" r="4"/><path d="M28 6 L8 30"/></g></svg></svg>
+        <p class="feat-q">What are we allowed to charge?</p>
+        <h3>Rule-based pricing</h3>
+        <p class="feat-b">Your published price list, as rules the engine has to obey: tiers, volume steps, contracted rates, minimum margin, caps. Nothing it returns falls outside what a customer could read on your pricing page.</p>
+        <p class="feat-out"><span>Returns</span> the bounds</p>
+      </div>
+      <div class="feat">
+        <svg class="chip" width="73" height="73" viewBox="0 0 73 73" aria-hidden="true" focusable="false"><g transform="translate(.5,.5)" stroke="#1741d6" stroke-opacity="0.4" stroke-width="1" shape-rendering="crispEdges"><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="72" y2="0"/><line vector-effect="non-scaling-stroke" x1="0" y1="72" x2="72" y2="72"/><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="0" y2="72"/><line vector-effect="non-scaling-stroke" x1="72" y1="0" x2="72" y2="72"/></g><svg x="21" y="21" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#1741d6" stroke-opacity="0.75" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 29 C13 29 15 8 31 8"/><circle cx="20" cy="17.5" r="2.6"/></g></svg></svg>
+        <p class="feat-q">Where in the band does it land?</p>
+        <h3>The decision</h3>
+        <p class="feat-b">Not the highest price. The highest price times the odds this buyer accepts it, learned from every offer you have made, including the ones that came back no. Every price comes back with the rule that produced it, in words you can put in front of the user.</p>
+        <p class="feat-out"><span>Returns</span> the price, and the reason</p>
+      </div>
+    </div>
+
+    <p class="mt6 mech-note"><strong>Rejections are the asset.</strong> Every no is a point on the demand curve, and today most products throw them away. For a customer who does not store rejected prices, the first feature is not a model. It is starting to store them.</p>
+  </div>
+</section>
+
+<!-- ============================ 4. OBJECTIONS ============================ -->
+<section class="surface-dark" id="objections">
+  <div class="wrap">
+    <p class="eyebrow">04 / Questions</p>
+    <h2 class="h-cyan">The hard parts, up front.</h2>
+  </div>
+
+
+  <div class="wrap fit">
+    <dl>
+      <div>
+        <dt>Who this is for</dt>
+        <dd>Agentic platforms with an open task space, where the user asks in free text and the work varies by orders of magnitude. Where the charge is decided in real time, before the run starts. And where an agent loop does the work, not a fixed pipeline.</dd>
+      </div>
+      <div>
+        <dt>Who this is not for</dt>
+        <dd>Closed intent spaces, where a fixed price per intent is enough. Parameterised generation, where a formula on the inputs already gets it right (Runway, ElevenLabs). Enterprise passthrough with caps, where the risk already sits with the customer and there is no pain to solve.</dd>
+      </div>
+    </dl>
+
+  </div>
+
+  <div class="wrap">
+    <div class="objs">
+      <details class="obj">
+        <summary>This explodes in procurement.</summary>
+        <div class="ans">
+          <p>Nobody is priced by identity. The price derives from declared attributes that are printed in the price list (average deal value, vertical, scope, close rate, LTV, sales cycle length) and the buyer classifies itself.</p>
+          <p>Identity-based pricing dies at the first invoice comparison and the first MFN clause. Attribute-based pricing is the version both customers can read.</p>
+        </div>
+      </details>
+      <details class="obj">
+        <summary>We will build it ourselves.</summary>
+        <div class="ans">
+          <p>The floor, probably. The acceptance curves have no source: a new customer of yours has no history, so the prior has to come from similar sellers, matched on the same declared attributes that set the price.</p>
+          <p>That is cross-customer data, and it only exists for a party sitting with many customers. Here it is a condition of the thing working, not a nice-to-have.</p>
+        </div>
+      </details>
+      <details class="obj">
+        <summary>Users will split one big job into small ones.</summary>
+        <div class="ans">
+          <p>To split "a campaign for every social network" into 100 image jobs, they have to already know which 100. That knowledge is the thing they came to buy.</p>
+          <p>The commercial precedent is a partner at $800 an hour against an analyst at $150, same deliverable, published rate card. Volume buyers get a volume tier that prices them directly.</p>
+        </div>
+      </details>
+      <details class="obj">
+        <summary>I do not want users thinking about price.</summary>
+        <div class="ans">
+          <p>They will not. The band is internal and what surfaces is a credit charge, not a dollar figure. Your users already see "this run cost 47 credits".</p>
+        </div>
+      </details>
+      <details class="obj">
+        <summary>Who decides what counts as delivered?</summary>
+        <div class="ans">
+          <p>Differential pricing starts arguments, and today the vendor rules on its own invoice. Fin bills for a resolution that includes a customer who gave up, and Zendesk moved to Verified Resolutions in May 2026 after that fight.</p>
+          <p>Once prices differ per job, a third party that both sides can read is worth more than an in-house dashboard.</p>
+        </div>
+      </details>
+    </div>
+
+  </div>
+
+  
+
+</section>
+
+<!-- ============================ 5. CLOSE ============================ -->
+<section class="close-sec gridpanel" id="close"
+         data-rows="5" data-rows-sm="6" data-mode="light" data-mincols="6"
+         data-merges="2,1,c-4,r-2" data-merges-sm="0,1,c,r-2">
+  <div class="frame">
+    <div class="grid-svg-host" aria-hidden="true">
+      <!-- Static desktop grid, 20x5 at CELL 72 (1440/72), window and wordmark
+         already merged by deleting interior edges. Ships in the HTML so the
+         page is correct before, and without, scripting. layoutAll() replaces
+         it on load when the measured column count differs. -->
+      <svg width="1441" height="361" viewBox="0 0 1441 361" aria-hidden="true" focusable="false" style="pointer-events:none">
+        <g id="grid" transform="translate(0.5,0.5)">
+          <g id="vertical-edges" stroke="#1741d6" stroke-opacity="0.4" stroke-width="1" shape-rendering="crispEdges">
+            <line x1="0" y1="0" x2="0" y2="72"/><line x1="72" y1="0" x2="72" y2="72"/><line x1="144" y1="0" x2="144" y2="72"/><line x1="216" y1="0" x2="216" y2="72"/><line x1="288" y1="0" x2="288" y2="72"/><line x1="360" y1="0" x2="360" y2="72"/><line x1="432" y1="0" x2="432" y2="72"/><line x1="504" y1="0" x2="504" y2="72"/><line x1="576" y1="0" x2="576" y2="72"/><line x1="648" y1="0" x2="648" y2="72"/><line x1="720" y1="0" x2="720" y2="72"/><line x1="792" y1="0" x2="792" y2="72"/><line x1="864" y1="0" x2="864" y2="72"/><line x1="936" y1="0" x2="936" y2="72"/><line x1="1008" y1="0" x2="1008" y2="72"/><line x1="1080" y1="0" x2="1080" y2="72"/><line x1="1152" y1="0" x2="1152" y2="72"/><line x1="1224" y1="0" x2="1224" y2="72"/><line x1="1296" y1="0" x2="1296" y2="72"/><line x1="1368" y1="0" x2="1368" y2="72"/><line x1="1440" y1="0" x2="1440" y2="72"/>
+            <line x1="0" y1="72" x2="0" y2="144"/><line x1="72" y1="72" x2="72" y2="144"/><line x1="1368" y1="72" x2="1368" y2="144"/><line x1="1440" y1="72" x2="1440" y2="144"/>
+            <line x1="0" y1="144" x2="0" y2="216"/><line x1="72" y1="144" x2="72" y2="216"/><line x1="1368" y1="144" x2="1368" y2="216"/><line x1="1440" y1="144" x2="1440" y2="216"/>
+            <line x1="0" y1="216" x2="0" y2="288"/><line x1="72" y1="216" x2="72" y2="288"/><line x1="1368" y1="216" x2="1368" y2="288"/><line x1="1440" y1="216" x2="1440" y2="288"/>
+            <line x1="0" y1="288" x2="0" y2="360"/><line x1="72" y1="288" x2="72" y2="360"/><line x1="144" y1="288" x2="144" y2="360"/><line x1="216" y1="288" x2="216" y2="360"/><line x1="288" y1="288" x2="288" y2="360"/><line x1="360" y1="288" x2="360" y2="360"/><line x1="432" y1="288" x2="432" y2="360"/><line x1="504" y1="288" x2="504" y2="360"/><line x1="576" y1="288" x2="576" y2="360"/><line x1="648" y1="288" x2="648" y2="360"/><line x1="720" y1="288" x2="720" y2="360"/><line x1="792" y1="288" x2="792" y2="360"/><line x1="864" y1="288" x2="864" y2="360"/><line x1="936" y1="288" x2="936" y2="360"/><line x1="1008" y1="288" x2="1008" y2="360"/><line x1="1080" y1="288" x2="1080" y2="360"/><line x1="1152" y1="288" x2="1152" y2="360"/><line x1="1224" y1="288" x2="1224" y2="360"/><line x1="1296" y1="288" x2="1296" y2="360"/><line x1="1368" y1="288" x2="1368" y2="360"/><line x1="1440" y1="288" x2="1440" y2="360"/>
+          </g>
+          <g id="horizontal-edges" stroke="#1741d6" stroke-opacity="0.4" stroke-width="1" shape-rendering="crispEdges">
+            <line x1="0" y1="0" x2="72" y2="0"/><line x1="72" y1="0" x2="144" y2="0"/><line x1="144" y1="0" x2="216" y2="0"/><line x1="216" y1="0" x2="288" y2="0"/><line x1="288" y1="0" x2="360" y2="0"/><line x1="360" y1="0" x2="432" y2="0"/><line x1="432" y1="0" x2="504" y2="0"/><line x1="504" y1="0" x2="576" y2="0"/><line x1="576" y1="0" x2="648" y2="0"/><line x1="648" y1="0" x2="720" y2="0"/><line x1="720" y1="0" x2="792" y2="0"/><line x1="792" y1="0" x2="864" y2="0"/><line x1="864" y1="0" x2="936" y2="0"/><line x1="936" y1="0" x2="1008" y2="0"/><line x1="1008" y1="0" x2="1080" y2="0"/><line x1="1080" y1="0" x2="1152" y2="0"/><line x1="1152" y1="0" x2="1224" y2="0"/><line x1="1224" y1="0" x2="1296" y2="0"/><line x1="1296" y1="0" x2="1368" y2="0"/><line x1="1368" y1="0" x2="1440" y2="0"/>
+            <line x1="0" y1="72" x2="72" y2="72"/><line x1="72" y1="72" x2="144" y2="72"/><line x1="144" y1="72" x2="216" y2="72"/><line x1="216" y1="72" x2="288" y2="72"/><line x1="288" y1="72" x2="360" y2="72"/><line x1="360" y1="72" x2="432" y2="72"/><line x1="432" y1="72" x2="504" y2="72"/><line x1="504" y1="72" x2="576" y2="72"/><line x1="576" y1="72" x2="648" y2="72"/><line x1="648" y1="72" x2="720" y2="72"/><line x1="720" y1="72" x2="792" y2="72"/><line x1="792" y1="72" x2="864" y2="72"/><line x1="864" y1="72" x2="936" y2="72"/><line x1="936" y1="72" x2="1008" y2="72"/><line x1="1008" y1="72" x2="1080" y2="72"/><line x1="1080" y1="72" x2="1152" y2="72"/><line x1="1152" y1="72" x2="1224" y2="72"/><line x1="1224" y1="72" x2="1296" y2="72"/><line x1="1296" y1="72" x2="1368" y2="72"/><line x1="1368" y1="72" x2="1440" y2="72"/>
+            <line x1="0" y1="144" x2="72" y2="144"/><line x1="1368" y1="144" x2="1440" y2="144"/>
+            <line x1="0" y1="216" x2="72" y2="216"/><line x1="1368" y1="216" x2="1440" y2="216"/>
+            <line x1="0" y1="288" x2="72" y2="288"/><line x1="72" y1="288" x2="144" y2="288"/><line x1="144" y1="288" x2="216" y2="288"/><line x1="216" y1="288" x2="288" y2="288"/><line x1="288" y1="288" x2="360" y2="288"/><line x1="360" y1="288" x2="432" y2="288"/><line x1="432" y1="288" x2="504" y2="288"/><line x1="504" y1="288" x2="576" y2="288"/><line x1="576" y1="288" x2="648" y2="288"/><line x1="648" y1="288" x2="720" y2="288"/><line x1="720" y1="288" x2="792" y2="288"/><line x1="792" y1="288" x2="864" y2="288"/><line x1="864" y1="288" x2="936" y2="288"/><line x1="936" y1="288" x2="1008" y2="288"/><line x1="1008" y1="288" x2="1080" y2="288"/><line x1="1080" y1="288" x2="1152" y2="288"/><line x1="1152" y1="288" x2="1224" y2="288"/><line x1="1224" y1="288" x2="1296" y2="288"/><line x1="1296" y1="288" x2="1368" y2="288"/><line x1="1368" y1="288" x2="1440" y2="288"/>
+            <line x1="0" y1="360" x2="72" y2="360"/><line x1="72" y1="360" x2="144" y2="360"/><line x1="144" y1="360" x2="216" y2="360"/><line x1="216" y1="360" x2="288" y2="360"/><line x1="288" y1="360" x2="360" y2="360"/><line x1="360" y1="360" x2="432" y2="360"/><line x1="432" y1="360" x2="504" y2="360"/><line x1="504" y1="360" x2="576" y2="360"/><line x1="576" y1="360" x2="648" y2="360"/><line x1="648" y1="360" x2="720" y2="360"/><line x1="720" y1="360" x2="792" y2="360"/><line x1="792" y1="360" x2="864" y2="360"/><line x1="864" y1="360" x2="936" y2="360"/><line x1="936" y1="360" x2="1008" y2="360"/><line x1="1008" y1="360" x2="1080" y2="360"/><line x1="1080" y1="360" x2="1152" y2="360"/><line x1="1152" y1="360" x2="1224" y2="360"/><line x1="1224" y1="360" x2="1296" y2="360"/><line x1="1296" y1="360" x2="1368" y2="360"/><line x1="1368" y1="360" x2="1440" y2="360"/>
+          </g>
+          <g id="icons">
+            <svg x="237" y="21" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#1741d6" stroke-opacity="0.5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="4"/><circle cx="26" cy="26" r="4"/><path d="M28 6 L8 30"/></g></svg>
+            <svg x="813" y="21" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#1741d6" stroke-opacity="0.5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7 H31 V24 H16 L9 30 V24 H5 Z"/><path d="M11 13 H25 M11 18 H21"/></g></svg>
+            <svg x="1245" y="21" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#1741d6" stroke-opacity="0.5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 V30"/><path d="M8 11 H28"/><path d="M8 11 L4 21 H12 Z"/><path d="M28 11 L24 21 H32 Z"/></g></svg>
+            <svg x="453" y="309" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#1741d6" stroke-opacity="0.5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4 H28 V29 L24.6 26.5 21.2 29 17.8 26.5 14.4 29 11 26.5 8 29 Z"/><path d="M12 11 H24 M12 16 H24 M12 21 H19"/></g></svg>
+            <svg x="1029" y="309" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#1741d6" stroke-opacity="0.5" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 4 L32 12 L18 20 L4 12 Z"/><path d="M4 19 L18 27 L32 19"/></g></svg>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="cellbox close-win" data-cell="2,1,c-4,r-2" data-cell-sm="0,1,c,r-2">
+      <h2 class="h-amber">Thirty minutes on how you price today.</h2>
+      <p>We go through what you charge now, where in the flow the price is decided, and which jobs you already suspect you are underpricing. You leave with the spread we think is sitting inside your current pricing and what it would take to capture it. No deck.</p>
+      <p class="mt5 cta-row">
+        <button type="button" class="btn btn-primary btn-full js-getquoted">Book a working session</button>
+      </p>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="foot gridpanel" data-rows="1" data-rows-sm="1" data-mode="light" data-mincols="4"
+        data-merges="c-4,r-1,2,1" data-merges-sm="c-3,r-1,2,1">
+  <div class="frame">
+    <div class="grid-svg-host" aria-hidden="true"></div>
+    <div class="cellbox foot-word" data-cell="c-4,r-1,2,1" data-cell-sm="c-3,r-1,2,1">Quoted</div>
+  </div>
+  <div class="wrap">
+    <div class="foot-meta">
+      <span>Value-based pricing for agentic products.</span>
+      <span>Thesis v5, 21 August 2026.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="gq" id="gq" role="dialog" aria-modal="true" aria-labelledby="gq-title" hidden>
+  <div class="gq-in">
+    <button type="button" class="gq-x" id="gq-x" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M2 2 L16 16 M16 2 L2 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+    </button>
+    <h2 id="gq-title" class="h-yellow">Book the session.</h2>
+    <p class="gq-sub">Leave your details and we will come back with two times that work.</p>
+    <form class="gq-form" id="gq-form" novalidate>
+      <label>Name
+        <input type="text" name="name" id="gq-name" autocomplete="name" required>
+      </label>
+      <label>Email
+        <input type="email" name="email" id="gq-email" autocomplete="email" required>
+      </label>
+      <label>Phone <span class="opt">(optional)</span>
+        <input type="tel" name="phone" id="gq-phone" autocomplete="tel">
+      </label>
+      <label>Company <span class="opt">(optional)</span>
+        <input type="text" name="company" id="gq-company" autocomplete="organization">
+      </label>
+      <button type="submit" class="btn btn-primary">Let's talk</button>
+      <p class="gq-note" id="gq-err" hidden>Name and email are the two we actually need.</p>
+    </form>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var NS = 'http://www.w3.org/2000/svg';
+  var root = document.documentElement;
+
+  /* ---------- brand icon vocabulary, the only ten ---------- */
+  var ICONS = {
+    percent: '<circle cx="10" cy="10" r="4"/><circle cx="26" cy="26" r="4"/><path d="M28 6 L8 30"/>',
+    tag:     '<path d="M4 15 L15 4 H30 V19 L19 30 Z"/><circle cx="24" cy="10" r="2.6"/>',
+    quote:   '<path d="M5 7 H31 V24 H16 L9 30 V24 H5 Z"/><path d="M11 13 H25 M11 18 H21"/>',
+    curve:   '<path d="M5 29 C13 29 15 8 31 8"/><circle cx="20" cy="17.5" r="2.6"/>',
+    receipt: '<path d="M8 4 H28 V29 L24.6 26.5 21.2 29 17.8 26.5 14.4 29 11 26.5 8 29 Z"/><path d="M12 11 H24 M12 16 H24 M12 21 H19"/>',
+    scales:  '<path d="M18 6 V30"/><path d="M8 11 H28"/><path d="M8 11 L4 21 H12 Z"/><path d="M28 11 L24 21 H32 Z"/>',
+    coins:   '<ellipse cx="18" cy="9" rx="11" ry="4"/><path d="M7 9 V18 C7 20.2 11.9 22 18 22 C24.1 22 29 20.2 29 18 V9"/><path d="M7 18 V27 C7 29.2 11.9 31 18 31 C24.1 31 29 29.2 29 27 V18"/>',
+    clock:   '<circle cx="18" cy="18" r="13"/><path d="M18 10 V18 L24 21"/>',
+    layers:  '<path d="M18 4 L32 12 L18 20 L4 12 Z"/><path d="M4 19 L18 27 L32 19"/>',
+    bolt:    '<path d="M20 3 L8 20 H17 L15 33 L28 15 H19 Z"/>'
+  };
+  var ICON_NAMES = Object.keys(ICONS);
+
+  /* ---------- helpers ---------- */
+  function cellPx(){
+    var v = parseFloat(getComputedStyle(root).getPropertyValue('--cell'));
+    return isNaN(v) ? 60 : v;
+  }
+  /* The column count is the constant, not the cell. Twenty-four columns:
+     two of margin on each side and twenty of content, which divides by
+     four for a row of cards and by two for a pair. The cell is whatever
+     that makes it, so the grid always ends exactly on both page edges.
+     Below 768 the windows go full width and a fixed 24 would leave cells
+     too small to hold an icon, so there the module leads again. */
+  var GRID_COLS = 24;
+  function fitCell(){
+    var vw = root.clientWidth;
+    var cols;
+    if (vw >= 768){
+      cols = GRID_COLS;
+    } else {
+      var base = parseFloat(getComputedStyle(root).getPropertyValue('--cell-base'));
+      if (isNaN(base) || base <= 0) base = 42;
+      cols = Math.max(1, Math.round(vw / base));
+      if (cols % 2) cols += 1;
+    }
+    root.style.setProperty('--cell', (vw / cols) + 'px');
+  }
+  function gutterPx(){
+    var vw = root.clientWidth;
+    return Math.min(32, Math.max(16, vw * 0.03));
+  }
+  /* "c-2" -> cols-2, "r-1" -> rows-1, "5" -> 5 */
+  function resolveTok(tok, cols, rows){
+    tok = String(tok).trim();
+    if (tok.charAt(0) === 'c') return cols + (parseInt(tok.slice(1), 10) || 0);
+    if (tok.charAt(0) === 'r') return rows + (parseInt(tok.slice(1), 10) || 0);
+    return parseInt(tok, 10) || 0;
+  }
+  function parseRects(spec, cols, rows){
+    if (!spec) return [];
+    return spec.split('|').map(function(part){
+      return part.split(',').map(function(t){ return resolveTok(t, cols, rows); });
+    });
+  }
+
+  /* ---------- build one grid of real per-edge lines ---------- */
+  function buildSvg(cols, rows, CELL, mode){
+    var w = cols * CELL, h = rows * CELL;
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('width', w);
+    svg.setAttribute('height', h);
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    /* The four boundary lines are pulled a pixel inside the box. Drawn on
+       the box edge they land half a pixel outside it, where the panel's
+       own clip eats half the stroke and the closing line reads lighter
+       than every line beside it. */
+    function edge(v, max){ return Math.min(v, max - 1); }
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('focusable', 'false');
+    svg.style.pointerEvents = 'none';
+
+    var g = document.createElementNS(NS, 'g');
+    g.setAttribute('id', 'grid');
+    g.setAttribute('transform', 'translate(0.5,0.5)');
+
+    var stroke = (mode === 'light') ? '#1741d6' : '#ffffff';
+    var op     = (mode === 'light') ? '0.4' : '0.3';
+
+    var gv = document.createElementNS(NS, 'g');
+    gv.setAttribute('id', 'vertical-edges');
+    var gh = document.createElementNS(NS, 'g');
+    gh.setAttribute('id', 'horizontal-edges');
+    [gv, gh].forEach(function(grp){
+      grp.setAttribute('stroke', stroke);
+      grp.setAttribute('stroke-opacity', op);
+      grp.setAttribute('stroke-width', '1');
+      grp.setAttribute('shape-rendering', 'crispEdges');
+    });
+
+    var c, r, ln, x, y;
+    for (c = 0; c <= cols; c++){
+      x = edge(c * CELL, w);
+      for (r = 0; r < rows; r++){
+        ln = document.createElementNS(NS, 'line');
+        ln.setAttribute('id', 'v-c' + c + '-r' + r);
+        ln.setAttribute('x1', x); ln.setAttribute('x2', x);
+        ln.setAttribute('y1', r * CELL); ln.setAttribute('y2', Math.min((r + 1) * CELL, h));
+        gv.appendChild(ln);
+      }
+    }
+    for (r = 0; r <= rows; r++){
+      y = edge(r * CELL, h);
+      for (c = 0; c < cols; c++){
+        ln = document.createElementNS(NS, 'line');
+        ln.setAttribute('id', 'h-c' + c + '-r' + r);
+        ln.setAttribute('y1', y); ln.setAttribute('y2', y);
+        ln.setAttribute('x1', c * CELL); ln.setAttribute('x2', Math.min((c + 1) * CELL, w));
+        gh.appendChild(ln);
+      }
+    }
+    g.appendChild(gv); g.appendChild(gh);
+    svg.appendChild(g);
+    svg._gridRoot = g;
+    return svg;
+  }
+
+  /* The merge: delete the interior edges of a rectangle of cells.
+     Nothing is drawn on top, nothing is hidden. The nodes are removed. */
+  function merge(svg, x, y, w, h){
+    var c, r, el;
+    for (c = x + 1; c < x + w; c++){
+      for (r = y; r < y + h; r++){
+        el = svg.querySelector('#v-c' + c + '-r' + r);
+        if (el) el.parentNode.removeChild(el);
+      }
+    }
+    for (r = y + 1; r < y + h; r++){
+      for (c = x; c < x + w; c++){
+        el = svg.querySelector('#h-c' + c + '-r' + r);
+        if (el) el.parentNode.removeChild(el);
+      }
+    }
+  }
+
+  /* An icon may only sit in a square whose four edges all survived. */
+  function isClosed(svg, c, r){
+    return !!(svg.querySelector('#v-c' + c + '-r' + r) &&
+              svg.querySelector('#v-c' + (c + 1) + '-r' + r) &&
+              svg.querySelector('#h-c' + c + '-r' + r) &&
+              svg.querySelector('#h-c' + c + '-r' + (r + 1)));
+  }
+
+  /* ---------- icons: random scatter, reshuffled for as long as the page
+     is open ----------
+     Every load deals a fresh hand: which squares, and which glyph in each.
+     From then on the set breathes without end. One icon at a time fades
+     out and returns in a different closed square wearing a different
+     glyph. Nothing ever slides: appear and disappear only, so the grid
+     holds still and the motion never competes with the copy. */
+  var iconAnims = [];
+  function stopIconAnims(panel){
+    iconAnims = iconAnims.filter(function(a){
+      if (panel && a.panel !== panel) return true;
+      a.stopped = true; clearTimeout(a.handle);
+      return false;
+    });
+  }
+  var REDUCED = !!(window.matchMedia &&
+                   window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  function scatterIcons(svg, cols, rows, CELL, mode, panel){
+    var closed = [], c, r;
+    for (r = 0; r < rows; r++){
+      for (c = 0; c < cols; c++){ if (isClosed(svg, c, r)) closed.push([c, r]); }
+    }
+    if (!closed.length) return;
+    var count = Math.max(1, Math.round(closed.length / 10));
+    var taken = {}, placed = [];
+    var draw = Math.max(20, Math.round(CELL * 30 / 72));
+    var off  = (CELL - draw) / 2;
+    var grp = document.createElementNS(NS, 'g');
+    grp.setAttribute('id', 'icons');
+
+    /* the same glyph never sits orthogonally next to itself */
+    function clashes(name, cc, rr, skip){
+      return placed.some(function(p){
+        return p !== skip && p.name === name &&
+               Math.abs(p.c - cc) + Math.abs(p.r - rr) === 1;
+      });
+    }
+
+    var guard = 0;
+    while (placed.length < count && guard++ < 400){
+      var pick = closed[Math.floor(Math.random() * closed.length)];
+      var key = pick[0] + ':' + pick[1];
+      if (taken[key]) continue;
+      var name = ICON_NAMES[Math.floor(Math.random() * ICON_NAMES.length)];
+      if (clashes(name, pick[0], pick[1])) continue;
+      taken[key] = 1;
+      placed.push({ c: pick[0], r: pick[1], name: name });
+    }
+
+    placed.forEach(function(p){
+      var inner = document.createElementNS(NS, 'svg');
+      inner.setAttribute('x', p.c * CELL + off);
+      inner.setAttribute('y', p.r * CELL + off);
+      inner.setAttribute('width', draw);
+      inner.setAttribute('height', draw);
+      inner.setAttribute('viewBox', '0 0 36 36');
+      var ig = document.createElementNS(NS, 'g');
+      ig.setAttribute('fill', 'none');
+      ig.setAttribute('stroke', mode === 'light' ? '#1741d6' : '#ffffff');
+      ig.setAttribute('stroke-opacity', mode === 'light' ? '0.5' : '0.55');
+      ig.setAttribute('stroke-width', '1.7');
+      ig.setAttribute('stroke-linecap', 'round');
+      ig.setAttribute('stroke-linejoin', 'round');
+      ig.innerHTML = ICONS[p.name];
+      inner.appendChild(ig);
+      grp.appendChild(inner);
+      p.el = inner; p.g = ig;
+    });
+    svg._gridRoot.appendChild(grp);
+
+    /* no free square to move into, or the reader asked for stillness */
+    if (REDUCED || placed.length >= closed.length) return;
+
+    var FADE = 900;
+    var anim = { stopped:false, handle:null, panel:panel };
+    iconAnims.push(anim);
+    /* cubic-bezier(.45,0,.55,1) is symmetric about its midpoint: the fade
+       out and the fade in are the identical curve, not mirror images of
+       one, which is what makes the pair read as a single slow breath. */
+    placed.forEach(function(p){
+      p.el.style.transition = 'opacity ' + FADE + 'ms cubic-bezier(.45,0,.55,1)';
+      p.el.style.willChange = 'opacity';
+    });
+
+    function swap(){
+      if (anim.stopped) return;
+      /* an icon already mid-breath is left alone: restarting it would cut
+         one of the two halves short and break the symmetry */
+      var idle = placed.filter(function(p){ return !p.busy; });
+      if (!idle.length) return;
+      var p = idle[Math.floor(Math.random() * idle.length)];
+      var free = closed.filter(function(cell){ return !taken[cell[0] + ':' + cell[1]]; });
+      if (!free.length) return;
+
+      var dest = null, nm = null, tries = 0;
+      while (tries++ < 24){
+        var d = free[Math.floor(Math.random() * free.length)];
+        var n = ICON_NAMES[Math.floor(Math.random() * ICON_NAMES.length)];
+        if (clashes(n, d[0], d[1], p)) continue;
+        dest = d; nm = n; break;
+      }
+      if (!dest) return;
+
+      p.busy = true;
+      p.el.style.opacity = '0';
+      setTimeout(function(){
+        if (anim.stopped) return;
+        delete taken[p.c + ':' + p.r];
+        p.c = dest[0]; p.r = dest[1]; p.name = nm;
+        taken[p.c + ':' + p.r] = 1;
+        p.el.setAttribute('x', p.c * CELL + off);
+        p.el.setAttribute('y', p.r * CELL + off);
+        p.g.innerHTML = ICONS[nm];
+        /* one frame at zero before the return, so the browser commits the
+           move and animates the fade in rather than skipping it */
+        requestAnimationFrame(function(){
+          if (anim.stopped) return;
+          p.el.style.opacity = '1';
+          setTimeout(function(){ p.busy = false; }, FADE);
+        });
+      }, FADE);
+    }
+
+    /* irregular cadence on purpose: an even metronome reads as a spinner */
+    function tick(){
+      if (anim.stopped) return;
+      if (!document.hidden) swap();
+      anim.handle = setTimeout(tick, 1400 + Math.random() * 2800);
+    }
+    anim.handle = setTimeout(tick, 1400 + Math.random() * 2400);
+  }
+
+  /* ---------- panel assembly ---------- */
+  var panels = [].slice.call(document.querySelectorAll('.gridpanel')).filter(function(p){ return !p.hasAttribute('data-ways'); });
+
+  function layoutPanel(panel, extraRows){
+    var CELL = cellPx();
+    var vw = root.clientWidth;
+    var sm = vw < 768;
+    /* no gutter and no 1440 cap: the grid spans the screen. The cell was
+       already fitted, so this divides exactly and the last column ends on
+       the right edge instead of being cut by it. */
+    var minCols = parseInt(panel.dataset.mincols || '6', 10);
+    var cols = Math.max(minCols, Math.round(vw / CELL));
+    var baseRows = parseInt((sm && panel.dataset.rowsSm) ? panel.dataset.rowsSm : (panel.dataset.rows || '6'), 10);
+    var rows = baseRows + (extraRows || 0);
+    var mode = panel.dataset.mode || 'dark';
+
+    panel.style.setProperty('--cols', cols);
+    panel.style.setProperty('--rows', rows);
+
+    var svg = buildSvg(cols, rows, CELL, mode);
+
+    var spec = (sm && panel.dataset.mergesSm) ? panel.dataset.mergesSm : panel.dataset.merges;
+    parseRects(spec, cols, rows).forEach(function(m){ merge(svg, m[0], m[1], m[2], m[3]); });
+
+    /* overlays are driven by the same cell value, so they cannot drift */
+    [].slice.call(panel.querySelectorAll('.cellbox')).forEach(function(box){
+      var cs = (sm && box.dataset.cellSm) ? box.dataset.cellSm : box.dataset.cell;
+      var rect = parseRects(cs, cols, rows)[0];
+      if (!rect) return;
+      box.style.left   = (rect[0] * CELL) + 'px';
+      box.style.top    = (rect[1] * CELL) + 'px';
+      box.style.width  = (rect[2] * CELL) + 'px';
+      box.style.height = (rect[3] * CELL) + 'px';
+    });
+
+    stopIconAnims(panel);
+    if (panel.dataset.icons !== 'none'){
+      scatterIcons(svg, cols, rows, CELL, mode, panel);
+    }
+
+    var host = panel.querySelector('.grid-svg-host');
+    host.textContent = '';
+    host.appendChild(svg);
+  }
+
+  /* If the copy is taller than its window, the frame grows by whole
+     cells. It never clips and never spills across a live line. */
+  function fitPanel(panel){
+    var CELL = cellPx();
+    var extra = 0;
+    for (var pass = 0; pass < 4; pass++){
+      layoutPanel(panel, extra);
+      var boxes = [].slice.call(panel.querySelectorAll('.cellbox.hero-win, .cellbox.close-win'));
+      if (!boxes.length) return;
+      var grow = 0;
+      boxes.forEach(function(box){
+        var have = box.offsetHeight;
+        box.style.height = 'auto';
+        var need = box.offsetHeight;
+        box.style.height = have + 'px';
+        if (need - have > 1) grow = Math.max(grow, Math.ceil((need - have) / CELL));
+      });
+      if (!grow) return;
+      extra += grow;
+    }
+  }
+
+  /* A horizontally scrolling region is a keyboard tab stop only while it is
+     actually scrolling. At desktop widths these tables fit, so the stop and the
+     scroll hint are both removed instead of lying about the region. */
+  function syncScrollRegions(){
+    [].slice.call(document.querySelectorAll('[data-scrollregion]')).forEach(function(el){
+      var over = (el.scrollWidth - el.clientWidth) > 1;
+      var hint = el.querySelector('.scroll-hint');
+      if (over){
+        el.setAttribute('tabindex', '0');
+        if (!hint){
+          hint = document.createElement('span');
+          hint.className = 'vh scroll-hint';
+          hint.textContent = 'Scrolls horizontally.';
+          el.insertBefore(hint, el.firstChild);
+        }
+      } else {
+        el.removeAttribute('tabindex');
+        if (hint) hint.parentNode.removeChild(hint);
+      }
+    });
+  }
+
+  /* The process stream: from the first icon to the last icon, behind the
+     chips. Horizontal when the five steps share a row, vertical when they
+     stack. Measured, so it ends exactly at the last icon at every width. */
+  function railFlow(){
+    var flow = document.querySelector('.flow');
+    if (!flow) return;
+    var rail = flow.querySelector('.flow-rail');
+    if (!rail) return;
+    var chips = [].slice.call(flow.querySelectorAll('.stat .chip'));
+    if (chips.length < 2){ rail.style.display = 'none'; return; }
+    var fr = flow.getBoundingClientRect();
+    var a = chips[0].getBoundingClientRect();
+    var b = chips[chips.length - 1].getBoundingClientRect();
+    var horiz = Math.abs(a.top - b.top) < 2;
+    rail.classList.remove('h','v');
+    if (horiz){
+      rail.classList.add('h');
+      rail.style.left = '0px';
+      rail.style.top = (a.top - fr.top + a.height/2 - 6) + 'px';
+      rail.style.width = (b.left - fr.left + b.width/2) + 'px';
+      rail.style.height = '12px';
+    } else {
+      rail.classList.add('v');
+      rail.style.left = (a.left - fr.left + a.width/2 - 6) + 'px';
+      rail.style.top = (a.top - fr.top + a.height/2) + 'px';
+      rail.style.width = '12px';
+      rail.style.height = (b.top - a.top) + 'px';
+    }
+    rail.style.display = 'block';
+  }
+
+  /* the ways panel: one closed grid. Desktop: an empty frame column, then
+     four 4-column windows side by side (each a merge of 4 x H cells sharing
+     single lines), the value window beneath them, and everything else
+     closed. Narrower: two by two, then stacked. */
+  function fitWays(){
+    var panel = document.querySelector('[data-ways]');
+    if (!panel) return;
+    var CELL = cellPx();
+    var vw = root.clientWidth;
+    var sm = vw < 768;
+    /* no gutter and no 1440 cap: the grid spans the screen. The cell was
+       already fitted, so this divides exactly and the last column ends on
+       the right edge instead of being cut by it. */
+    var minCols = parseInt(panel.dataset.mincols || '6', 10);
+    var cols = Math.max(minCols, Math.round(vw / CELL));
+    var mode = panel.dataset.mode || 'light';
+
+    var boxes = [].slice.call(panel.querySelectorAll('.way-box'));
+    var walls = boxes.slice(0, 4);
+    var open = boxes[4];
+
+    /* How many windows fit on a row, then how wide each one gets. The
+       width is divided out of the content span rather than fixed at four
+       cells, so a smaller module gives wider cards instead of leaving a
+       stack of empty columns on the right. */
+    var inset = sm ? 0 : 2;
+    var contentW = cols - 2 * inset;
+    var per = Math.floor(contentW / 4);
+    var k = per >= 4 ? 4 : (per >= 2 ? 2 : 1);
+    if (sm) k = 1;
+
+    /* The row always spans the full content width, so it starts and ends
+       on the same columns as every headline on the page. Four equal cards
+       rarely divide it exactly, and the remainder goes into the cards, one
+       column each from the left, rather than into the margins: a card a
+       column wider than its neighbour is a smaller lie than a row that
+       does not line up with the copy above it. */
+    var wallW = sm ? cols : Math.floor(contentW / k);
+    var rem   = sm ? 0 : contentW - wallW * k;
+    var widths = [], offs = [], acc = sm ? 0 : inset, wi;
+    for (wi = 0; wi < k; wi++){
+      var cw = sm ? cols : wallW + (wi < rem ? 1 : 0);
+      widths.push(cw); offs.push(acc); acc += cw;
+    }
+    var x0 = sm ? 0 : inset;
+
+    var measure = function(b, wpx){
+      b.style.left = '0px'; b.style.top = '0px';
+      b.style.width = wpx + 'px'; b.style.height = 'auto';
+      return Math.max(2, Math.ceil(b.offsetHeight / CELL));
+    };
+
+    /* row bands of k windows; each band as tall as its tallest window */
+    var rects = [];
+    var y = 1;
+    for (var r0 = 0; r0 < walls.length; r0 += k){
+      var band = walls.slice(r0, r0 + k);
+      var H = 0;
+      band.forEach(function(b, i){ H = Math.max(H, measure(b, widths[i] * CELL)); });
+      band.forEach(function(b, i){
+        rects.push({ box:b, x:offs[i], y:y, w:widths[i], h:H });
+      });
+      y += H;
+    }
+
+    /* the value window spans the same width as the wall row */
+    var openW = sm ? cols : contentW;
+    var openH = measure(open, openW * CELL);
+    rects.push({ box:open, x:x0, y:y, w:openW, h:openH });
+    y += openH;
+
+    var rows = y + 1;
+    panel.style.setProperty('--cols', cols);
+    panel.style.setProperty('--rows', rows);
+    var svg = buildSvg(cols, rows, CELL, mode);
+    rects.forEach(function(rc){
+      merge(svg, rc.x, rc.y, rc.w, rc.h);
+      rc.box.style.left = (rc.x * CELL) + 'px';
+      rc.box.style.top = (rc.y * CELL) + 'px';
+      rc.box.style.width = (rc.w * CELL) + 'px';
+      rc.box.style.height = (rc.h * CELL) + 'px';
+    });
+    stopIconAnims(panel);
+    scatterIcons(svg, cols, rows, CELL, mode, panel);
+    var host = panel.querySelector('.grid-svg-host');
+    host.textContent = '';
+    host.appendChild(svg);
+  }
+
+  /* A section whose height is not a whole number of cells shifts every
+     row line under it. Measure, then top the section up to the next row.
+     Reset before measuring or the padding compounds on each pass. */
+  function snapSections(){
+    if (root.clientWidth < 768) return;
+    var CELL = cellPx();
+    var secs = [].slice.call(document.querySelectorAll('main > section, footer.foot'));
+    secs.forEach(function(sec){ sec.style.paddingBottom = ''; });
+    secs.forEach(function(sec){
+      var h = sec.getBoundingClientRect().height;
+      var add = Math.ceil(h / CELL) * CELL - h;
+      if (add > 0.5){
+        var base = parseFloat(getComputedStyle(sec).paddingBottom) || 0;
+        sec.style.paddingBottom = (base + add) + 'px';
+      }
+    });
+  }
+
+  function layoutAll(){
+    stopIconAnims();
+    root.style.setProperty('--vw', root.clientWidth + 'px');
+    fitCell();
+    panels.forEach(fitPanel);
+    fitWays();
+    syncScrollRegions();
+    railFlow();
+    snapSections();
+  }
+
+  /* The grid is never allowed to take the page down with it. If measurement
+     throws, every panel falls back to the flat, unmerged band. */
+  function safeLayout(){
+    try { layoutAll(); }
+    catch (err){
+      panels.forEach(function(pn){ pn.classList.add('nojs-flat'); });
+      try { syncScrollRegions(); } catch (e2){}
+    }
+  }
+
+  safeLayout();
+  if (document.fonts && document.fonts.ready){
+    document.fonts.ready.then(function(){ requestAnimationFrame(safeLayout); });
+  }
+  window.addEventListener('load', function(){ requestAnimationFrame(safeLayout); });
+
+  var t = null;
+  function scheduleLayout(){
+    clearTimeout(t);
+    t = setTimeout(function(){ requestAnimationFrame(safeLayout); }, 150);
+  }
+  window.addEventListener('resize', scheduleLayout);
+  window.addEventListener('orientationchange', scheduleLayout);
+
+  /* ---------- Get Quoted modal ---------- */
+  var gq = document.getElementById('gq');
+  var gqForm = document.getElementById('gq-form');
+  var gqErr = document.getElementById('gq-err');
+  var gqOpener = null;
+  function gqOpen(e){
+    if (e) e.preventDefault();
+    gqOpener = e ? e.currentTarget : null;
+    gq.hidden = false;
+    document.body.style.overflow = 'hidden';
+    var f = document.getElementById('gq-name');
+    if (f) f.focus();
+  }
+  function gqClose(){
+    gq.hidden = true;
+    document.body.style.overflow = '';
+    if (gqErr) gqErr.hidden = true;
+    if (gqOpener && gqOpener.focus) gqOpener.focus();
+  }
+  if (gq && gqForm){
+    [].slice.call(document.querySelectorAll('.js-getquoted')).forEach(function(b){
+      b.addEventListener('click', gqOpen);
+    });
+    document.getElementById('gq-x').addEventListener('click', gqClose);
+    /* click on the dimmed backdrop, outside the panel, closes */
+    gq.addEventListener('mousedown', function(e){ if (e.target === gq) gqClose(); });
+    document.addEventListener('keydown', function(e){
+      if (gq.hidden) return;
+      if (e.key === 'Escape'){ gqClose(); return; }
+      if (e.key !== 'Tab') return;
+      /* keep tab inside the dialog */
+      var focusables = [].slice.call(gq.querySelectorAll('button, input')).filter(function(el){ return !el.disabled && el.offsetParent !== null; });
+      if (!focusables.length) return;
+      var first = focusables[0], last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    });
+    gqForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      var name = document.getElementById('gq-name').value.trim();
+      var email = document.getElementById('gq-email').value.trim();
+      var phone = document.getElementById('gq-phone').value.trim();
+      var company = document.getElementById('gq-company').value.trim();
+      var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!name || !emailOk){ gqErr.hidden = false; return; }
+      gqErr.hidden = true;
+      var body = 'Name: ' + name + '\nEmail: ' + email +
+                 (phone ? '\nPhone: ' + phone : '') +
+                 (company ? '\nCompany: ' + company : '');
+      window.location.href = 'mailto:dor@genielabs.tech?subject=' +
+        encodeURIComponent('Get Quoted: ' + name + (company ? ', ' + company : '')) +
+        '&body=' + encodeURIComponent(body);
+      gqClose();
+    });
+  }
+
+  /* ---------- mobile menu ---------- */
+  var mnav = document.getElementById('mnav');
+  var mnavOpenBtn = document.getElementById('mnav-open');
+  if (mnav && mnavOpenBtn){
+    var mnavClose = function(){
+      mnav.hidden = true;
+      mnavOpenBtn.setAttribute('aria-expanded','false');
+      if (document.body.style.overflow === 'hidden' && gq.hidden) document.body.style.overflow = '';
+      mnavOpenBtn.focus();
+    };
+    mnavOpenBtn.addEventListener('click', function(){
+      mnav.hidden = false;
+      mnavOpenBtn.setAttribute('aria-expanded','true');
+      document.body.style.overflow = 'hidden';
+      var f = mnav.querySelector('a'); if (f) f.focus();
+    });
+    document.getElementById('mnav-x').addEventListener('click', mnavClose);
+    [].slice.call(mnav.querySelectorAll('a')).forEach(function(a){
+      a.addEventListener('click', function(){
+        mnav.hidden = true;
+        mnavOpenBtn.setAttribute('aria-expanded','false');
+        document.body.style.overflow = '';
+      });
+    });
+    /* Get Quoted inside the menu: close the menu, then the modal opens */
+    [].slice.call(mnav.querySelectorAll('.js-getquoted')).forEach(function(b){
+      b.addEventListener('click', function(){
+        mnav.hidden = true;
+        mnavOpenBtn.setAttribute('aria-expanded','false');
+      });
+    });
+    document.addEventListener('keydown', function(e){
+      if (mnav.hidden) return;
+      if (e.key === 'Escape'){ mnavClose(); return; }
+      if (e.key !== 'Tab') return;
+      var f = [].slice.call(mnav.querySelectorAll('a, button')).filter(function(el){ return el.offsetParent !== null; });
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    });
+  }
+
+  /* ---------- header CTA joins after the hero scrolls away ---------- */
+  var hdr = document.querySelector('.hdr');
+  var hero = document.getElementById('top');
+  if (hdr && hero && 'IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      hdr.classList.toggle('past-hero', !entries[0].isIntersecting);
+    }, { rootMargin: '-56px 0px 0px 0px' }).observe(hero);
+  } else if (hdr){
+    hdr.classList.add('past-hero');
+  }
+
+  /* ---------- nav active state ---------- */
+  var links = [].slice.call(document.querySelectorAll('.hdr-nav a'));
+  if (links.length && 'IntersectionObserver' in window){
+    var map = {};
+    links.forEach(function(a){
+      var id = a.getAttribute('href').slice(1);
+      var sec = document.getElementById(id);
+      if (sec) map[id] = a;
+    });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (!en.isIntersecting) return;
+        links.forEach(function(a){ a.removeAttribute('aria-current'); });
+        var a = map[en.target.id];
+        if (a) a.setAttribute('aria-current', 'true');
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    Object.keys(map).forEach(function(id){ io.observe(document.getElementById(id)); });
+  }
+
+  /* ---------- the one animation on the page ---------- */
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: no-preference)').matches){
+    requestAnimationFrame(function(){
+      [].slice.call(document.querySelectorAll('.rise')).forEach(function(el){ el.classList.add('in'); });
+    });
+  } else {
+    [].slice.call(document.querySelectorAll('.rise')).forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
+</body>
+</html>
