@@ -63,7 +63,7 @@
      span the full row of the stage, one closed row above, one below, copy
      on the left, the rest of the window open.
      index-v3.html is untouched. -->
-<meta name="description" content="Charge what it's worth. Dynamic pricing for agentic products: the price of every request follows the value it creates for your user, decided before the run. Thesis v5: the cost floor runs today, the value scorer and the decision loop are designed.">
+<meta name="description" content="Dynamic pricing for agentic products. The price of every request follows the value it creates for your user, decided before the run.">
 <meta name="color-scheme" content="light">
 <!-- Link preview. WhatsApp, Slack, iMessage and LinkedIn all read og:*, and
      every one of them needs og:image as an ABSOLUTE https URL: a relative
@@ -200,7 +200,7 @@ setTimeout(function(){
 
 @media (max-width:1199px){ :root{ --cell-base:54px; --cell:54px; } }
 @media (max-width:1023px){ :root{ --cell-base:48px; --cell:48px; } }
-@media (max-width:767px) { :root{ --cell-base:42px; --cell:42px; --hdr:56px; } }
+@media (max-width:767px) { :root{ --cell-base:48px; --cell:48px; --hdr:var(--cell); } }
 
 @media (prefers-reduced-motion:reduce){
   :root{ --dur-1:0ms; --dur-2:0ms; --dur-3:0ms; --dur-4:0ms; }
@@ -320,6 +320,9 @@ section{ padding-block:clamp(48px,7vw,96px); }
   text-decoration:none; line-height:1; padding-block:var(--sp-3);
   margin-inline-end:auto;
 }
+/* the bar is one cell on a phone too, and on the narrowest screens that
+   cell is 45px: the wordmark gives back the 8px it does not need */
+@media (max-width:767px){ .hdr-word{ padding-block:var(--sp-2); } }
 .hdr-nav{ display:none; gap:var(--sp-1); }
 .hdr-nav a{
   display:inline-flex; align-items:center; min-height:44px;
@@ -522,7 +525,11 @@ html.js .hdr:not(.past-hero) .hdr-nav{ transform:translateX(calc(var(--cta-w,0px
 .nojs-flat .frame{ width:100%; height:auto; }
 .nojs-flat .grid-svg-host{ display:none; }
 .nojs-flat .cellbox{ position:static; width:auto !important; height:auto !important; }
-.nojs-flat .hero-win, .nojs-flat .close-win{ padding:var(--sp-7) 0; }
+/* padding-block only: the shorthand used to zero padding-inline as well,
+   which put the headline and the button flat against the viewport edge on
+   the no-JS and layout-error paths. The fallback should read as plain, not
+   as broken. */
+.nojs-flat .hero-win, .nojs-flat .close-win{ padding-block:var(--sp-7); }
 .nojs-flat .hero-word, .nojs-flat .foot-word{ padding-block:var(--sp-5); }
 
 /* ---------- hero ---------- */
@@ -770,7 +777,13 @@ table.t td.n{ font-variant-numeric:tabular-nums; font-feature-settings:'tnum'; d
 .obj .ans-wrap{ display:grid; grid-template-rows:0fr; transition:grid-template-rows var(--dur-2) var(--ease); }
 .obj.is-open .ans-wrap,
 .obj[open]:not(.acc) .ans-wrap{ grid-template-rows:1fr; }
-.obj .ans{ min-height:0; overflow:hidden; padding:0 0 var(--sp-5); max-width:var(--measure); color:var(--text-on-blue-muted); }
+/* No padding on the grid item. Padding counts toward a grid item's automatic
+   minimum, so a bottom padding here stopped the 0fr track resolving below
+   32px: the answer opened by popping its first line into place and closed by
+   snapping the last 32px away. The space moves to the last paragraph's
+   margin, which the track can collapse. */
+.obj .ans{ min-height:0; overflow:hidden; padding:0; max-width:var(--measure); color:var(--text-on-blue-muted); }
+.obj .ans > :last-child{ margin-bottom:var(--sp-5); }
 .obj .ans p + p{ margin-top:var(--sp-3); }
 
 /* ---------- close panel ---------- */
@@ -1060,6 +1073,10 @@ h3{ line-height:1.28; }
 /* ---- 9. THE CALL TO ACTION HAS PRESENCE --------------------- */
 .btn{ min-height:48px; padding-inline:var(--sp-7); letter-spacing:-.005em; }
 .btn-sm{ min-height:40px; padding-inline:var(--sp-5); }
+/* On a touch width the header CTA is a real target, and the burger beside
+   it is already 44. 40 is below the floor, so it goes up to 44 and the bar
+   height does not change. */
+@media (max-width:1099px){ .hdr .hdr-cta{ min-height:44px; } }
 .hero-actions{ margin-top:var(--sp-6); }
 .close-win h2{ margin-bottom:var(--sp-4); }
 .close-win p{ font-size:var(--fs-lead); line-height:1.55; max-width:54ch; }
@@ -1124,7 +1141,11 @@ h3{ line-height:1.28; }
      the page was the single most unfinished looking thing here. */
   .objs{ max-width:none; }
   .obj > summary{ padding-inline-end:var(--sp-3); }
-  .obj .ans{ max-width:64ch; padding-bottom:var(--sp-6); }
+  /* the space is a margin on the last child, never padding on the grid
+     item: padding here re-floors the 0fr track and the answer stops
+     collapsing (see the .obj .ans rule above) */
+  .obj .ans{ max-width:64ch; }
+  .obj .ans > :last-child{ margin-bottom:var(--sp-6); }
 }
 
 
@@ -1368,7 +1389,11 @@ html.sheet-open{ overflow:hidden; }
 .feat-q{ transition:color var(--dur-3) var(--ease); }
 .feat:hover .chip > g, .stat:hover .chip > g{ stroke-opacity:1; }
 .feat:hover .chip svg g, .stat:hover .chip svg g{ stroke-opacity:1; }
-.feat:hover .feat-q, .way-box:hover .feat-q{ color:var(--acc-lime-lt); }
+/* The kicker deepens, it does not take the accent. The light-mode lime is a
+   3.2:1 headline colour and these labels are 12px, so putting the accent
+   here made the label harder to read on hover than at rest. The accent stays
+   on headlines; the icon cell's edges carry the rest of the hover. */
+.feat:hover .feat-q, .way-box:hover .feat-q{ color:var(--blue-deep); }
 .stat .lbl{ transition:color var(--dur-3) var(--ease); }
 .stat:hover .lbl{ color:var(--blue); }
 .feat, .way-box{ transition:none; }
@@ -1599,10 +1624,10 @@ html.sheet-open{ overflow:hidden; }
      Below 768 the window is the full width. Icons never sit under the bar
      and never inside the window. -->
 <section class="hero gridpanel" id="top" data-fullbleed
-         data-rows="10" data-rows-md="11" data-rows-sm="12" data-mincols="6" data-icons-skip="hdr"
+         data-rows="10" data-rows-md="11" data-rows-sm="10" data-mincols="6" data-icons-skip="hdr"
          data-merges="2,0,c-4,1|2,2,c-4,r-4"
          data-merges-md="2,0,c-4,2|2,3,c-4,r-5"
-         data-merges-sm="0,0,c,2|0,3,c,r-5">
+         data-merges-sm="0,0,c,1|0,2,c,r-4">
   <div class="frame">
     <div class="grid-svg-host" aria-hidden="true">
       <!-- Static desktop grid, 24x9 at CELL 60 (1440/24), the header row
@@ -1612,7 +1637,7 @@ html.sheet-open{ overflow:hidden; }
       <svg width="1440" height="600" viewBox="0 0 1440 600" aria-hidden="true" focusable="false" style="pointer-events: none;"><g class="grid" transform="translate(0.5,0.5)"><g class="vertical-edges" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1" shape-rendering="crispEdges"><line pathLength="1" x1="0" x2="0" y1="0" y2="60" style="--r: 0;"></line><line pathLength="1" x1="0" x2="0" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="0" x2="0" y1="120" y2="180" style="--r: 2;"></line><line pathLength="1" x1="0" x2="0" y1="180" y2="240" style="--r: 3;"></line><line pathLength="1" x1="0" x2="0" y1="240" y2="300" style="--r: 4;"></line><line pathLength="1" x1="0" x2="0" y1="300" y2="360" style="--r: 5;"></line><line pathLength="1" x1="0" x2="0" y1="360" y2="420" style="--r: 6;"></line><line pathLength="1" x1="0" x2="0" y1="420" y2="480" style="--r: 7;"></line><line pathLength="1" x1="0" x2="0" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="0" x2="0" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="60" x2="60" y1="0" y2="60" style="--r: 0;"></line><line pathLength="1" x1="60" x2="60" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="60" x2="60" y1="120" y2="180" style="--r: 2;"></line><line pathLength="1" x1="60" x2="60" y1="180" y2="240" style="--r: 3;"></line><line pathLength="1" x1="60" x2="60" y1="240" y2="300" style="--r: 4;"></line><line pathLength="1" x1="60" x2="60" y1="300" y2="360" style="--r: 5;"></line><line pathLength="1" x1="60" x2="60" y1="360" y2="420" style="--r: 6;"></line><line pathLength="1" x1="60" x2="60" y1="420" y2="480" style="--r: 7;"></line><line pathLength="1" x1="60" x2="60" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="60" x2="60" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="120" x2="120" y1="0" y2="60" style="--r: 0;"></line><line pathLength="1" x1="120" x2="120" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="120" x2="120" y1="120" y2="180" style="--r: 2;"></line><line pathLength="1" x1="120" x2="120" y1="180" y2="240" style="--r: 3;"></line><line pathLength="1" x1="120" x2="120" y1="240" y2="300" style="--r: 4;"></line><line pathLength="1" x1="120" x2="120" y1="300" y2="360" style="--r: 5;"></line><line pathLength="1" x1="120" x2="120" y1="360" y2="420" style="--r: 6;"></line><line pathLength="1" x1="120" x2="120" y1="420" y2="480" style="--r: 7;"></line><line pathLength="1" x1="120" x2="120" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="120" x2="120" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="180" x2="180" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="180" x2="180" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="180" x2="180" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="240" x2="240" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="240" x2="240" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="240" x2="240" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="300" x2="300" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="300" x2="300" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="300" x2="300" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="360" x2="360" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="360" x2="360" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="360" x2="360" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="420" x2="420" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="420" x2="420" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="420" x2="420" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="480" x2="480" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="480" x2="480" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="480" x2="480" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="540" x2="540" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="540" x2="540" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="540" x2="540" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="600" x2="600" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="600" x2="600" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="600" x2="600" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="660" x2="660" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="660" x2="660" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="660" x2="660" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="720" x2="720" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="720" x2="720" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="720" x2="720" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="780" x2="780" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="780" x2="780" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="780" x2="780" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="840" x2="840" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="840" x2="840" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="840" x2="840" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="900" x2="900" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="900" x2="900" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="900" x2="900" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="960" x2="960" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="960" x2="960" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="960" x2="960" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="1020" x2="1020" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="1020" x2="1020" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="1020" x2="1020" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="1080" x2="1080" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="1080" x2="1080" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="1080" x2="1080" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="1140" x2="1140" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="1140" x2="1140" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="1140" x2="1140" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="1200" x2="1200" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="1200" x2="1200" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="1200" x2="1200" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="1260" x2="1260" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="1260" x2="1260" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="1260" x2="1260" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="1320" x2="1320" y1="0" y2="60" style="--r: 0;"></line><line pathLength="1" x1="1320" x2="1320" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="1320" x2="1320" y1="120" y2="180" style="--r: 2;"></line><line pathLength="1" x1="1320" x2="1320" y1="180" y2="240" style="--r: 3;"></line><line pathLength="1" x1="1320" x2="1320" y1="240" y2="300" style="--r: 4;"></line><line pathLength="1" x1="1320" x2="1320" y1="300" y2="360" style="--r: 5;"></line><line pathLength="1" x1="1320" x2="1320" y1="360" y2="420" style="--r: 6;"></line><line pathLength="1" x1="1320" x2="1320" y1="420" y2="480" style="--r: 7;"></line><line pathLength="1" x1="1320" x2="1320" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="1320" x2="1320" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="1380" x2="1380" y1="0" y2="60" style="--r: 0;"></line><line pathLength="1" x1="1380" x2="1380" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="1380" x2="1380" y1="120" y2="180" style="--r: 2;"></line><line pathLength="1" x1="1380" x2="1380" y1="180" y2="240" style="--r: 3;"></line><line pathLength="1" x1="1380" x2="1380" y1="240" y2="300" style="--r: 4;"></line><line pathLength="1" x1="1380" x2="1380" y1="300" y2="360" style="--r: 5;"></line><line pathLength="1" x1="1380" x2="1380" y1="360" y2="420" style="--r: 6;"></line><line pathLength="1" x1="1380" x2="1380" y1="420" y2="480" style="--r: 7;"></line><line pathLength="1" x1="1380" x2="1380" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="1380" x2="1380" y1="540" y2="600" style="--r: 9;"></line><line pathLength="1" x1="1439" x2="1439" y1="0" y2="60" style="--r: 0;"></line><line pathLength="1" x1="1439" x2="1439" y1="60" y2="120" style="--r: 1;"></line><line pathLength="1" x1="1439" x2="1439" y1="120" y2="180" style="--r: 2;"></line><line pathLength="1" x1="1439" x2="1439" y1="180" y2="240" style="--r: 3;"></line><line pathLength="1" x1="1439" x2="1439" y1="240" y2="300" style="--r: 4;"></line><line pathLength="1" x1="1439" x2="1439" y1="300" y2="360" style="--r: 5;"></line><line pathLength="1" x1="1439" x2="1439" y1="360" y2="420" style="--r: 6;"></line><line pathLength="1" x1="1439" x2="1439" y1="420" y2="480" style="--r: 7;"></line><line pathLength="1" x1="1439" x2="1439" y1="480" y2="540" style="--r: 8;"></line><line pathLength="1" x1="1439" x2="1439" y1="540" y2="600" style="--r: 9;"></line></g><g class="horizontal-edges" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1" shape-rendering="crispEdges"><line pathLength="1" y1="0" y2="0" x1="0" x2="60" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="60" x2="120" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="120" x2="180" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="180" x2="240" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="240" x2="300" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="300" x2="360" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="360" x2="420" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="420" x2="480" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="480" x2="540" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="540" x2="600" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="600" x2="660" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="660" x2="720" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="720" x2="780" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="780" x2="840" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="840" x2="900" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="900" x2="960" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="960" x2="1020" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="1020" x2="1080" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="1080" x2="1140" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="1140" x2="1200" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="1200" x2="1260" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="1260" x2="1320" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="1320" x2="1380" style="--r: 0;"></line><line pathLength="1" y1="0" y2="0" x1="1380" x2="1440" style="--r: 0;"></line><line pathLength="1" y1="60" y2="60" x1="0" x2="60" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="60" x2="120" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="120" x2="180" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="180" x2="240" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="240" x2="300" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="300" x2="360" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="360" x2="420" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="420" x2="480" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="480" x2="540" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="540" x2="600" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="600" x2="660" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="660" x2="720" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="720" x2="780" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="780" x2="840" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="840" x2="900" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="900" x2="960" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="960" x2="1020" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="1020" x2="1080" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="1080" x2="1140" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="1140" x2="1200" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="1200" x2="1260" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="1260" x2="1320" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="1320" x2="1380" style="--r: 1;"></line><line pathLength="1" y1="60" y2="60" x1="1380" x2="1440" style="--r: 1;"></line><line pathLength="1" y1="120" y2="120" x1="0" x2="60" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="60" x2="120" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="120" x2="180" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="180" x2="240" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="240" x2="300" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="300" x2="360" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="360" x2="420" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="420" x2="480" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="480" x2="540" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="540" x2="600" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="600" x2="660" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="660" x2="720" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="720" x2="780" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="780" x2="840" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="840" x2="900" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="900" x2="960" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="960" x2="1020" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="1020" x2="1080" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="1080" x2="1140" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="1140" x2="1200" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="1200" x2="1260" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="1260" x2="1320" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="1320" x2="1380" style="--r: 2;"></line><line pathLength="1" y1="120" y2="120" x1="1380" x2="1440" style="--r: 2;"></line><line pathLength="1" y1="180" y2="180" x1="0" x2="60" style="--r: 3;"></line><line pathLength="1" y1="180" y2="180" x1="60" x2="120" style="--r: 3;"></line><line pathLength="1" y1="180" y2="180" x1="1320" x2="1380" style="--r: 3;"></line><line pathLength="1" y1="180" y2="180" x1="1380" x2="1440" style="--r: 3;"></line><line pathLength="1" y1="240" y2="240" x1="0" x2="60" style="--r: 4;"></line><line pathLength="1" y1="240" y2="240" x1="60" x2="120" style="--r: 4;"></line><line pathLength="1" y1="240" y2="240" x1="1320" x2="1380" style="--r: 4;"></line><line pathLength="1" y1="240" y2="240" x1="1380" x2="1440" style="--r: 4;"></line><line pathLength="1" y1="300" y2="300" x1="0" x2="60" style="--r: 5;"></line><line pathLength="1" y1="300" y2="300" x1="60" x2="120" style="--r: 5;"></line><line pathLength="1" y1="300" y2="300" x1="1320" x2="1380" style="--r: 5;"></line><line pathLength="1" y1="300" y2="300" x1="1380" x2="1440" style="--r: 5;"></line><line pathLength="1" y1="360" y2="360" x1="0" x2="60" style="--r: 6;"></line><line pathLength="1" y1="360" y2="360" x1="60" x2="120" style="--r: 6;"></line><line pathLength="1" y1="360" y2="360" x1="1320" x2="1380" style="--r: 6;"></line><line pathLength="1" y1="360" y2="360" x1="1380" x2="1440" style="--r: 6;"></line><line pathLength="1" y1="420" y2="420" x1="0" x2="60" style="--r: 7;"></line><line pathLength="1" y1="420" y2="420" x1="60" x2="120" style="--r: 7;"></line><line pathLength="1" y1="420" y2="420" x1="1320" x2="1380" style="--r: 7;"></line><line pathLength="1" y1="420" y2="420" x1="1380" x2="1440" style="--r: 7;"></line><line pathLength="1" y1="480" y2="480" x1="0" x2="60" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="60" x2="120" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="120" x2="180" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="180" x2="240" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="240" x2="300" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="300" x2="360" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="360" x2="420" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="420" x2="480" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="480" x2="540" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="540" x2="600" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="600" x2="660" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="660" x2="720" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="720" x2="780" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="780" x2="840" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="840" x2="900" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="900" x2="960" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="960" x2="1020" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="1020" x2="1080" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="1080" x2="1140" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="1140" x2="1200" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="1200" x2="1260" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="1260" x2="1320" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="1320" x2="1380" style="--r: 8;"></line><line pathLength="1" y1="480" y2="480" x1="1380" x2="1440" style="--r: 8;"></line><line pathLength="1" y1="540" y2="540" x1="0" x2="60" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="60" x2="120" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="120" x2="180" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="180" x2="240" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="240" x2="300" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="300" x2="360" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="360" x2="420" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="420" x2="480" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="480" x2="540" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="540" x2="600" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="600" x2="660" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="660" x2="720" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="720" x2="780" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="780" x2="840" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="840" x2="900" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="900" x2="960" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="960" x2="1020" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="1020" x2="1080" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="1080" x2="1140" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="1140" x2="1200" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="1200" x2="1260" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="1260" x2="1320" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="1320" x2="1380" style="--r: 9;"></line><line pathLength="1" y1="540" y2="540" x1="1380" x2="1440" style="--r: 9;"></line><line pathLength="1" y1="599" y2="599" x1="0" x2="60" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="60" x2="120" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="120" x2="180" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="180" x2="240" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="240" x2="300" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="300" x2="360" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="360" x2="420" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="420" x2="480" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="480" x2="540" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="540" x2="600" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="600" x2="660" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="660" x2="720" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="720" x2="780" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="780" x2="840" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="840" x2="900" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="900" x2="960" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="960" x2="1020" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="1020" x2="1080" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="1080" x2="1140" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="1140" x2="1200" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="1200" x2="1260" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="1260" x2="1320" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="1320" x2="1380" style="--r: 10;"></line><line pathLength="1" y1="599" y2="599" x1="1380" x2="1440" style="--r: 10;"></line></g><g class="icons"><svg x="13.5" y="373.5" width="33" height="33" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7 H31 V24 H16 L9 30 V24 H5 Z"></path><path d="M11 13 H25 M11 18 H21"></path></g></svg><svg x="1393.5" y="373.5" width="33" height="33" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="18" cy="9" rx="11" ry="4"></ellipse><path d="M7 9 V18 C7 20.2 11.9 22 18 22 C24.1 22 29 20.2 29 18 V9"></path><path d="M7 18 V27 C7 29.2 11.9 31 18 31 C24.1 31 29 29.2 29 27 V18"></path></g></svg><svg x="733.5" y="493.5" width="33" height="33" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4 H28 V29 L24.6 26.5 21.2 29 17.8 26.5 14.4 29 11 26.5 8 29 Z"></path><path d="M12 11 H24 M12 16 H24 M12 21 H19"></path></g></svg><svg x="493.5" y="73.5" width="33" height="33" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 29 C13 29 15 8 31 8"></path><circle cx="20" cy="17.5" r="2.6"></circle></g></svg><svg x="913.5" y="73.5" width="33" height="33" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 4 L32 12 L18 20 L4 12 Z"></path><path d="M4 19 L18 27 L32 19"></path></g></svg><svg x="373.5" y="493.5" width="33" height="33" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="4"></circle><circle cx="26" cy="26" r="4"></circle><path d="M28 6 L8 30"></path></g></svg><svg x="1033.5" y="553.5" width="33" height="33" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="13"></circle><path d="M18 10 V18 L24 21"></path></g></svg><svg x="13.5" y="133.5" width="33" height="33" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 3 L8 20 H17 L15 33 L28 15 H19 Z"></path></g></svg><svg x="1393.5" y="553.5" width="33" height="33" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 V30"></path><path d="M8 11 H28"></path><path d="M8 11 L4 21 H12 Z"></path><path d="M28 11 L24 21 H32 Z"></path></g></svg><svg x="1333.5" y="133.5" width="33" height="33" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15 L15 4 H30 V19 L19 30 Z"></path><circle cx="24" cy="10" r="2.6"></circle></g></svg></g></g></svg>
     </div>
 
-    <div class="cellbox hero-win" data-cell="2,2,c-4,r-4" data-cell-md="2,3,c-4,r-5" data-cell-sm="0,3,c,r-5">
+    <div class="cellbox hero-win" data-cell="2,2,c-4,r-4" data-cell-md="2,3,c-4,r-5" data-cell-sm="0,2,c,r-4">
       <h1 class="h-lime rise" style="--d:0ms">Charge what it's worth.</h1>
       <p class="sub rise" style="--d:60ms"><b>Dynamic pricing for agentic products.</b><br> The price of every request follows the value it creates for your user, decided before the run.</p>
       <div class="hero-actions rise" style="--d:120ms">
@@ -1857,7 +1882,7 @@ html.sheet-open{ overflow:hidden; }
       </p>
     </div>
 
-    <footer>
+    <footer role="contentinfo">
       <span class="cellbox foot-meta" data-cell="0,r-1,c-2,1" data-cell-md="0,r-4,c-4,4" data-cell-sm="0,r-4,c,3">
         <span class="stage">&copy; 2026 Quoted. All rights reserved.</span>
       </span>
@@ -1972,9 +1997,15 @@ html.sheet-open{ overflow:hidden; }
       cols = GRID_COLS;
     } else {
       var base = parseFloat(getComputedStyle(root).getPropertyValue('--cell-base'));
-      if (isNaN(base) || base <= 0) base = 42;
+      if (isNaN(base) || base <= 0) base = 48;
       cols = Math.max(1, Math.round(vw / base));
       if (cols % 2) cols += 1;
+      /* the header is exactly one cell and holds a 44px burger, so a cell
+         never goes under 44 on a phone. The cap rounds down to even:
+         rounding up would put the cell back under the floor. */
+      var maxCols = Math.floor(vw / 44);
+      if (maxCols % 2) maxCols -= 1;
+      cols = Math.max(2, Math.min(cols, maxCols));
     }
     root.style.setProperty('--cell', (vw / cols) + 'px');
     publishStage();
@@ -2571,11 +2602,22 @@ html.sheet-open{ overflow:hidden; }
      jump to a section and is left alone. */
   if (!location.hash){
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    var toTop = function(){ window.scrollTo(0, 0); };
+    /* scroll-behavior on the root is smooth, which makes scrollTo an
+       animation. An animation takes time, and on a phone the first touch
+       cancels it and leaves the page wherever it had got to. The reset
+       has to be a jump, so the behaviour is turned off around it. */
+    var toTop = function(){
+      var prev = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+      window.scrollTo(0, 0);
+      root.style.scrollBehavior = prev;
+    };
     toTop();
     window.addEventListener('load', toTop, { once: true });
     setTimeout(toTop, 0);
     setTimeout(toTop, 260);
+    /* the fonts land last and the page grows when they do */
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(toTop);
   }
 
   safeLayout();
@@ -2855,10 +2897,20 @@ html.sheet-open{ overflow:hidden; }
       var id = a.getAttribute('href').slice(1);
       if (document.getElementById(id)) map[id] = a;
     });
+    /* lastSection is what the band says, heroOn is whether the hero still
+       owns the screen, and the underline shows the first only when the
+       second is false. Keeping the two apart matters: the first section
+       crosses the band while the hero is still half on screen, so its
+       entry used to arrive, be thrown away for being under the hero, and
+       never fire again, which left the underline hidden through the whole
+       of section one. Now the entry is remembered and the hero observer
+       hands it back the moment the hero lets go. */
+    var lastSection = null;
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
         if (!en.isIntersecting) return;
-        setCurrent(heroOn ? null : (map[en.target.id] || null));
+        lastSection = map[en.target.id] || null;
+        setCurrent(heroOn ? null : lastSection);
       });
     }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
     Object.keys(map).forEach(function(id){ io.observe(document.getElementById(id)); });
@@ -2870,8 +2922,10 @@ html.sheet-open{ overflow:hidden; }
        section observer last said */
     if (hero){
       new IntersectionObserver(function(entries){
+        var was = heroOn;
         heroOn = entries[0].isIntersecting && entries[0].intersectionRatio >= 0.5;
         if (heroOn) setCurrent(null);
+        else if (was) setCurrent(lastSection);
       }, { threshold:[0.5] }).observe(hero);
     }
   }
