@@ -1,0 +1,2919 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quoted / Charge what it's worth.</title>
+<!-- v4. Same grid engine, same tokens, same sections as v3. Built from
+     three candidate builds on 2 September 2026 and one review of them.
+       1. THE COPY. The positioning line is the headline, one sub-line
+          under it, one button. The stage (a working name and a thesis,
+          not a company) is stated once, in the footer, next to the
+          version line. How it works and The mechanism are written as the
+          design, never as a shipped product, and each mechanism card says
+          whether it runs or is designed. "We" appears once, in the
+          working-session offer at the end.
+       2. ONE ACCENT. Lime on the blue, turned down to olive on white, and
+          only ever on a headline. Buttons on the blue are white with ink
+          type. Pink and cyan are gone from the tokens.
+       3. THE HERO IS ONE WINDOW. A full-row window on the stage, twenty
+          columns wide, with one closed row above it and one below: the
+          headline, the sub-line and one button on the left, the rest of
+          the window open. Nothing else sits in the hero but the grid and
+          the icon scatter in its closed cells.
+       4. THE MERGE, PERFORMED. On load the grid draws in row by row with
+          every edge present, including the ones the hero windows delete.
+          Those edges live in a ghost group for one moment, then fade: the
+          brand's merge rule on screen. Then the copy rises. About a
+          second, once, and a relayout that lands during it waits.
+       5. THE MECHANISM IS ON THE GRID. Four windows merged out of one
+          field, and each card's icon is the closed cell above its left
+          edge, a real cell of the same grid. A window lights its cell on
+          hover. Nothing is drawn on top of a line.
+       6. THE HEADER is transparent and the grid runs under it; past the
+          hero it is white with a hairline. One underline element follows
+          hover and focus and returns to the current section; over the
+          hero it shrinks to nothing.
+       7. MOTION. Scroll reveals on every kicker, headline, lead and card,
+          staggered inside a group, once. The process rail runs once and
+          each step lights as the current reaches it, timed off geometry.
+          Press feedback lands on pointer-down. Nothing loops, nothing
+          bounces, nothing travels more than 16px, and reduced motion gets
+          every end state at once.
+       8. SQUARE. Buttons, inputs, sheet: radius zero.
+       9. THE FORM keeps mailto as its transport (there is no endpoint),
+          the address never shows, and the page confirms in place.
+      10. THE CLOSE is a full-row window like the hero, copy on the left,
+          the rest open, and the answer window in the opportunity section
+          is the page's second blue surface: hero, answer, close.
+     The headline face is imported italic only and preloaded, so no upright
+     headline can paint while the file is in flight.
+
+     Dor's calls, 2 Sep 2026, applied on top of the synthesis above and
+     overriding it where they conflict: build-a's opening sequence is kept
+     exactly as grafted; the ceiling / price / floor band is out of the
+     hero; the hero has no kicker, so the rise starts with the headline;
+     the stage sentence moved from the hero to the footer and appears there
+     only; the hero sub-line is "Quoted is dynamic pricing for agentic
+     products." and nothing follows it; "Value-based pricing for every
+     agent request." is gone from the file; the hero and the close windows
+     span the full row of the stage, one closed row above, one below, copy
+     on the left, the rest of the window open.
+     index-v3.html is untouched. -->
+<meta name="description" content="Charge what it's worth. Quoted is dynamic pricing for agentic products: one price list for everyone, a different price per job, set before the run and explained by the rule that set it. A working name and a thesis, not a company yet.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20width%3D%22187%22%20height%3D%22187%22%20viewBox%3D%220%200%20187%20187%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%20%3Crect%20width%3D%22187%22%20height%3D%22187%22%20fill%3D%22%231741D6%22%2F%3E%20%3Cpath%20d%3D%22M122.014%2093C122.701%2094.5283%20123.331%2096.1219%20123.903%2097.7803C126.747%20106.228%20129.287%20111.96%20131.522%20114.977C133.757%20117.994%20137.11%20119.502%20141.58%20119.502C149.301%20119.502%20153.873%20111.457%20155.295%2095.3667L162%2095.97C161.594%20109.244%20157.428%20119.401%20149.504%20126.441C141.58%20133.48%20130.506%20137%20116.284%20137C102.264%20137%2091.3936%20133.48%2083.6726%20126.441C75.9516%20119.602%2070.0593%20109.445%2065.9956%2095.97C65.6638%2094.9339%2065.3382%2093.944%2065.0192%2093H64.9858C64.2986%2091.4717%2063.6692%2089.8781%2063.0971%2088.2197C60.2525%2079.7724%2057.7127%2074.0402%2055.4777%2071.0233C53.2426%2068.0065%2049.8901%2066.498%2045.4201%2066.498C37.6991%2066.498%2033.1274%2074.5432%2031.7051%2090.6333L25%2090.03C25.4064%2076.7557%2029.5716%2066.5987%2037.4957%2059.5592C45.4199%2052.5198%2056.4936%2049%2070.7165%2049C84.7361%2049%2095.6064%2052.5198%20103.327%2059.5592C111.048%2066.3975%20116.941%2076.5545%20121.004%2090.03C121.336%2091.0661%20121.662%2092.056%20121.981%2093H122.014Z%22%20fill%3D%22white%22%2F%3E%20%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- The headline face is the italic and only the italic. Preloaded so it is
+     in flight before the stylesheet is parsed, and served with display=block
+     so no upright fallback ever paints in its place. -->
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/dmserifdisplay/v17/-nFhOHM81r4j6k0gjAW3mujVU2B2G_VB0PD2xWr53A.woff2">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@1&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Assistant:wght@400;700&display=swap">
+<script>
+document.documentElement.classList.add('js');
+/* Reveal floor. If the layout script never reaches its reveal call, the hero
+   still shows. Nothing above the fold may depend on a 300 line IIFE finishing. */
+setTimeout(function(){
+  if (window.__seq) return; /* the load sequence has taken over and will land by 900ms */
+  var els = document.querySelectorAll('.rise');
+  for (var i=0;i<els.length;i++){ els[i].classList.add('in'); }
+}, 600);
+</script>
+<style>
+/* ============================================================
+   QUOTED one-pager. Single file, no build step, opens from file://
+   Brand system locked 21 August 2026, thesis v5.
+   Grid is structure: every edge is a separate <line>. A window is
+   made by deleting interior edges, never by drawing a box on top.
+   ============================================================ */
+
+:root{
+  /* 1. BRAND CORE */
+  --blue:#1741d6;
+  --blue-deep:#1236b8;
+  --blue-grad:linear-gradient(160deg,#1741d6 0%,#1236b8 100%);
+  --ink:#0d1b3e;
+  --white:#ffffff;
+
+  /* 2. THE ACCENT. One for the whole page: lime on the blue, and the same
+     hue turned down until it clears 3:1 on white. Headline weight only. */
+  --acc-lime:#DDFF00;
+  --acc-lime-lt:#859900;
+
+  /* 4. SURFACES */
+  --surface:#ffffff;
+  --surface-tint:#f4f6fb;
+  --surface-tint-2:#eef2fe;
+  --surface-dark:#1741d6;
+  --surface-dark-deep:#1236b8;
+  --surface-ink:#0d1b3e;
+  --hairline:#aab8da;        /* 1.99:1 on white, table row rules */
+  --rule-control:rgba(23,65,214,.60); /* composites to #748de6 = 3.14:1 on white, control boundaries */
+
+  /* 5. TEXT */
+  --text:#0d1b3e;
+  --text-muted:var(--ink); /* one text colour on white: ink. No grays. */
+  --text-on-blue:#ffffff;
+  --text-on-blue-muted:rgba(255,255,255,.82);
+  --link:#1741d6;
+
+  /* 6. GRID LINES */
+  --line-on-dark:rgba(255,255,255,.30);
+  --ctl-on-dark:rgba(255,255,255,.62); /* control chrome, not grid: #a7b7ef on blue = 3.86:1 */
+  --line-on-light:rgba(23,65,214,.40);
+
+  /* 7. THE MODULE
+     --cell-base is the target. --cell is what the page actually draws:
+     the script nudges it by a couple of percent so a whole number of cells
+     spans the screen exactly and no cell is ever cut off at an edge.
+     Without script the two are the same and the base value stands. */
+  --cell-base:60px;
+  --cell:60px;
+
+  /* 8. SPACING */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px;
+  --sp-6:32px; --sp-7:48px; --sp-8:64px; --sp-9:96px; --sp-10:144px;
+  --gutter:clamp(16px,3vw,32px);
+  /* The air inside a merged window. Type never touches a surviving edge.
+     Shared with .wrap, so copy in a window and copy in a plain section
+     start on the same line whichever kind of section it is. */
+  --win-pad:clamp(20px,2.8vw,44px);
+  --win-pad-block:clamp(20px,2.4vw,36px);
+
+  /* 9. RADIUS */
+  /* every edge in this system is a square cell */
+  --r-grid:0; --r-1:0; --r-2:0; --r-3:0;
+
+  /* 10. TYPE */
+  --f-word:'Abril Fatface',Georgia,serif;
+  --f-head:'DM Serif Display',Georgia,serif; /* always font-style:italic */
+  --f-body:Assistant,system-ui,-apple-system,'Segoe UI',sans-serif;
+
+  --fs-display:clamp(2.5rem,1.55rem + 3.9vw,4.5rem);
+  --fs-h1:clamp(2rem,1.45rem + 2.4vw,3.25rem);
+  --fs-h2:clamp(1.5rem,1.2rem + 1.35vw,2.125rem);
+  --fs-h3:clamp(1.25rem,1.13rem + 0.5vw,1.5rem);
+  --fs-lead:clamp(1.0625rem,1rem + 0.4vw,1.25rem);
+  --fs-body:clamp(1rem,0.965rem + 0.15vw,1.0625rem);
+  --fs-small:0.9375rem;
+  --fs-micro:0.8125rem;
+  --fs-num:clamp(1.75rem,1.35rem + 1.7vw,2.75rem);
+
+  --lh-tight:1.08; --lh-head:1.18; --lh-body:1.65;
+  --tr-tight:-0.02em; --tr-label:0.08em;
+  --measure:66ch;
+
+  /* 11. FOCUS */
+  --focus-on-light:#1741d6;
+  --focus-on-dark:#ffffff; /* brand blue is invisible on the blue; on that surface the ring is white */
+  --focus-w:2px; --focus-off:2px;
+
+  /* 12. MOTION */
+  --dur-1:120ms; --dur-2:220ms; --dur-3:160ms; --dur-4:260ms; --ease:cubic-bezier(.2,.7,.3,1);
+
+  /* header height, drives scroll-padding so anchors never land under it */
+  --hdr:60px;
+}
+
+@media (max-width:1199px){ :root{ --cell-base:54px; --cell:54px; } }
+@media (max-width:1023px){ :root{ --cell-base:48px; --cell:48px; } }
+@media (max-width:767px) { :root{ --cell-base:42px; --cell:42px; --hdr:56px; } }
+
+@media (prefers-reduced-motion:reduce){
+  :root{ --dur-1:0ms; --dur-2:0ms; --dur-3:0ms; --dur-4:0ms; }
+}
+
+/* ---------- reset ---------- */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; scroll-padding-top:calc(var(--hdr) + 16px); }
+@media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
+body{
+  margin:0;
+  font-family:var(--f-body);
+  font-size:var(--fs-body);
+  line-height:var(--lh-body);
+  color:var(--text);
+  background:var(--surface);
+  overflow-x:hidden;
+  text-wrap:pretty;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{ margin:0; font-family:var(--f-head);font-style:italic; font-weight:700; line-height:var(--lh-head); letter-spacing:var(--tr-tight); text-wrap:balance; hyphens:none; }
+h1{ font-size:var(--fs-display); line-height:var(--lh-tight); }
+h2{ font-size:var(--fs-h2); }
+h3{ font-size:var(--fs-h3); }
+p,ul,ol,dl{ margin:0; }
+img,svg{ max-width:100%; }
+table{ border-collapse:collapse; }
+button{ font:inherit; color:inherit; }
+a{ color:var(--link); text-underline-offset:.12em; text-decoration-thickness:1px; }
+
+/* ---------- focus, never removed ---------- */
+:focus-visible{
+  outline:var(--focus-w) solid var(--focus-on-light);
+  outline-offset:var(--focus-off);
+}
+.surface-dark :focus-visible,
+.surface-deep :focus-visible,
+.hero :focus-visible,
+.hdr :focus-visible{
+  outline-color:var(--focus-on-dark);
+}
+
+.vh{
+  position:absolute; width:1px; height:1px; margin:-1px; padding:0;
+  overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap; border:0;
+}
+
+.skip{
+  position:absolute; left:var(--sp-4); top:-100px; z-index:100;
+  background:var(--white); color:var(--blue); font-weight:700;
+  padding:var(--sp-3) var(--sp-4); border-radius:0;
+  transition:top var(--dur-1) var(--ease);
+}
+.skip:focus{ top:calc(var(--hdr) + 8px); }
+
+/* ---------- page watermark grid (texture only, nothing merged) ---------- */
+.tex{
+  background-image:
+    repeating-linear-gradient(to bottom, rgba(23,65,214,.055) 0 1px, transparent 1px var(--cell)),
+    repeating-linear-gradient(to right,  rgba(23,65,214,.055) 0 1px, transparent 1px var(--cell));
+  background-size:var(--cell) var(--cell);
+}
+
+/* ---------- layout ---------- */
+.wrap{ width:100%; max-width:1440px; margin-inline:auto; padding-inline:var(--gutter); }
+/* Above 768 the grid is the page. Copy in a plain section starts exactly
+   on the third column line, with two empty columns on either side, so the
+   headline is measured by the grid rather than floating free of it. */
+@media (min-width:768px){
+  .wrap{ max-width:none; padding-inline:calc(2 * var(--cell) + var(--win-pad)); }
+}
+section{ padding-block:clamp(48px,7vw,96px); }
+.surface-dark{ background:var(--surface-dark); color:var(--text-on-blue); }
+.surface-deep{ background:var(--surface-dark-deep); color:var(--text-on-blue); }
+.surface-white{ background:var(--surface); color:var(--text); }
+.surface-dark a:not(.btn), .surface-deep a:not(.btn),
+.hero a:not(.btn){ color:var(--white); }
+
+.eyebrow{
+  font-size:var(--fs-micro); font-weight:700; letter-spacing:var(--tr-label);
+  text-transform:uppercase; margin:0 0 var(--sp-4);
+}
+.surface-white .eyebrow{ color:var(--text-muted); }
+.surface-dark .eyebrow, .surface-deep .eyebrow,
+.hero .eyebrow{ color:var(--text-on-blue-muted); }
+
+.deck{ font-size:var(--fs-lead); max-width:var(--measure); margin-top:var(--sp-4); }
+.surface-dark .deck, .surface-deep .deck,
+.hero .deck{ color:var(--text-on-blue-muted); }
+.surface-white .deck{ color:var(--text-muted); }
+.body p{ max-width:var(--measure); }
+.body p + p{ margin-top:var(--sp-4); }
+.mt5{ margin-top:var(--sp-5); } .mt6{ margin-top:var(--sp-6); } .mt7{ margin-top:var(--sp-7); }
+
+/* accent per surface */
+.h-lime{ color:var(--acc-lime); }
+.h-limelt{ color:var(--acc-lime-lt); }
+
+/* ---------- sticky header ---------- */
+.hdr{
+  position:fixed; top:0; inset-inline:0; z-index:60;
+  background:transparent;
+  color:var(--white);
+}
+.hdr-in{
+  display:flex; align-items:center; gap:var(--sp-4);
+  min-height:var(--hdr);
+  width:100%; max-width:1440px; margin-inline:auto;
+  padding-inline:var(--gutter);
+}
+.hdr-word{
+  font-family:var(--f-word); font-size:1.375rem; color:var(--white);
+  text-decoration:none; line-height:1; padding-block:var(--sp-3);
+  margin-inline-end:auto;
+}
+.hdr-nav{ display:none; gap:var(--sp-1); }
+.hdr-nav a{
+  display:inline-flex; align-items:center; min-height:44px;
+  padding-inline:var(--sp-3);
+  font-size:var(--fs-small); color:var(--text-on-blue-muted);
+  text-decoration:none; border-bottom:2px solid transparent;
+}
+.hdr-nav a:hover{ color:var(--white); }
+.hdr-nav a[aria-current="true"]{ color:var(--acc-lime); border-bottom-color:var(--acc-lime); }
+/* specificity has to beat the later .btn rule, hence .hdr .hdr-cta.
+   The header CTA joins only after the hero, and its own button, scroll away. */
+.hdr .hdr-cta{ display:inline-flex; white-space:nowrap; }
+/* collapsed to zero width while the hero is on screen, so the nav sits flush
+   against the edge; when the CTA joins, the nav slides over in one motion */
+html.js .hdr .hdr-cta{
+  opacity:0; visibility:hidden; overflow:hidden;
+  max-width:0; padding-inline:0; border-width:0;
+  margin-inline-start:calc(-1 * var(--sp-4)); /* cancels the flex gap */
+  transition:opacity var(--dur-1) var(--ease), visibility var(--dur-1) var(--ease),
+             max-width 280ms var(--ease), padding 280ms var(--ease), margin 280ms var(--ease);
+}
+html.js .hdr.past-hero .hdr-cta{
+  opacity:1; visibility:visible;
+  max-width:220px; padding-inline:var(--sp-5); border-width:2px;
+  margin-inline-start:0;
+}
+@media (prefers-reduced-motion:reduce){
+  html.js .hdr .hdr-cta{ transition:none; }
+}
+
+/* ---------- Get Quoted modal ----------
+   An overlay, not a page: dimmed ink backdrop, and only the centre panel
+   is blue. The panel wears the brand grid as a low-opacity texture with a
+   full perimeter frame. Sharp corners: in this brand rectangles are always
+   square-cornered, and the 100% pill is reserved for buttons alone. */
+.gq{
+  position:fixed; inset:0; z-index:200;
+  background:rgba(13,27,62,.72);
+  display:flex; align-items:flex-start; justify-content:center;
+  overflow-y:auto; padding:var(--gutter);
+}
+/* an author display value outranks the UA rule for [hidden], so state it
+   here or the dialog is permanently open and close does nothing */
+.gq[hidden], .mnav[hidden]{ display:none; }
+.gq :focus-visible{ outline-color:var(--focus-on-dark); }
+.gq-in{
+  position:relative; margin:auto;
+  width:100%; max-width:560px;
+  background:var(--blue-grad);
+  border:1px solid var(--line-on-dark);
+  color:var(--text-on-blue);
+  padding:var(--sp-7) var(--sp-6) var(--sp-6);
+}
+/* bare icon, no enclosure: icons never sit in a circle */
+.gq-x{
+  position:absolute; top:var(--sp-4); inset-inline-end:var(--sp-4);
+  width:44px; height:44px; display:grid; place-items:center;
+  background:transparent; border:0; padding:0;
+  color:var(--white); cursor:pointer;
+}
+.gq-x:hover{ color:var(--acc-lime); }
+.gq h2{ margin:0 0 var(--sp-2); }
+.gq .gq-sub{ color:var(--text-on-blue-muted); margin:0 0 var(--sp-6); }
+.gq-form{ display:grid; gap:var(--sp-4); }
+.gq-form label{
+  display:block;
+  font-size:var(--fs-small); font-weight:700; color:var(--white);
+}
+.gq-form label .opt{ font-weight:400; color:var(--text-on-blue-muted); }
+.gq-form input{
+  display:block; width:100%; margin-top:var(--sp-1);
+  min-height:46px; padding:var(--sp-2) var(--sp-4);
+  background:rgba(255,255,255,.07); color:var(--white);
+  border:1px solid var(--ctl-on-dark); border-radius:0;
+  font-family:var(--f-body); font-size:var(--fs-body);
+}
+.gq-form input::placeholder{ color:rgba(255,255,255,.45); }
+.gq-form input:focus-visible{ border-color:var(--white); }
+.gq-form .btn{ margin-top:var(--sp-3); justify-self:start; }
+.gq-note{ margin-top:var(--sp-4); font-size:var(--fs-small); color:var(--text-on-blue-muted); }
+
+/* ---------- mobile menu ---------- */
+.hdr-burger{
+  display:grid; place-items:center; width:42px; height:42px; flex:0 0 auto;
+  background:transparent; border:0; padding:0;
+  color:var(--white); cursor:pointer;
+}
+.hdr-burger:hover{ color:var(--acc-lime); }
+.hdr-burger svg{ width:20px; height:20px; }
+@media (min-width:1100px){ .hdr-burger{ display:none; } }
+.mnav{
+  position:fixed; inset:0; z-index:180;
+  background:var(--blue-grad); color:var(--text-on-blue);
+  overflow-y:auto;
+}
+.mnav :focus-visible{ outline-color:var(--focus-on-dark); }
+.mnav-in{
+  min-height:100%; display:flex; flex-direction:column; justify-content:center;
+  gap:var(--sp-5); max-width:520px; margin:0 auto; padding:var(--sp-8) var(--gutter);
+}
+.mnav-in a{
+  color:var(--white); text-decoration:none;
+  font-family:var(--f-head);font-style:italic; font-weight:700; font-size:1.75rem; line-height:1.2;
+}
+.mnav-in a:hover{ color:var(--acc-lime); }
+.mnav-in .btn{ align-self:start; margin-top:var(--sp-4); }
+@media (min-width:1100px){ .hdr .hdr-nav{ display:flex; } }
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:var(--sp-2);
+  min-height:42px; padding:var(--sp-2) var(--sp-6);
+  /* square: a pill is the one shape the grid cannot make */
+  border-radius:0; border:2px solid transparent;
+  font-weight:700; font-size:var(--fs-body); text-decoration:none;
+  cursor:pointer; text-align:center;
+  transition:transform var(--dur-1) var(--ease), background-color var(--dur-1) var(--ease), filter var(--dur-1) var(--ease);
+}
+.btn:hover{ transform:translateY(-1px); }
+@media (prefers-reduced-motion:reduce){ .btn:hover{ transform:none; } }
+/* on the blue the button is white with ink type: the accent is for headlines */
+.btn-primary{ background:var(--white); color:var(--ink); }
+.btn-primary:hover{ background:var(--surface-tint-2); }
+.surface-white .btn-primary{ background:var(--blue); color:var(--white); }
+.surface-white .btn-primary:hover{ background:var(--blue-deep); }
+.btn-sm{ min-height:38px; padding:var(--sp-1) var(--sp-5); font-size:var(--fs-small); }
+.btn-full{ width:100%; }
+.cta-cost{ font-size:var(--fs-small); margin-top:var(--sp-3); }
+.surface-dark .cta-cost, .surface-deep .cta-cost,
+.hero .cta-cost{ color:var(--text-on-blue-muted); }
+.jump{
+  display:inline-flex; align-items:center; min-height:44px;
+  font-size:var(--fs-small); text-decoration:underline;
+}
+
+/* ============================================================
+   GRID PANELS. Built by JS as real per-edge <line> elements.
+   ============================================================ */
+/* The grid is the page, not a band inside it: it runs edge to edge with no
+   inset on either side. Panels sitting inside a .wrap break out of it here,
+   and panels that are already full-width sections resolve this to zero.
+   --vw is the scrollbar-free viewport width, published once per layout
+   pass; 100vw is only the fallback for the frame before script runs. */
+.gridpanel{
+  position:relative; --cols:19; --rows:6;
+  width:var(--vw,100vw);
+  margin-inline:calc(50% - var(--vw,100vw) / 2);
+  overflow:hidden;
+}
+/* A whole number of cells spans the screen exactly, because the cell was
+   sized to make that true. Anchored at the left edge rather than centred,
+   so the content windows always land at the same inset.
+   overflow:hidden on the panel is only a guard against sub-pixel rounding
+   in the calc, never a crop of real content. */
+.gridpanel .frame{
+  position:relative;
+  width:calc(var(--cols) * var(--cell));
+  height:calc(var(--rows) * var(--cell));
+  margin-inline:0;
+}
+.gridpanel .grid-svg-host{ position:absolute; inset:0; pointer-events:none; }
+.gridpanel .grid-svg-host svg{ display:block; }
+.cellbox{ position:absolute; }
+
+.hero-win{
+  display:flex; flex-direction:column; justify-content:center;
+  padding-inline:var(--win-pad);
+  padding-block:clamp(40px,6vh,72px);
+}
+.hero-word{
+  display:grid; place-items:center;
+  font-family:var(--f-word); color:var(--white);
+  font-size:clamp(1.25rem,1.6vw,1.75rem); line-height:1;
+}
+.foot-word{
+  display:grid; place-items:center;
+  font-family:var(--f-word); color:var(--blue);
+  /* the name cell is two squares wide on the stage; Abril "Quoted" runs
+     about 3.3em, so the size follows the cell and never crosses the line.
+     Under 1200 the cell is four wide, under 768 it is the whole row. */
+  font-size:min(1.875rem, calc(var(--cell) * 0.5)); line-height:1;
+}
+@media (min-width:768px) and (max-width:1199px){
+  .foot-word{ font-size:min(1.875rem, calc(var(--cell) * 0.8)); }
+}
+@media (max-width:767px){
+  .foot-word{ font-size:min(1.875rem, calc(var(--cell) * 0.6)); }
+}
+.foot-meta{
+  display:flex; align-items:center; gap:var(--sp-3) var(--sp-6); flex-wrap:wrap;
+  padding-inline:var(--win-pad);
+  font-size:var(--fs-small); color:var(--text);
+}
+
+/* no-JS: sanctioned flat, unmerged band fallback (brand spec F.3) */
+.nojs-flat .frame{ width:100%; height:auto; }
+.nojs-flat .grid-svg-host{ display:none; }
+.nojs-flat .cellbox{ position:static; width:auto !important; height:auto !important; }
+.nojs-flat .hero-win, .nojs-flat .close-win{ padding:var(--sp-7) 0; }
+.nojs-flat .hero-word, .nojs-flat .foot-word{ padding-block:var(--sp-5); }
+
+/* ---------- hero ---------- */
+.hero{ background:var(--blue-grad); color:var(--text-on-blue); padding-block:0; overflow:hidden; }
+/* no bare blue around the grid at all: the grid is the hero, and its
+   first and last row lines are the seams with the header and the section
+   below. The breathing room is two empty grid rows, not a margin. */
+.hero .frame{ margin-block:0; }
+.hero h1{ max-width:22ch; margin-bottom:var(--sp-4); }
+.hero .def{ max-width:calc(13 * var(--cell)); color:var(--text-on-blue-muted); font-size:var(--fs-lead); }
+.hero .def b{ color:var(--white); font-weight:700; }
+/* the break belongs to the wide composition; below 768 the copy wraps on its own */
+.br-lg{ display:none; }
+@media (min-width:768px){ .br-lg{ display:inline; } }
+.hero-actions{ display:flex; flex-wrap:wrap; align-items:center; gap:var(--sp-4); margin-top:var(--sp-5); }
+
+/* ---------- the four ways: three walls and an open seat ---------- */
+/* ---------- the ways panel: one closed grid, five merged windows ----------
+   Built by fitWays() with the same engine as the hero: every edge is a real
+   line, a window is made by deleting interior edges, stacked windows share
+   the single surviving line between them, and icons land only in the closed
+   frame cells around them. */
+.ways-grid .way-box{
+  display:flex; flex-direction:column; justify-content:flex-start;
+  padding:var(--win-pad-block) var(--win-pad);
+}
+.ways-grid .way-box.way-open{ justify-content:center; }
+.way-box .feat-q{ margin:0; }
+.way-box h3{ margin:var(--sp-1) 0 var(--sp-2); font-size:1.25rem; color:var(--ink); }
+.way-box .feat-b{ margin:0; max-width:78ch; }
+.way-box.way-open{ background:var(--surface-tint); flex-direction:row; align-items:center; gap:var(--sp-5); }
+.way-open .way-mark{ flex:0 0 auto; width:56px; height:56px; }
+.way-open .feat-q{ color:var(--white); }
+.way-open h3{ color:var(--white); }
+.way-open .feat-b{ color:var(--white); font-weight:700; }
+@media (max-width:599.98px){
+  .way-box.way-open{ flex-direction:column; align-items:flex-start; gap:var(--sp-3); }
+  .way-open .way-mark{ width:40px; height:40px; }
+}
+@media (min-width:768px){
+  .feat.feat-open{ display:grid; grid-template-columns:auto 1fr; gap:var(--sp-2) var(--sp-6); align-items:start; }
+  .feat.feat-open .chip{ grid-row:1 / span 3; }
+  .feat.feat-open .feat-q{ margin-top:0; }
+}
+
+/* ---------- the four components, on the light surface ----------
+   Three inputs sit side by side, a bus converges them into the decision
+   panel, and the explanation closes the section. Sharp corners throughout:
+   only buttons are pills. */
+.feats{ display:grid; gap:var(--sp-5); margin-top:var(--sp-7); }
+@media (min-width:900px){ .feats{ grid-template-columns:repeat(3,1fr); gap:var(--sp-6); } }
+@media (min-width:900px){ .feats.c4{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1200px){ .feats.c4{ grid-template-columns:repeat(4,1fr); } }
+.mech-note{ max-width:var(--measure); }
+.feat{
+  display:flex; flex-direction:column;
+}
+.feat h3{ margin:var(--sp-1) 0 var(--sp-3); font-size:1.25rem; color:var(--ink); }
+.feat-q{
+  margin:var(--sp-4) 0 0; font-size:var(--fs-micro); font-weight:700;
+  letter-spacing:var(--tr-label); text-transform:uppercase; color:var(--blue);
+}
+/* two lines reserved, so a question that wraps does not drop its own title
+   half a line below the three beside it */
+.feat .feat-q{ min-height:calc(2 * 1.65em); }
+.feat-b{ margin:0; color:var(--text); font-size:var(--fs-small); line-height:1.6; }
+.feat-b + .feat-b{ margin-top:var(--sp-3); }
+.feat-out{
+  margin:auto 0 0; padding-top:var(--sp-5);
+  font-weight:700; color:var(--ink); font-size:var(--fs-small);
+}
+.feat-out span{ font-weight:400; color:var(--text); }
+.eng-label{ margin-top:0; }
+.eng-title{
+  margin:var(--sp-1) 0 0; font-size:clamp(1.5rem,2.4vw,2rem);
+  font-family:var(--f-head);font-style:italic; font-weight:700; color:var(--acc-lime-lt);
+}
+/* the sample explanation: a receipt, not a callout */
+.feat-wide{
+  margin-top:var(--sp-8); padding-top:var(--sp-7);
+  border-top:1px solid var(--line-on-light);
+  display:grid; gap:var(--sp-5);
+}
+@media (min-width:768px){ .feat-wide{ grid-template-columns:auto 1fr; gap:var(--sp-6); } }
+.feat-wide .feat-q{ margin-top:0; }
+.feat-wide h3{ margin:var(--sp-1) 0 var(--sp-3); font-size:1.5rem; color:var(--ink); }
+
+/* ---------- chips: a closed square with one icon ---------- */
+/* the chip is a cell: it takes the live --cell, never a hardcoded 72 */
+.chip{ display:block; flex:0 0 auto; width:calc(var(--cell) + 1px); height:calc(var(--cell) + 1px); }
+.statgrid{
+  display:grid; gap:var(--sp-5);
+  grid-template-columns:1fr;
+  margin-top:var(--sp-7);
+}
+@media (min-width:600px){ .statgrid{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1024px){ .statgrid.c4{ grid-template-columns:repeat(4,1fr); } }
+@media (min-width:1024px){ .statgrid.c5{ grid-template-columns:repeat(5,1fr); } }
+@media (min-width:1024px){ .statgrid.c3{ grid-template-columns:repeat(3,1fr); } }
+
+/* ---------- process stream ----------
+   A continuous current flowing left to right under the five steps.
+   Two dash layers on one line at different speeds and weights give it
+   depth, like water moving over water. No stops, no per-step beats.
+   Dash motion is stroke-dashoffset on a fixed geometry: cheap to paint,
+   deterministic, and it degrades to a static dashed line under reduced
+   motion. The stream only exists at 1024px+, where the five steps sit
+   on one row. */
+/* The stream runs through the middle of the icons, behind the chips, and
+   ends at the last icon. railFlow() in the layout script measures the first
+   and last chip and sets the box: horizontal when the steps share a row,
+   vertical when they stack. Chips sit above it on an opaque background. */
+.flow{ position:relative; }
+.flow-rail{ display:none; position:absolute; z-index:0; }
+.flow-rail svg{ display:none; width:100%; height:100%; }
+.flow-rail.h .rail-h{ display:block; }
+.flow-rail.v .rail-v{ display:block; }
+.flow .chip{ position:relative; z-index:1; background:var(--white); }
+/* the flow never runs two-up: one column until all five fit on one row,
+   so the stream is always a single straight line through every icon */
+@media (min-width:600px) and (max-width:1023.98px){
+  .statgrid.flow{ grid-template-columns:1fr; }
+}
+.flow-rail .base{ stroke:var(--blue); stroke-opacity:.26; stroke-width:1; }
+/* v4. The current is one dash that runs the rail once, when the section
+   enters view, and stops at the last step. pathLength=1 on the line, so
+   the same dash and offset work whatever the measured length is. Never a
+   loop: a loop reads as something loading. */
+.flow-rail .current{
+  stroke:var(--blue); stroke-opacity:.9; stroke-width:2;
+  stroke-linecap:round; stroke-dasharray:.08 2; stroke-dashoffset:.08;
+}
+/* each step lights as the current reaches it. The delay is --kt, set by
+   railFlow() from where the step's icon sits on the measured rail, so
+   adding or moving a step cannot desynchronise the pass. */
+@media (prefers-reduced-motion:no-preference){
+  .flow.run .flow-rail .current{ animation:rail-pass 2s linear 1 forwards; }
+  .flow.run .stat .chip > g{ animation:chip-pass 700ms var(--ease) 1; animation-delay:var(--kt,0ms); }
+  .flow.run .stat .lbl{ animation:lbl-pass 700ms var(--ease) 1; animation-delay:var(--kt,0ms); }
+}
+@keyframes rail-pass{ to{ stroke-dashoffset:-1.08; } }
+@keyframes chip-pass{ 0%{ stroke-opacity:.4; } 35%{ stroke-opacity:1; } 100%{ stroke-opacity:.4; } }
+@keyframes lbl-pass{ 0%{ color:var(--ink); } 35%{ color:var(--blue); } 100%{ color:var(--ink); } }
+.stat .num{
+  font-weight:700; font-size:var(--fs-num); line-height:1.1;
+  font-variant-numeric:tabular-nums; font-feature-settings:'tnum';
+  direction:ltr; unicode-bidi:isolate;
+  margin-top:var(--sp-4);
+}
+/* on white, numbers inherit ink from the surface */
+.stat .lbl{ font-weight:700; margin-top:var(--sp-2); }
+.stat .sub{ font-size:var(--fs-small); margin-top:var(--sp-2); max-width:44ch; }
+.surface-dark .stat .sub, .surface-deep .stat .sub{ color:var(--text-on-blue-muted); }
+.surface-white .stat .sub{ color:var(--text-muted); }
+
+/* ---------- formula ---------- */
+.formula{
+  font-family:var(--f-body); font-weight:400;
+  font-size:clamp(.9375rem,.85rem + .4vw,1.125rem);
+  font-variant-numeric:tabular-nums; font-feature-settings:'tnum';
+  letter-spacing:0; line-height:1.9; padding-block:var(--sp-2);
+  /* wraps between terms instead of scrolling: no clipped tail, no dead tab stop */
+  white-space:normal; overflow-wrap:break-word;
+}
+.formula .nb{ white-space:nowrap; }
+.formula b{ color:var(--blue); font-weight:700; }
+.formula-note{ font-size:var(--fs-small); color:var(--text-muted); margin-top:var(--sp-3); }
+
+/* ---------- axis blocks ---------- */
+.axes{ display:grid; gap:var(--sp-6); margin-top:var(--sp-7); }
+@media (min-width:900px){ .axes{ grid-template-columns:repeat(2,1fr); gap:var(--sp-8); } }
+.axis h3{ margin-bottom:var(--sp-3); }
+.axis .kicker{
+  font-size:var(--fs-micro); font-weight:700; letter-spacing:var(--tr-label);
+  text-transform:uppercase; color:var(--text-muted); display:block; margin-bottom:var(--sp-2);
+}
+.axis p{ max-width:52ch; }
+.axis p + p{ margin-top:var(--sp-3); }
+
+/* ---------- tables ---------- */
+.tablewrap{ overflow-x:auto; margin-top:var(--sp-6); -webkit-overflow-scrolling:touch; }
+.tablewrap:focus-visible{ outline:var(--focus-w) solid var(--focus-on-light); outline-offset:2px; }
+table.t{ width:100%; min-width:520px; font-size:var(--fs-small); text-align:left; }
+table.t caption{
+  text-align:left; font-size:var(--fs-micro); font-weight:700; letter-spacing:var(--tr-label);
+  text-transform:uppercase; color:var(--text-muted); padding-bottom:var(--sp-3);
+}
+table.t th, table.t td{
+  padding:var(--sp-3) var(--sp-4);
+  border-bottom:1px solid var(--hairline);
+  vertical-align:top;
+}
+table.t thead th{ border-bottom:2px solid var(--blue); font-weight:700; }
+table.t tbody th{ font-weight:700; }
+table.t td.n{ font-variant-numeric:tabular-nums; font-feature-settings:'tnum'; direction:ltr; unicode-bidi:isolate; font-weight:700; }
+.ledger td.done{ color:var(--blue); font-weight:700; }
+.ledger td.open{ color:var(--text-muted); font-weight:700; }
+
+/* ---------- numbered steps ---------- */
+.steps{ list-style:none; padding:0; counter-reset:s; display:grid; gap:var(--sp-5); margin-top:var(--sp-7); }
+@media (min-width:900px){ .steps{ grid-template-columns:repeat(3,1fr); } }
+.steps li{ counter-increment:s; border-top:1px solid var(--line-on-dark); padding-top:var(--sp-4); }
+.steps li::before{
+  content:counter(s); display:block;
+  font-weight:700; font-size:var(--fs-num); line-height:1;
+  color:var(--acc-lime); font-variant-numeric:tabular-nums;
+  margin-bottom:var(--sp-3);
+}
+.steps h3{ margin-bottom:var(--sp-2); }
+.steps p{ color:var(--text-on-blue-muted); font-size:var(--fs-small); }
+
+.bounds{ list-style:none; padding:0; margin-top:var(--sp-7); display:grid; gap:var(--sp-3); max-width:var(--measure); }
+.bounds li{ padding-left:var(--sp-5); position:relative; }
+.bounds li::before{
+  content:""; position:absolute; left:0; top:.62em;
+  width:10px; height:10px; border:1.7px solid var(--acc-lime);
+}
+
+/* ---------- objections ---------- */
+.objs{ margin-top:var(--sp-6); max-width:78ch; border-top:1px solid var(--ctl-on-dark); }
+.obj{ border-bottom:1px solid var(--ctl-on-dark); }
+.obj > summary{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--sp-4);
+  min-height:56px; padding:var(--sp-3) 0;
+  cursor:pointer; list-style:none; font-weight:700; font-size:var(--fs-lead);
+  font-family:var(--f-body);
+}
+.obj > summary::-webkit-details-marker{ display:none; }
+.obj > summary::marker{ content:""; }
+.obj > summary::after{
+  content:""; flex:0 0 auto; width:11px; height:11px;
+  border-right:2px solid var(--white); border-bottom:2px solid var(--white);
+  transform:rotate(45deg) translate(-2px,-2px);
+  transition:transform var(--dur-2) var(--ease);
+}
+/* the chevron turns 180 with the panel. .acc is set by the script that runs
+   the transition; without it a native open/close still shows the answer */
+.obj.is-open > summary::after,
+.obj[open]:not(.acc) > summary::after{ transform:rotate(-135deg) translate(-2px,-2px); }
+/* v4. The answer opens on grid-template-rows 0fr to 1fr, 220ms, and the
+   chevron turns with it. The wrapper is the grid, the answer is its one
+   row, min-height 0 so the row can actually reach zero. */
+.obj .ans-wrap{ display:grid; grid-template-rows:0fr; transition:grid-template-rows var(--dur-2) var(--ease); }
+.obj.is-open .ans-wrap,
+.obj[open]:not(.acc) .ans-wrap{ grid-template-rows:1fr; }
+.obj .ans{ min-height:0; overflow:hidden; padding:0 0 var(--sp-5); max-width:var(--measure); color:var(--text-on-blue-muted); }
+.obj .ans p + p{ margin-top:var(--sp-3); }
+
+/* ---------- close panel ---------- */
+.close-sec{ background:var(--surface); color:var(--text); padding-block:0; overflow:hidden; }
+/* no bare white around the grid: it ends where the surface ends */
+.close-sec .frame{ margin-block:0; }
+.close-sec .btn-primary{ background:var(--blue); color:var(--white); }
+.close-sec .btn-primary:hover{ background:var(--blue-deep); filter:none; }
+.close-win{
+  display:flex; flex-direction:column; justify-content:center;
+  padding-inline:var(--win-pad);
+  padding-block:clamp(32px,5vh,56px);
+}
+.close-win h2{ margin-bottom:var(--sp-3); }
+.close-win p{ color:var(--text); max-width:60ch; }
+.close-win p.cta-row{ max-width:none; margin-top:var(--sp-5); }
+/* the pill is a pill, not a bar: full width only where the column is narrow */
+@media (min-width:600px){
+  .close-win .btn-full{ width:auto; padding-inline:var(--sp-8); }
+}
+.fit{ padding-block:var(--sp-6) var(--sp-8); }
+.fit dl{ display:grid; gap:var(--sp-5); }
+@media (min-width:900px){ .fit dl{ grid-template-columns:repeat(2,1fr); gap:var(--sp-8); } }
+.fit dt{
+  font-size:var(--fs-micro); font-weight:700; letter-spacing:var(--tr-label);
+  text-transform:uppercase; color:var(--acc-lime); margin-bottom:var(--sp-2);
+}
+.fit dd{ margin:0; color:var(--text-on-blue-muted); max-width:52ch; }
+.fit dd b{ color:var(--white); font-weight:700; }
+
+/* ---------- footer ---------- */
+.foot-meta{
+  display:flex; flex-wrap:wrap; gap:var(--sp-3) var(--sp-6);
+  padding-top:var(--sp-5); font-size:var(--fs-small); color:var(--text-muted);
+}
+.foot-meta a{ min-height:44px; display:inline-flex; align-items:center; }
+
+
+/* ---------- one animation: hero content settles in on load ---------- */
+@media (prefers-reduced-motion:no-preference){
+  html.js .rise{ opacity:0; transform:translateY(10px); }
+  html.js .rise.in{ opacity:1; transform:none; transition:opacity 260ms var(--ease), transform 260ms var(--ease); }
+}
+
+/* Vertical rhythm on the module. 96px was 1.52 cells at 1512, so every
+   section pushed the grid a little further off the row line than the one
+   above it. Two cells of padding, one cell between a section intro and
+   the block under it, and snapSections() below tops each section up to a
+   whole number of cells so the row rhythm survives the whole page. */
+@media (min-width:768px){
+  section{ padding-block:calc(2 * var(--cell)); }
+  .feats, .statgrid, .axes, .steps, .bounds, .objs,
+  .gridpanel.mt7, .gridpanel.mt5, .mt7{ margin-top:var(--cell); }
+}
+
+/* One left edge for the whole page. A window already starts on the third
+   column line, so it carries no inset of its own and the copy inside sits
+   on the column, flush to the surviving edge, exactly like the copy in a
+   plain section above it. Below 768 the windows go full width and the
+   ordinary gutter takes over again. */
+@media (min-width:768px){
+  .ways-grid .way-box{ padding-block:var(--win-pad-block); }
+  /* the header is on the same grid as the page under it: the wordmark
+     starts on the third column line, the nav ends on its mirror, and the
+     bar is exactly one cell tall so the vertical rhythm starts on a row
+     line rather than 12px short of one */
+  :root{ --hdr:var(--cell); }
+  .hdr-in{ max-width:none; padding-inline:calc(2 * var(--cell) + var(--win-pad)); }
+  /* the last item ends on the line, not a text-padding short of it */
+  .hdr-nav a:last-child{ padding-inline-end:0; }
+  .hdr.past-hero .hdr-nav a:last-child{ padding-inline-end:var(--sp-3); }
+}
+
+/* ---------- small screens ---------- */
+@media (max-width:767px){
+  .hero h1{ max-width:100%; margin-bottom:var(--sp-3); }
+  .hero .def{ font-size:var(--fs-body); line-height:1.5; }
+  .hero-actions{ margin-top:var(--sp-4); gap:var(--sp-3); }
+  .hero .cta-cost{ margin-top:var(--sp-2); }
+  .stat{ display:grid; grid-template-columns:auto 1fr; gap:0 var(--sp-4); align-items:start; }
+  .stat .chip{ grid-row:1 / span 3; }
+  .stat .num{ margin-top:0; }
+  .hdr-word{ font-size:1.25rem; }
+}
+/* ============================================================
+   V2 LAYER - fluid interface pass
+   ------------------------------------------------------------
+   Everything above is the original one-pager. Nothing there was
+   changed; this block and the script at the end of the body are
+   the whole of v2.
+
+   Source of the rules: the apple-design skill (WWDC "Designing
+   Fluid Interfaces", "The Details of UI Typography", "Principles
+   of Great Design"). Section numbers below refer to it.
+   The brand is unchanged: Quoted blue, the 160deg gradient, the
+   grid as structure, one accent per surface, three typefaces.
+   ============================================================ */
+
+:root{
+  /* Brand book says the gradient is always 160deg. The base file
+     draws it at 180. Fixed here, everywhere it is used. */
+  --blue-grad:linear-gradient(160deg,#1741d6 0%,#1236b8 100%);
+
+  /* 15. Tracking is size-specific. One --tr-tight for every heading
+     is wrong at one end of the scale or the other: display type reads
+     too loose as it grows, small type too tight as it shrinks. */
+  --tr-display:-0.035em;
+  --tr-h2:-0.022em;
+  --tr-h3:-0.015em;
+  --tr-lead:-0.005em;
+  --tr-body:0em;
+
+  /* springs, quoted in the two parameters Apple ships: damping ratio
+     and response in seconds. Mirrored in the script. */
+  --sp-response:.38s;
+
+  --chrome-h:var(--hdr);
+}
+
+html{ scrollbar-gutter:stable; }
+body{
+  font-optical-sizing:auto;
+  font-synthesis-weight:none;
+}
+
+/* 15. Leading tracks size inversely: tight on display, open on body. */
+h1{ line-height:1.02; letter-spacing:var(--tr-display); }
+h2{ line-height:1.14; letter-spacing:var(--tr-h2); }
+h3{ line-height:1.25; letter-spacing:var(--tr-h3); }
+.deck, .hero .def{ letter-spacing:var(--tr-lead); }
+.feat-b, .stat .sub, .obj .ans, .fit dd{ letter-spacing:var(--tr-body); }
+/* vibrancy: text over a translucent or coloured surface takes weight and
+   a hair of tracking rather than a lighter grey */
+.hdr-nav a, .mnav-in a, .foot-meta{ letter-spacing:.005em; }
+
+.hero .frame{ position:relative; z-index:2; }
+
+/* ------------------------------------------------------------
+   14. Reduced motion is a gentler equivalent, not the absence of
+   feedback: cross-fades stay, travel and overshoot go.
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion:reduce){
+  .hdr{ transition:none; }
+}
+@media (prefers-reduced-transparency:reduce){
+  .gq-scrim{ background:rgba(13,27,62,.94); }
+}
+@media (prefers-contrast:more){
+  .hdr.past-hero{ box-shadow:inset 0 -1px 0 var(--ink); }
+  .obj{ border-bottom-color:var(--white); }
+}
+@media print{
+  .hdr, .gq, .mnav{ display:none !important; }
+  .rv, .rise{ opacity:1 !important; transform:none !important; }
+  .obj .ans-wrap{ grid-template-rows:1fr !important; }
+  .flow-rail{ display:none !important; }
+  .hero #ghost{ display:none; }
+}
+
+/* ============================================================
+   V2 VISUAL PASS
+   ------------------------------------------------------------
+   Two problems, named: the page reads flat because every step in
+   the type scale is a small one, and it reads unfinished because
+   the loudest thing on a white surface is a 3:1 accent headline.
+   Structure, copy, sections and the grid engine are untouched.
+   ------------------------------------------------------------ */
+
+/* ---- 1. A SCALE WITH REAL STEPS ----------------------------
+   Before: 34 / 24 / 20 / 17 / 15. Every jump under 1.4x, so a
+   card title, a section deck and a paragraph all read as the
+   same rank. After: 46 / 22 / 21 / 17 / 15, with the big break
+   put where the hierarchy actually breaks - between the section
+   headline and everything under it.
+   Tracking and leading move with size (15): the display line
+   tightens as it grows, body stays at zero, labels open up. */
+:root{
+  --fs-display:clamp(2.75rem,1.35rem + 5.2vw,5rem);
+  --fs-h1:clamp(2.125rem,1.4rem + 2.9vw,3.5rem);
+  --fs-h2:clamp(1.875rem,1.15rem + 2.7vw,2.875rem);
+  --fs-h3:clamp(1.1875rem,1.06rem + 0.5vw,1.375rem);
+  --fs-lead:clamp(1.125rem,1.05rem + 0.45vw,1.3125rem);
+  --fs-body:clamp(1rem,0.97rem + 0.16vw,1.0625rem);
+  --fs-small:0.9375rem;
+  --fs-micro:0.75rem;
+  --fs-num:clamp(2rem,1.4rem + 2.2vw,3.25rem);
+
+  --tr-display:-0.04em;
+  --tr-h2:-0.028em;
+  --tr-h3:-0.012em;
+  --tr-lead:-0.008em;
+  --tr-label:0.11em;
+
+  --measure:62ch;
+}
+h1{ line-height:0.98; }
+h2{ line-height:1.08; }
+h3{ line-height:1.28; }
+
+/* ---- 2. THE HEADLINE TAKES THE STRONGEST INK ----------------
+   The brand's accent headline is written for the blue post tile,
+   where lime reads at 6.65:1. On white the same hue lands at
+   3.20:1, which is the legal minimum for large text and the
+   reason the page reads washed out. So: on blue the headline
+   keeps its accent, exactly as specified. On white it takes Ink
+   at 16.89:1 and the accent moves to the marker above it, where
+   3:1 is not carrying the argument.
+   To go back: delete this block. */
+.surface-white h2, .close-win h2{ color:var(--ink); }
+
+/* ---- 3. THE SECTION MARKER ---------------------------------
+   "01 / The opportunity" was a line of small grey caps. Now it is
+   an editorial marker: a rule in the section's accent, then the
+   label in the surface's own text colour, so nothing small is
+   asked to carry colour it cannot carry. */
+#dispersion{ --sec-acc:var(--acc-lime-lt); }
+#process{ --sec-acc:var(--acc-lime); }
+#mechanism{ --sec-acc:var(--acc-lime-lt); }
+#objections{ --sec-acc:var(--acc-lime-lt); }
+#close{ --sec-acc:var(--acc-lime-lt); }
+.hero{ --sec-acc:var(--acc-lime); }
+.eyebrow{
+  display:flex; align-items:center; gap:var(--sp-3);
+  font-size:var(--fs-micro); font-variant-numeric:tabular-nums;
+  margin-bottom:var(--sp-5);
+}
+.eyebrow::before{
+  content:""; flex:0 0 auto; width:32px; height:2px;
+  background:var(--sec-acc,var(--blue));
+}
+.surface-white .eyebrow{ color:var(--ink); }
+
+/* ---- 4. THE DECK IS A BLOCK, NOT A BIG PARAGRAPH ------------
+   Separated from body copy by size, measure and leading rather
+   than by a grey, because this palette has one text colour. */
+.deck{
+  max-width:54ch;
+  line-height:1.55;
+  margin-top:var(--sp-5);
+}
+.hero .def{ line-height:1.5; }
+.hero h1{ max-width:20ch; margin-bottom:var(--sp-5); }
+
+/* ---- 5. THE WINDOWS READ AS SPEC SHEETS ---------------------
+   The grid stays the structure: no shadow, no radius, no box drawn
+   on top of a line. What changes is inside. More air, a label that
+   is clearly a label, a title that is clearly a title, and the
+   return value closed off by a rule instead of floating. */
+.feat{ padding:var(--sp-6) var(--sp-5) var(--sp-5); }
+.feat-q{
+  margin:0 0 var(--sp-3);
+  font-size:var(--fs-micro); letter-spacing:var(--tr-label);
+  color:var(--blue);
+}
+.feat .feat-q{ min-height:calc(2 * 1.55em); }
+.feat h3, .way-box h3{ margin:0 0 var(--sp-4); font-size:var(--fs-h3); color:var(--ink); }
+.feat-b{ line-height:1.65; }
+.feat-out{
+  margin:auto 0 0; padding-top:var(--sp-4);
+  border-top:1px solid var(--line-on-light);
+  font-size:var(--fs-micro); letter-spacing:var(--tr-label);
+  text-transform:uppercase; color:var(--ink);
+}
+.feat-out span{ color:var(--blue); font-weight:700; }
+
+.ways-grid .way-box{ padding:var(--sp-6) var(--win-pad); }
+.way-box .feat-q{ margin-bottom:var(--sp-2); }
+.way-box .feat-b{ max-width:62ch; }
+
+/* ---- 6. THE ANSWER WINDOW IS THE BRAND, NOT A CYAN FILL -----
+   A saturated cyan panel is the loudest surface on the page and it
+   argues with the blue two sections away. The window that says
+   "this is where Quoted comes in" should be the product's own
+   surface: the 160deg gradient, white type, the mark in white. */
+.way-box.way-open{
+  background:var(--blue-grad);
+  padding-block:var(--sp-7);
+  align-items:flex-start; gap:var(--sp-6);
+}
+.way-open .feat-q{ color:var(--blue); letter-spacing:var(--tr-label); }
+.way-open h3{ color:var(--white); font-size:var(--fs-h2); line-height:1.08; letter-spacing:var(--tr-h2); }
+.way-open .feat-b{ color:rgba(255,255,255,.86); font-weight:400; font-size:var(--fs-body); max-width:66ch; }
+.way-open .way-mark path{ fill:var(--white); }
+.way-open .way-mark{ width:72px; height:72px; opacity:.92; margin-top:-6px; }
+@media (max-width:599.98px){ .way-open .way-mark{ width:44px; height:44px; } }
+
+/* ---- 7. THE PROCESS ROW ------------------------------------- */
+.stat .lbl{
+  margin-top:var(--sp-4);
+  font-size:var(--fs-body); font-weight:700; letter-spacing:-.008em;
+}
+.stat .sub{ margin-top:var(--sp-2); line-height:1.6; max-width:38ch; }
+
+/* ---- 8. THE QUESTIONS --------------------------------------- */
+.objs{ max-width:74ch; }
+.obj > summary{
+  font-size:var(--fs-h3); font-family:var(--f-head);font-style:italic; font-weight:700;
+  letter-spacing:var(--tr-h3); min-height:64px; padding-block:var(--sp-4);
+}
+.obj .ans{ font-size:var(--fs-small); line-height:1.7; }
+.fit dt{ font-size:var(--fs-micro); letter-spacing:var(--tr-label); }
+.fit dd{ font-size:var(--fs-body); line-height:1.7; }
+
+/* ---- 9. THE CALL TO ACTION HAS PRESENCE --------------------- */
+.btn{ min-height:48px; padding-inline:var(--sp-7); letter-spacing:-.005em; }
+.btn-sm{ min-height:40px; padding-inline:var(--sp-5); }
+.hero-actions{ margin-top:var(--sp-6); }
+.close-win h2{ margin-bottom:var(--sp-4); }
+.close-win p{ font-size:var(--fs-lead); line-height:1.55; max-width:54ch; }
+
+/* ---- 10. AIR BETWEEN AN INTRO AND WHAT IT INTRODUCES --------
+   A section headline and the block under it were one cell apart,
+   the same distance as two cards from each other. snapSections()
+   still tops every section up to a whole number of cells, so the
+   row rhythm survives this. */
+@media (min-width:768px){
+  .feats, .statgrid, .objs, .gridpanel.mt7{ margin-top:calc(1.5 * var(--cell)); }
+  .fit{ padding-block:calc(1.5 * var(--cell)) calc(2 * var(--cell)); }
+}
+@media (max-width:767px){
+  .eyebrow{ margin-bottom:var(--sp-4); }
+  .feat{ padding:var(--sp-5) var(--sp-4); }
+  .way-open h3{ font-size:1.625rem; }
+}
+
+/* ---- 11. THE SECTION HEADER USES THE PAGE, NOT A THIRD OF IT ----
+   Every intro was a headline and a paragraph stacked in the left column of
+   a 1440px page, with the other half empty. Wide screens get the pair side
+   by side, baselines aligned, which is what makes a page of this kind read
+   as considered rather than as a draft. :has() gates it, so a .wrap with no
+   deck is left exactly as it was. */
+@media (min-width:1100px){
+  .wrap:has(> .deck){
+    display:grid;
+    grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);
+    column-gap:calc(2 * var(--cell));
+    /* both columns hang from the same line under the marker. Bottom aligning
+       them dropped the headline half a section down and left a hole between
+       it and the eyebrow. */
+    align-items:start;
+  }
+  .wrap:has(> .deck) > *{ grid-column:1 / -1; }
+  .wrap:has(> .deck) > .eyebrow{ grid-column:1 / -1; }
+  .wrap:has(> .deck) > h2{ grid-column:1; margin:0; max-width:20ch; }
+  /* optical, not mathematical: the two faces carry different leading above
+     their first line, so equal box tops do not read as equal text tops. The
+     deck is nudged onto the headline's cap line. */
+  .wrap:has(> .deck) > .deck{
+    grid-column:2; max-width:46ch;
+    margin-top:calc((1.08em - 1em) / 2);
+  }
+}
+
+.foot-meta{ padding-top:0; align-items:center; }
+
+/* ---- 12. THE QUESTIONS BLOCK ------------------------------------
+   Less dead air between the fit statement and the questions, and a wider
+   measure so the list is not a narrow strip against an empty half page. */
+.objs{ max-width:88ch; }
+.fit{ padding-block:var(--sp-6) var(--sp-6); }
+@media (min-width:768px){
+  .fit{ padding-block:var(--cell) 0; }
+  #objections .objs{ margin-top:var(--cell); }
+}
+@media (min-width:1100px){
+  /* a list of questions that spans the content width, with the answer held
+     to a reading measure under it. A narrow strip against an empty half of
+     the page was the single most unfinished looking thing here. */
+  .objs{ max-width:none; }
+  .obj > summary{ padding-inline-end:var(--sp-3); }
+  .obj .ans{ max-width:64ch; padding-bottom:var(--sp-6); }
+}
+
+
+/* ============================================================
+   V3 LAYER
+   ------------------------------------------------------------
+   v2 drew the grid on the viewport everywhere: it ran edge to
+   edge down the whole page, and the two sections in the middle
+   each took a full bleed band of blue.
+
+   1. THE STAGE. The module does not change: 24 columns of the
+      viewport, and the hero still draws all of them, edge to
+      edge, exactly as in v2. Every panel under the hero is drawn
+      on the middle twenty instead. The two columns given back on
+      each side are the whitespace, and because the margin is a
+      whole number of the same columns, the copy in a stage panel
+      still starts on the same line as the copy in the hero.
+   2. ONE BLUE SURFACE. The hero. The two reversed sections are
+      white, and the blue that is left is the hero, the marks, the
+      rules and the buttons.
+   3. AIR. Three cells of section padding instead of two, and no
+      watermark grid behind the copy: on a page this white the
+      texture was the thing arguing with the whitespace.
+
+   To go back: delete this block, put .tex on <body>, and restore
+   .surface-deep / .surface-dark on the two sections.
+   ============================================================ */
+
+:root{
+  /* all three are overwritten by the layout script on first paint */
+  --vw-full:100vw;
+  --stage:100vw;
+  --page-x:0px;
+  --gap-y:clamp(40px,5.5vw,96px);
+}
+
+/* ---- 1. THE PAGE IS WHITE ---------------------------------- */
+body{ background:var(--white); background-image:none; }
+
+/* ---- 2. THE HERO KEEPS THE WHOLE WIDTH ---------------------
+   .gridpanel now spans --vw, and --vw is the stage. The hero opts
+   out: it is the one panel still measured against the window, so
+   the band, the grid on it and the header floating over it are the
+   v2 hero, untouched. */
+.hero.gridpanel{
+  width:var(--vw-full,100vw);
+  margin-inline:calc(50% - var(--vw-full,100vw) / 2);
+}
+
+/* ---- 3. ONE LEFT EDGE, STATED ONCE -------------------------
+   Copy starts on the stage, plus the window's own air. Same number
+   in the header, the same number inside every merged window, and
+   on desktop the same number the hero's third column falls on. */
+.wrap{ padding-inline:calc(var(--page-x) + var(--win-pad)); }
+@media (min-width:768px){
+  .wrap{ padding-inline:calc(var(--page-x) + var(--win-pad)); }
+  .hdr-in{ padding-inline:calc(var(--page-x) + var(--win-pad)); }
+  /* three cells, not two. The whitespace is the point of this version. */
+  section{ padding-block:calc(3 * var(--cell)); }
+}
+
+/* the last grid block does not sit on the bottom of the page */
+.close-sec{ margin-bottom:var(--gap-y); }
+
+/* ---- 4. WHAT WAS WRITTEN FOR A DARK GROUND ------------------
+   The two reversed sections carry .surface-white now, so anything
+   keyed on the surface follows on its own. These are the rules that
+   assumed a dark ground without ever saying so. */
+#process{ --sec-acc:var(--acc-lime-lt); }
+#objections{ --sec-acc:var(--acc-lime-lt); }
+
+.objs{ border-top-color:var(--rule-control); }
+.obj{ border-bottom-color:var(--rule-control); }
+.obj > summary::after{ border-right-color:var(--blue); border-bottom-color:var(--blue); }
+.obj > summary:hover{ color:var(--blue); }
+.obj .ans{ color:var(--text); }
+
+.fit dt{ color:var(--blue); }
+.fit dd{ color:var(--text); }
+.fit dd b{ color:var(--blue); font-weight:700; }
+
+.steps li{ border-top-color:var(--line-on-light); }
+.steps li::before{ color:var(--blue); }
+.steps p{ color:var(--text); }
+.bounds li::before{ border-color:var(--blue); }
+
+
+@media (prefers-contrast:more){
+  .obj{ border-bottom-color:var(--ink); }
+}
+
+/* ---- 5. THE ANSWER WINDOW, ON A WHITE PAGE ------------------
+   v2 filled it with the 160deg gradient, which was right when the
+   page had three blue bands in it. Here the hero is the only blue
+   surface, so the window that says "this is where Quoted comes in"
+   separates itself by weight instead of by ground: the page tint,
+   the mark in full blue, and the title still at section size.
+   To put the blue back: delete this block. */
+/* the mark sits above the copy, not beside it: with the blue ground gone
+   there is nothing to hold an indented column, and the title has to start
+   on the same line as the four cards over it. */
+.way-box.way-open{
+  background:var(--surface-tint);
+  flex-direction:column; align-items:flex-start; gap:var(--sp-4);
+}
+.way-open .way-mark{ width:52px; height:52px; margin-top:0; }
+.way-open .feat-q{ color:var(--blue); }
+.way-open h3{ color:var(--ink); }
+.way-open .feat-b{ color:var(--text); }
+.way-open .way-mark{ opacity:1; }
+.way-open .way-mark path{ fill:var(--blue); }
+
+/* ---- 6. A FILLED WINDOW KEEPS ITS FRAME --------------------
+   A .cellbox is painted after the grid host, so any window with a
+   fill of its own covers the four lines that made it a window. The
+   grid is structure, so it goes back on top. Nothing is drawn that
+   was not already there: every interior edge inside a window has
+   been deleted by the merge, so what lands over a filled window is
+   exactly its own perimeter, and the SVG takes no pointer events. */
+.gridpanel .grid-svg-host{ z-index:2; }
+.gridpanel .cellbox{ z-index:1; }
+
+/* ---- 7. SMALL SCREENS ---------------------------------------
+   The margin columns are zero below 768: a phone has no room to
+   give two columns away, and the page there is the v2 page. */
+@media (max-width:767px){
+  section{ padding-block:clamp(44px,9vw,72px); }
+  .close-sec{ margin-bottom:clamp(28px,6vw,48px); }
+}
+
+
+/* ============================================================
+   V4 LAYER
+   ------------------------------------------------------------
+   Motion, hover, the header, the sheet, and the phone. Everything
+   above is v3 with the pink, the cyan, the pills and the spring
+   engine's CSS taken out at source. The rules for this block:
+   opacity and transform, cubic-bezier(.2,.7,.3,1), 120-260ms for
+   an interaction and one 900ms load sequence, nothing loops,
+   nothing bounces, nothing travels more than 16px, and reduced
+   motion gets every end state at once (the --dur tokens go to 0).
+   ============================================================ */
+
+/* ---- 1. THE HEADER ------------------------------------------
+   Transparent over the hero: the grid's first row is the bar, and
+   the row is merged, so nothing but the frame runs behind the
+   wordmark. Past the hero it turns white with a hairline of the
+   grid's own blue. Never shorter than 56px: at 768 the cell is 32
+   and a 32px bar could not hold a 44px control. */
+:root{ --hdr:56px; }
+@media (min-width:768px){ :root{ --hdr:56px; } }
+@media (min-width:1200px){ :root{ --hdr:var(--cell); } }
+.hdr{
+  background:transparent; color:var(--white);
+  box-shadow:inset 0 -1px 0 transparent;
+  transition:background-color var(--dur-2) var(--ease), color var(--dur-2) var(--ease),
+             box-shadow var(--dur-2) var(--ease);
+}
+.hdr.past-hero{
+  background:var(--white); color:var(--ink);
+  box-shadow:inset 0 -1px 0 var(--line-on-light);
+}
+.hdr-word{ transition:color var(--dur-2) var(--ease); }
+.hdr.past-hero .hdr-word{ color:var(--blue); }
+.hdr.past-hero .hdr-burger{ color:var(--ink); }
+.hdr.past-hero .hdr-burger:hover{ color:var(--blue); }
+.hdr.past-hero .hdr-cta{ background:var(--blue); color:var(--white); }
+.hdr.past-hero .hdr-cta:hover{ background:var(--blue-deep); }
+.hdr.past-hero :focus-visible{ outline-color:var(--focus-on-light); }
+.hdr-burger{ width:44px; height:44px; }
+html.sheet-open{ overflow:hidden; }
+
+.hdr-nav{ position:relative; }
+.hdr-nav a{
+  border-bottom:0; color:var(--text-on-blue-muted);
+  transition:color var(--dur-3) var(--ease);
+}
+.hdr-nav a:hover, .hdr-nav a[aria-current="true"]{ color:var(--white); }
+.hdr.past-hero .hdr-nav a{ color:var(--ink); }
+.hdr.past-hero .hdr-nav a:hover, .hdr.past-hero .hdr-nav a[aria-current="true"]{ color:var(--blue); }
+/* one underline for the whole nav. It is 1px wide and scaled to the
+   current item, so moving between items is a transform, not a re-layout */
+/* one underline for the whole nav. It is 100px wide and scaled to the
+   width of the word it sits under, so moving it is a transform, not a
+   layout. It follows the pointer on hover and focus, returns to the
+   current section on leave, and over the hero shrinks to nothing. */
+.hdr-ul{
+  position:absolute; left:0; bottom:6px; width:100px; height:2px;
+  background:var(--acc-lime); pointer-events:none;
+  transform-origin:0 50%; transform:translateX(0) scaleX(0);
+  transition:transform var(--dur-2) var(--ease), background-color var(--dur-2) var(--ease);
+}
+.hdr.past-hero .hdr-ul{ background:var(--blue); }
+/* the menu links: an underline that grows from the left edge of the text */
+.mnav-in a{ position:relative; align-self:flex-start; padding-bottom:4px; }
+.mnav-in a::after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:2px;
+  background:currentColor; transform:scaleX(0); transform-origin:left center;
+  transition:transform var(--dur-3) var(--ease);
+}
+.mnav-in a:hover::after, .mnav-in a:focus-visible::after{ transform:scaleX(1); }
+.mnav-in a:hover{ color:var(--white); }
+/* the menu is a sheet too: it fades and settles 12px */
+.mnav{
+  opacity:0; transform:translateY(12px);
+  transition:opacity var(--dur-4) var(--ease), transform var(--dur-4) var(--ease);
+}
+.mnav.open{ opacity:1; transform:none; }
+
+/* ---- 2. BUTTONS AND FOCUS ------------------------------------ */
+.btn{
+  border-radius:0;
+  transition:transform var(--dur-3) var(--ease), background-color var(--dur-3) var(--ease),
+             color var(--dur-3) var(--ease), border-color var(--dur-3) var(--ease);
+}
+.btn:hover{ transform:translateY(-1px); }
+/* pressed: back down in 90ms. .press lands on pointer-down (script), so a
+   finger gets the answer on touch, not on release */
+.btn:active, .btn.press{ transform:translateY(0); transition-duration:90ms; }
+.btn-primary{ background:var(--white); color:var(--ink); filter:none; }
+.btn-primary:hover{ background:var(--surface-tint-2); color:var(--ink); filter:none; }
+.btn, .hdr-nav a, .mnav-in a, .obj > summary, .gq-x, .hdr-burger, .hdr-word{
+  -webkit-tap-highlight-color:transparent; touch-action:manipulation;
+}
+.hdr-nav a.press, .hdr-word.press, .mnav-in a.press{ opacity:.7; transition:opacity 90ms var(--ease); }
+.gq-x.press, .hdr-burger.press{ opacity:.6; transition:opacity 90ms var(--ease); }
+.obj > summary.press{ color:var(--blue); }
+.surface-white .btn-primary, .close-sec .btn-primary{ background:var(--blue); color:var(--white); }
+.surface-white .btn-primary:hover, .close-sec .btn-primary:hover{ background:var(--blue-deep); color:var(--white); filter:none; }
+:focus-visible{ outline:var(--focus-w) solid var(--focus-on-light); outline-offset:var(--focus-off); }
+.gq :focus-visible, .mnav :focus-visible, .hero :focus-visible{ outline-color:var(--focus-on-dark); }
+.gq-form input:focus-visible{ outline-offset:0; }
+
+/* ---- 3. CARDS AND STEPS ON HOVER -----------------------------
+   The icon cell's edges go to full brand blue and the kicker takes
+   the accent. Nothing grows, nothing lifts: a window is a window. */
+.chip > g, .chip svg g{ transition:stroke-opacity var(--dur-3) var(--ease); }
+.feat-q{ transition:color var(--dur-3) var(--ease); }
+.feat:hover .chip > g, .stat:hover .chip > g{ stroke-opacity:1; }
+.feat:hover .chip svg g, .stat:hover .chip svg g{ stroke-opacity:1; }
+.feat:hover .feat-q, .way-box:hover .feat-q{ color:var(--acc-lime-lt); }
+.stat .lbl{ transition:color var(--dur-3) var(--ease); }
+.stat:hover .lbl{ color:var(--blue); }
+.feat, .way-box{ transition:none; }
+.feat:hover, .way-box:not(.way-open):hover{ background:transparent; }
+.feat .chip{ margin-bottom:var(--sp-4); }
+
+/* the answer window is the page's second blue surface. White is the
+   ground, blue is the mood change: hero, this window, then the close. */
+.way-box.way-open, .way-box.way-open:hover{ background:var(--blue-grad); color:var(--white); }
+.way-open .way-mark path{ fill:var(--white); }
+.way-open .feat-q{ color:var(--text-on-blue-muted); }
+.way-open:hover .feat-q{ color:var(--acc-lime); }
+.way-open h3{ color:var(--acc-lime); }
+.way-open .feat-b{ color:var(--white); }
+.way-open :focus-visible{ outline-color:var(--white); }
+.close-win h2.h-limelt{ color:var(--acc-lime-lt); }
+
+/* the mechanism windows: the card stack on the grid. No chip inside, no
+   rule drawn inside: the icon is the closed cell above the window, and
+   the cell's four edges light with it. */
+.feat-win{ display:flex; flex-direction:column; }
+.feat-win .feat-q{ margin:0 0 var(--sp-3); min-height:calc(2 * 1.55em); }
+.feat-win h3{ margin:0 0 var(--sp-4); }
+.feat-win .feat-b{ max-width:44ch; }
+.feat-win .feat-out{ margin-top:auto; padding-top:var(--sp-6); border-top:0; }
+.feat-st{
+  margin-top:var(--sp-2); font-size:var(--fs-micro); letter-spacing:var(--tr-label);
+  text-transform:uppercase; color:var(--text); font-weight:400;
+}
+.gridpanel line.chip-edge{ stroke-opacity:.4; transition:stroke-opacity var(--dur-3) var(--ease); }
+.gridpanel line.chip-edge.lit{ stroke-opacity:1; }
+.gridpanel .chip-ico{ transition:stroke-opacity var(--dur-3) var(--ease); }
+.gridpanel .chip-ico.lit{ stroke-opacity:1; }
+.way-box.way-note{ justify-content:center; }
+.way-note .mech-note{ margin:0; max-width:var(--measure); }
+.obj > summary{ transition:color var(--dur-3) var(--ease); }
+
+/* ---- 4. THE HERO ----------------------------------------------
+   One full-row window on the stage, and three things in it, set on
+   the left: the positioning line, the sub-line, one action. The rest
+   of the window is open. No kicker, no band, no stage line here: the
+   stage is stated once, in the footer. */
+.hero-win{ padding-block:calc(var(--cell) * .6); justify-content:center; }
+.hero h1{ max-width:none; margin-bottom:var(--sp-5); }
+.hero .sub{
+  font-size:var(--fs-lead); font-weight:700; line-height:1.4;
+  letter-spacing:var(--tr-lead); color:var(--white);
+  margin:0; max-width:40ch;
+}
+.hero-actions{ margin-top:var(--sp-6); }
+
+/* ---- 4b. THE FOOTER ----------------------------------------------
+   The version line and the stage sentence share the meta window, in
+   the footer's own type. The window is two rows tall on the stage and
+   four under 1200, so the sentence wraps inside it and never crosses
+   the line under it. The name cell is the bottom-right pair, four by
+   two under 1200 where the cell is small. */
+.foot-meta{ gap:var(--sp-1) var(--sp-6); align-items:baseline; align-content:center; line-height:1.5; }
+.foot-meta .stage{ flex:1 1 34ch; max-width:none; }
+
+/* ---- 5. THE SHEET ----------------------------------------------
+   A scrim that fades and a panel that settles 16px, 260ms. Full
+   screen on a phone. */
+.gq{ background:transparent; }
+.gq-scrim{
+  position:fixed; inset:0; z-index:-1; background:rgba(13,27,62,.72);
+  opacity:0; transition:opacity var(--dur-4) var(--ease);
+}
+.gq-in{
+  opacity:0; transform:translateY(16px);
+  transition:opacity var(--dur-4) var(--ease), transform var(--dur-4) var(--ease);
+}
+.gq.open .gq-scrim{ opacity:1; }
+.gq.open .gq-in{ opacity:1; transform:none; }
+.gq-form input{ min-height:48px; }
+.gq-form .btn{ margin-top:var(--sp-3); }
+.gq-note{ margin-top:0; }
+.gq-form .gq-note{ margin-top:0; }
+.gq-done{ display:grid; gap:var(--sp-4); justify-items:start; }
+.gq-done[hidden], .gq-ask[hidden]{ display:none; }
+.gq-done h2{ margin:0; }
+.gq-done .gq-sub{ margin:0; }
+@media (max-width:767px){
+  .gq{ padding:0; align-items:stretch; }
+  .gq-in{
+    max-width:none; min-height:100%; border:0; margin:0;
+    padding:calc(var(--hdr) + var(--sp-4)) var(--gutter) var(--sp-8);
+  }
+}
+
+/* ---- 6. THE STEPS ON NARROW SCREENS ---------------------------
+   Icon on the left, copy on the right, up to 1023, so the vertical
+   rail runs through the icons and never through a label. */
+@media (max-width:1023px){
+  .stat{ display:grid; grid-template-columns:auto 1fr; gap:0 var(--sp-4); align-items:start; }
+  .stat .chip{ grid-row:1 / span 3; }
+  .stat .lbl{ margin-top:0; }
+}
+
+/* ---- 7. REVEALS ------------------------------------------------
+   .rv is set by the script on what is below the fold; .rise is in
+   the hero markup and lands from the load sequence or from the
+   600ms floor in the head. Each carries its own delay in --d. */
+@media (prefers-reduced-motion:no-preference){
+  html.js .rv, html.js .rise{ opacity:0; transform:translateY(12px); }
+  html.js .rv.in, html.js .rise.in{
+    opacity:1; transform:none;
+    transition:opacity var(--dur-2) var(--ease) var(--d,0ms),
+               transform var(--dur-2) var(--ease) var(--d,0ms);
+  }
+  html.js .rise.in{ transition-duration:var(--dur-4); }
+  /* the kicker's rule draws in from zero width once the label has landed */
+  html.js .rv.eyebrow::before, html.js .rise.eyebrow::before{ transform:scaleX(0); transform-origin:left center; }
+  html.js .rv.eyebrow.in::before, html.js .rise.eyebrow.in::before{
+    transform:scaleX(1);
+    transition:transform 300ms var(--ease) calc(var(--d,0ms) + 100ms);
+  }
+  /* the load sequence. Every line has pathLength 1 and its row in --r:
+     .pre holds them undrawn, .drawn lets them in one row after the next,
+     .merging fades the ghost group, which is the edges the hero windows
+     deleted, kept for this one moment. */
+  html.js .hero.pre line{ stroke-dasharray:1; stroke-dashoffset:1; }
+  html.js .hero.drawn line{
+    stroke-dashoffset:0;
+    transition:stroke-dashoffset 380ms var(--ease);
+    transition-delay:calc(var(--r,0) * 22ms);
+  }
+  html.js .hero.pre .icons{ opacity:0; }
+  html.js .hero.drawn .icons{ opacity:1; transition:opacity 420ms var(--ease) 360ms; }
+  html.js .hero.merging #ghost{ opacity:0; transition:opacity 300ms var(--ease); }
+}
+@media (prefers-reduced-motion:reduce){
+  .hdr-ul, .mnav-in a::after, .btn, .chip > g, .chip svg g, .feat-q, .stat .lbl,
+  .chip-edge, .chip-ico, .gq-scrim, .gq-in, .mnav, .obj .ans-wrap, .obj > summary::after{ transition:none; }
+  .hero line{ stroke-dasharray:none; stroke-dashoffset:0; }
+  .hero #ghost{ display:none; }
+  .flow-rail .current{ display:none; }
+}
+</style>
+<noscript><style>
+  /* Flat, unmerged band fallback. Permitted by the brand spec only in this case. */
+  .gridpanel .frame{ width:100%; height:auto; }
+  .gridpanel .grid-svg-host{ display:none; }
+  .gridpanel .cellbox{ position:static; }
+  .nojs-flat .way-box, .gridpanel[data-ways] .way-box{ width:auto !important; height:auto !important; }
+  /* A flat, unmerged band (spec F.3). The lines here are a watermark at .08
+     (spec F.1), never structure: structure is the inline SVG, which needs
+     measurement to place. No full-strength rule may cross the headline. */
+  .hero{
+    background-image:
+      repeating-linear-gradient(to bottom, rgba(255,255,255,.08) 0 1px, transparent 1px var(--cell)),
+      repeating-linear-gradient(to right,  rgba(255,255,255,.08) 0 1px, transparent 1px var(--cell)),
+      var(--blue-grad);
+    background-size:var(--cell) var(--cell), var(--cell) var(--cell), auto;
+  }
+  .close-sec{
+    background-image:
+      repeating-linear-gradient(to bottom, rgba(23,65,214,.08) 0 1px, transparent 1px var(--cell)),
+      repeating-linear-gradient(to right,  rgba(23,65,214,.08) 0 1px, transparent 1px var(--cell)),
+      linear-gradient(var(--surface), var(--surface));
+    background-size:var(--cell) var(--cell), var(--cell) var(--cell), auto;
+  }
+  .hero-win, .close-win{ padding:var(--sp-8) 0; }
+  .hero-word{ place-items:start; padding-bottom:var(--sp-6); }
+  .foot-word{ padding-bottom:var(--sp-5); }
+</style></noscript>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============================ HEADER ============================ -->
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="hdr-word" href="#top">Quoted</a>
+
+    <nav class="hdr-nav" aria-label="Sections">
+      <a href="#dispersion">The opportunity</a>
+      <a href="#process">How it works</a>
+      <a href="#mechanism">Mechanism</a>
+      <a href="#objections">Questions</a>
+      <i class="hdr-ul" aria-hidden="true"></i>
+    </nav>
+
+    <button type="button" class="btn btn-primary btn-sm hdr-cta js-getquoted">Get Quoted</button>
+
+    <button type="button" class="hdr-burger" id="mnav-open" aria-label="Menu" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M1 4 H17 M1 9 H17 M1 14 H17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="mnav" id="mnav" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <button type="button" class="gq-x" id="mnav-x" aria-label="Close">
+    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M2 2 L16 16 M16 2 L2 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+  </button>
+  <nav class="mnav-in" aria-label="Sections">
+    <a href="#dispersion">The opportunity</a>
+    <a href="#process">How it works</a>
+    <a href="#mechanism">Mechanism</a>
+    <a href="#objections">Questions</a>
+    <button type="button" class="btn btn-primary js-getquoted">Get Quoted</button>
+  </nav>
+</div>
+
+<main id="main" tabindex="-1">
+
+<!-- ============================ 1. HERO ============================ -->
+<!-- The hero: the header row is part of the grid, and the grid runs under
+     the bar. One window, the full width of the stage (columns 2 to 22 of
+     the 24), six rows tall, with a closed row above it and one below. The
+     height is row-relative, so when the copy needs more room the frame
+     grows by whole cells and the closed row below survives.
+     Below 768 the window is the full width. Icons never sit under the bar
+     and never inside the window. -->
+<section class="hero gridpanel" id="top" data-fullbleed
+         data-rows="9" data-rows-sm="10" data-mincols="6" data-icons-skip="hdr"
+         data-merges="2,2,c-4,r-3"
+         data-merges-sm="0,2,c,r-3">
+  <div class="frame">
+    <div class="grid-svg-host" aria-hidden="true">
+      <!-- Static desktop grid, 24x9 at CELL 60 (1440/24), the hero window
+         already merged by deleting interior edges. Ships in the HTML so the
+         page is correct before scripting. layoutAll() replaces it on load
+         when the measured column count differs. -->
+      <svg width="1440" height="540" viewBox="0 0 1440 540" aria-hidden="true" focusable="false" style="pointer-events:none">
+        <g class="grid" transform="translate(0.5,0.5)">
+          <g class="vertical-edges" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1" shape-rendering="crispEdges">
+            <line x1="0" y1="0" x2="0" y2="60"/><line x1="60" y1="0" x2="60" y2="60"/><line x1="120" y1="0" x2="120" y2="60"/><line x1="180" y1="0" x2="180" y2="60"/><line x1="240" y1="0" x2="240" y2="60"/><line x1="300" y1="0" x2="300" y2="60"/><line x1="360" y1="0" x2="360" y2="60"/><line x1="420" y1="0" x2="420" y2="60"/><line x1="480" y1="0" x2="480" y2="60"/><line x1="540" y1="0" x2="540" y2="60"/><line x1="600" y1="0" x2="600" y2="60"/><line x1="660" y1="0" x2="660" y2="60"/><line x1="720" y1="0" x2="720" y2="60"/><line x1="780" y1="0" x2="780" y2="60"/><line x1="840" y1="0" x2="840" y2="60"/><line x1="900" y1="0" x2="900" y2="60"/><line x1="960" y1="0" x2="960" y2="60"/><line x1="1020" y1="0" x2="1020" y2="60"/><line x1="1080" y1="0" x2="1080" y2="60"/><line x1="1140" y1="0" x2="1140" y2="60"/><line x1="1200" y1="0" x2="1200" y2="60"/><line x1="1260" y1="0" x2="1260" y2="60"/><line x1="1320" y1="0" x2="1320" y2="60"/><line x1="1380" y1="0" x2="1380" y2="60"/><line x1="1439" y1="0" x2="1439" y2="60"/>
+            <line x1="0" y1="60" x2="0" y2="120"/><line x1="60" y1="60" x2="60" y2="120"/><line x1="120" y1="60" x2="120" y2="120"/><line x1="180" y1="60" x2="180" y2="120"/><line x1="240" y1="60" x2="240" y2="120"/><line x1="300" y1="60" x2="300" y2="120"/><line x1="360" y1="60" x2="360" y2="120"/><line x1="420" y1="60" x2="420" y2="120"/><line x1="480" y1="60" x2="480" y2="120"/><line x1="540" y1="60" x2="540" y2="120"/><line x1="600" y1="60" x2="600" y2="120"/><line x1="660" y1="60" x2="660" y2="120"/><line x1="720" y1="60" x2="720" y2="120"/><line x1="780" y1="60" x2="780" y2="120"/><line x1="840" y1="60" x2="840" y2="120"/><line x1="900" y1="60" x2="900" y2="120"/><line x1="960" y1="60" x2="960" y2="120"/><line x1="1020" y1="60" x2="1020" y2="120"/><line x1="1080" y1="60" x2="1080" y2="120"/><line x1="1140" y1="60" x2="1140" y2="120"/><line x1="1200" y1="60" x2="1200" y2="120"/><line x1="1260" y1="60" x2="1260" y2="120"/><line x1="1320" y1="60" x2="1320" y2="120"/><line x1="1380" y1="60" x2="1380" y2="120"/><line x1="1439" y1="60" x2="1439" y2="120"/>
+            <line x1="0" y1="120" x2="0" y2="180"/><line x1="60" y1="120" x2="60" y2="180"/><line x1="120" y1="120" x2="120" y2="180"/><line x1="1320" y1="120" x2="1320" y2="180"/><line x1="1380" y1="120" x2="1380" y2="180"/><line x1="1439" y1="120" x2="1439" y2="180"/>
+            <line x1="0" y1="180" x2="0" y2="240"/><line x1="60" y1="180" x2="60" y2="240"/><line x1="120" y1="180" x2="120" y2="240"/><line x1="1320" y1="180" x2="1320" y2="240"/><line x1="1380" y1="180" x2="1380" y2="240"/><line x1="1439" y1="180" x2="1439" y2="240"/>
+            <line x1="0" y1="240" x2="0" y2="300"/><line x1="60" y1="240" x2="60" y2="300"/><line x1="120" y1="240" x2="120" y2="300"/><line x1="1320" y1="240" x2="1320" y2="300"/><line x1="1380" y1="240" x2="1380" y2="300"/><line x1="1439" y1="240" x2="1439" y2="300"/>
+            <line x1="0" y1="300" x2="0" y2="360"/><line x1="60" y1="300" x2="60" y2="360"/><line x1="120" y1="300" x2="120" y2="360"/><line x1="1320" y1="300" x2="1320" y2="360"/><line x1="1380" y1="300" x2="1380" y2="360"/><line x1="1439" y1="300" x2="1439" y2="360"/>
+            <line x1="0" y1="360" x2="0" y2="420"/><line x1="60" y1="360" x2="60" y2="420"/><line x1="120" y1="360" x2="120" y2="420"/><line x1="1320" y1="360" x2="1320" y2="420"/><line x1="1380" y1="360" x2="1380" y2="420"/><line x1="1439" y1="360" x2="1439" y2="420"/>
+            <line x1="0" y1="420" x2="0" y2="480"/><line x1="60" y1="420" x2="60" y2="480"/><line x1="120" y1="420" x2="120" y2="480"/><line x1="1320" y1="420" x2="1320" y2="480"/><line x1="1380" y1="420" x2="1380" y2="480"/><line x1="1439" y1="420" x2="1439" y2="480"/>
+            <line x1="0" y1="480" x2="0" y2="540"/><line x1="60" y1="480" x2="60" y2="540"/><line x1="120" y1="480" x2="120" y2="540"/><line x1="180" y1="480" x2="180" y2="540"/><line x1="240" y1="480" x2="240" y2="540"/><line x1="300" y1="480" x2="300" y2="540"/><line x1="360" y1="480" x2="360" y2="540"/><line x1="420" y1="480" x2="420" y2="540"/><line x1="480" y1="480" x2="480" y2="540"/><line x1="540" y1="480" x2="540" y2="540"/><line x1="600" y1="480" x2="600" y2="540"/><line x1="660" y1="480" x2="660" y2="540"/><line x1="720" y1="480" x2="720" y2="540"/><line x1="780" y1="480" x2="780" y2="540"/><line x1="840" y1="480" x2="840" y2="540"/><line x1="900" y1="480" x2="900" y2="540"/><line x1="960" y1="480" x2="960" y2="540"/><line x1="1020" y1="480" x2="1020" y2="540"/><line x1="1080" y1="480" x2="1080" y2="540"/><line x1="1140" y1="480" x2="1140" y2="540"/><line x1="1200" y1="480" x2="1200" y2="540"/><line x1="1260" y1="480" x2="1260" y2="540"/><line x1="1320" y1="480" x2="1320" y2="540"/><line x1="1380" y1="480" x2="1380" y2="540"/><line x1="1439" y1="480" x2="1439" y2="540"/>
+          </g>
+          <g class="horizontal-edges" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1" shape-rendering="crispEdges">
+            <line x1="0" y1="0" x2="60" y2="0"/><line x1="60" y1="0" x2="120" y2="0"/><line x1="120" y1="0" x2="180" y2="0"/><line x1="180" y1="0" x2="240" y2="0"/><line x1="240" y1="0" x2="300" y2="0"/><line x1="300" y1="0" x2="360" y2="0"/><line x1="360" y1="0" x2="420" y2="0"/><line x1="420" y1="0" x2="480" y2="0"/><line x1="480" y1="0" x2="540" y2="0"/><line x1="540" y1="0" x2="600" y2="0"/><line x1="600" y1="0" x2="660" y2="0"/><line x1="660" y1="0" x2="720" y2="0"/><line x1="720" y1="0" x2="780" y2="0"/><line x1="780" y1="0" x2="840" y2="0"/><line x1="840" y1="0" x2="900" y2="0"/><line x1="900" y1="0" x2="960" y2="0"/><line x1="960" y1="0" x2="1020" y2="0"/><line x1="1020" y1="0" x2="1080" y2="0"/><line x1="1080" y1="0" x2="1140" y2="0"/><line x1="1140" y1="0" x2="1200" y2="0"/><line x1="1200" y1="0" x2="1260" y2="0"/><line x1="1260" y1="0" x2="1320" y2="0"/><line x1="1320" y1="0" x2="1380" y2="0"/><line x1="1380" y1="0" x2="1440" y2="0"/>
+            <line x1="0" y1="60" x2="60" y2="60"/><line x1="60" y1="60" x2="120" y2="60"/><line x1="120" y1="60" x2="180" y2="60"/><line x1="180" y1="60" x2="240" y2="60"/><line x1="240" y1="60" x2="300" y2="60"/><line x1="300" y1="60" x2="360" y2="60"/><line x1="360" y1="60" x2="420" y2="60"/><line x1="420" y1="60" x2="480" y2="60"/><line x1="480" y1="60" x2="540" y2="60"/><line x1="540" y1="60" x2="600" y2="60"/><line x1="600" y1="60" x2="660" y2="60"/><line x1="660" y1="60" x2="720" y2="60"/><line x1="720" y1="60" x2="780" y2="60"/><line x1="780" y1="60" x2="840" y2="60"/><line x1="840" y1="60" x2="900" y2="60"/><line x1="900" y1="60" x2="960" y2="60"/><line x1="960" y1="60" x2="1020" y2="60"/><line x1="1020" y1="60" x2="1080" y2="60"/><line x1="1080" y1="60" x2="1140" y2="60"/><line x1="1140" y1="60" x2="1200" y2="60"/><line x1="1200" y1="60" x2="1260" y2="60"/><line x1="1260" y1="60" x2="1320" y2="60"/><line x1="1320" y1="60" x2="1380" y2="60"/><line x1="1380" y1="60" x2="1440" y2="60"/>
+            <line x1="0" y1="120" x2="60" y2="120"/><line x1="60" y1="120" x2="120" y2="120"/><line x1="120" y1="120" x2="180" y2="120"/><line x1="180" y1="120" x2="240" y2="120"/><line x1="240" y1="120" x2="300" y2="120"/><line x1="300" y1="120" x2="360" y2="120"/><line x1="360" y1="120" x2="420" y2="120"/><line x1="420" y1="120" x2="480" y2="120"/><line x1="480" y1="120" x2="540" y2="120"/><line x1="540" y1="120" x2="600" y2="120"/><line x1="600" y1="120" x2="660" y2="120"/><line x1="660" y1="120" x2="720" y2="120"/><line x1="720" y1="120" x2="780" y2="120"/><line x1="780" y1="120" x2="840" y2="120"/><line x1="840" y1="120" x2="900" y2="120"/><line x1="900" y1="120" x2="960" y2="120"/><line x1="960" y1="120" x2="1020" y2="120"/><line x1="1020" y1="120" x2="1080" y2="120"/><line x1="1080" y1="120" x2="1140" y2="120"/><line x1="1140" y1="120" x2="1200" y2="120"/><line x1="1200" y1="120" x2="1260" y2="120"/><line x1="1260" y1="120" x2="1320" y2="120"/><line x1="1320" y1="120" x2="1380" y2="120"/><line x1="1380" y1="120" x2="1440" y2="120"/>
+            <line x1="0" y1="180" x2="60" y2="180"/><line x1="60" y1="180" x2="120" y2="180"/><line x1="1320" y1="180" x2="1380" y2="180"/><line x1="1380" y1="180" x2="1440" y2="180"/>
+            <line x1="0" y1="240" x2="60" y2="240"/><line x1="60" y1="240" x2="120" y2="240"/><line x1="1320" y1="240" x2="1380" y2="240"/><line x1="1380" y1="240" x2="1440" y2="240"/>
+            <line x1="0" y1="300" x2="60" y2="300"/><line x1="60" y1="300" x2="120" y2="300"/><line x1="1320" y1="300" x2="1380" y2="300"/><line x1="1380" y1="300" x2="1440" y2="300"/>
+            <line x1="0" y1="360" x2="60" y2="360"/><line x1="60" y1="360" x2="120" y2="360"/><line x1="1320" y1="360" x2="1380" y2="360"/><line x1="1380" y1="360" x2="1440" y2="360"/>
+            <line x1="0" y1="420" x2="60" y2="420"/><line x1="60" y1="420" x2="120" y2="420"/><line x1="1320" y1="420" x2="1380" y2="420"/><line x1="1380" y1="420" x2="1440" y2="420"/>
+            <line x1="0" y1="480" x2="60" y2="480"/><line x1="60" y1="480" x2="120" y2="480"/><line x1="120" y1="480" x2="180" y2="480"/><line x1="180" y1="480" x2="240" y2="480"/><line x1="240" y1="480" x2="300" y2="480"/><line x1="300" y1="480" x2="360" y2="480"/><line x1="360" y1="480" x2="420" y2="480"/><line x1="420" y1="480" x2="480" y2="480"/><line x1="480" y1="480" x2="540" y2="480"/><line x1="540" y1="480" x2="600" y2="480"/><line x1="600" y1="480" x2="660" y2="480"/><line x1="660" y1="480" x2="720" y2="480"/><line x1="720" y1="480" x2="780" y2="480"/><line x1="780" y1="480" x2="840" y2="480"/><line x1="840" y1="480" x2="900" y2="480"/><line x1="900" y1="480" x2="960" y2="480"/><line x1="960" y1="480" x2="1020" y2="480"/><line x1="1020" y1="480" x2="1080" y2="480"/><line x1="1080" y1="480" x2="1140" y2="480"/><line x1="1140" y1="480" x2="1200" y2="480"/><line x1="1200" y1="480" x2="1260" y2="480"/><line x1="1260" y1="480" x2="1320" y2="480"/><line x1="1320" y1="480" x2="1380" y2="480"/><line x1="1380" y1="480" x2="1440" y2="480"/>
+            <line x1="0" y1="539" x2="60" y2="539"/><line x1="60" y1="539" x2="120" y2="539"/><line x1="120" y1="539" x2="180" y2="539"/><line x1="180" y1="539" x2="240" y2="539"/><line x1="240" y1="539" x2="300" y2="539"/><line x1="300" y1="539" x2="360" y2="539"/><line x1="360" y1="539" x2="420" y2="539"/><line x1="420" y1="539" x2="480" y2="539"/><line x1="480" y1="539" x2="540" y2="539"/><line x1="540" y1="539" x2="600" y2="539"/><line x1="600" y1="539" x2="660" y2="539"/><line x1="660" y1="539" x2="720" y2="539"/><line x1="720" y1="539" x2="780" y2="539"/><line x1="780" y1="539" x2="840" y2="539"/><line x1="840" y1="539" x2="900" y2="539"/><line x1="900" y1="539" x2="960" y2="539"/><line x1="960" y1="539" x2="1020" y2="539"/><line x1="1020" y1="539" x2="1080" y2="539"/><line x1="1080" y1="539" x2="1140" y2="539"/><line x1="1140" y1="539" x2="1200" y2="539"/><line x1="1200" y1="539" x2="1260" y2="539"/><line x1="1260" y1="539" x2="1320" y2="539"/><line x1="1320" y1="539" x2="1380" y2="539"/><line x1="1380" y1="539" x2="1440" y2="539"/>
+          </g>
+          <g class="icons">
+            <svg x="1397.5" y="257.5" width="25" height="25" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 3 L8 20 H17 L15 33 L28 15 H19 Z"/></g></svg>
+            <svg x="1337.5" y="437.5" width="25" height="25" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="4"/><circle cx="26" cy="26" r="4"/><path d="M28 6 L8 30"/></g></svg>
+            <svg x="677.5" y="77.5" width="25" height="25" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 4 L32 12 L18 20 L4 12 Z"/><path d="M4 19 L18 27 L32 19"/></g></svg>
+            <svg x="77.5" y="437.5" width="25" height="25" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="4"/><circle cx="26" cy="26" r="4"/><path d="M28 6 L8 30"/></g></svg>
+            <svg x="557.5" y="497.5" width="25" height="25" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="13"/><path d="M18 10 V18 L24 21"/></g></svg>
+            <svg x="1397.5" y="317.5" width="25" height="25" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 4 L32 12 L18 20 L4 12 Z"/><path d="M4 19 L18 27 L32 19"/></g></svg>
+            <svg x="77.5" y="137.5" width="25" height="25" viewBox="0 0 36 36"><g fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="13"/><path d="M18 10 V18 L24 21"/></g></svg>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <div class="cellbox hero-win" data-cell="2,2,c-4,r-3" data-cell-sm="0,2,c,r-3">
+      <h1 class="h-lime rise" style="--d:0ms">Charge what it's worth.</h1>
+      <p class="sub rise" style="--d:60ms">Quoted is dynamic pricing for agentic products.</p>
+      <div class="hero-actions rise" style="--d:120ms">
+        <button type="button" class="btn btn-primary js-getquoted">Get Quoted</button>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ============================ 1. OPPORTUNITY ============================ -->
+<section class="surface-white" id="dispersion">
+  <div class="wrap">
+    <p class="eyebrow">01 / The opportunity</p>
+    <h2>Today you price effort. Your users buy worth.</h2>
+    <p class="deck">That is the whole opportunity: price each job on the value it delivers, and collect the spread. One price list for everyone, a different price per job, set before the run and explained by the rule that set it. Today every agentic product prices one of these four ways instead, and each one caps what the agent can earn.</p>
+
+    </div>
+
+  <div class="gridpanel ways-grid mt7" data-ways data-mode="light" data-mincols="6">
+    <div class="frame">
+      <div class="grid-svg-host" aria-hidden="true"></div>
+      <div class="cellbox way-box">
+        <p class="feat-q">Cost-plus</p>
+        <h3>Tokens burned, plus a margin.</h3>
+        <p class="feat-b">Revenue tracks the cost curve, not the value delivered. Every efficiency win cuts your own price, and the model vendor sets your profit.</p>
+      </div>
+      <div class="cellbox way-box">
+        <p class="feat-q">Flat price</p>
+        <h3>One price for every job.</h3>
+        <p class="feat-b">A button tweak and an app that replaces a subscription go out at the same number. The 1,000x jobs are sold at a 1x price.</p>
+      </div>
+      <div class="cellbox way-box">
+        <p class="feat-q">Priced by size</p>
+        <h3>Bigger job, bigger bill.</h3>
+        <p class="feat-b">Steps, tokens and tiers measure effort, not worth. A run of hundreds of steps that fails is expensive. A one-shot that replaces a SaaS is cheap.</p>
+      </div>
+      <div class="cellbox way-box">
+        <p class="feat-q">Subscription</p>
+        <h3>One price a month, no matter what.</h3>
+        <p class="feat-b">A flat fee, blind to how much the agent was used and to what its work was worth. The user who fixed one button and the user who shipped ten apps pay the same.</p>
+      </div>
+      <div class="cellbox way-box way-open">
+        <svg class="way-mark" viewBox="0 0 187 187" aria-hidden="true" focusable="false"><g fill="#1741d6"><path d="M122.014 93C122.701 94.5283 123.331 96.1219 123.903 97.7803C126.747 106.228 129.287 111.96 131.522 114.977C133.757 117.994 137.11 119.502 141.58 119.502C149.301 119.502 153.873 111.457 155.295 95.3667L162 95.97C161.594 109.244 157.428 119.401 149.504 126.441C141.58 133.48 130.506 137 116.284 137C102.264 137 91.3936 133.48 83.6726 126.441C75.9516 119.602 70.0593 109.445 65.9956 95.97C65.6638 94.9339 65.3382 93.944 65.0192 93H64.9858C64.2986 91.4717 63.6692 89.8781 63.0971 88.2197C60.2525 79.7724 57.7127 74.0402 55.4777 71.0233C53.2426 68.0065 49.8901 66.498 45.4201 66.498C37.6991 66.498 33.1274 74.5432 31.7051 90.6333L25 90.03C25.4064 76.7557 29.5716 66.5987 37.4957 59.5592C45.4199 52.5198 56.4936 49 70.7165 49C84.7361 49 95.6064 52.5198 103.327 59.5592C111.048 66.3975 116.941 76.5545 121.004 90.03C121.336 91.0661 121.662 92.056 121.981 93H122.014Z"/></g></svg>
+        <div>
+          <p class="feat-q">Priced by value</p>
+          <h3>This is where Quoted comes in.</h3>
+          <p class="feat-b">Quoted is designed to price every job on the value it delivers, the way a professional quotes work: what is it worth to the client, what will it cost to deliver, and the price lands between the two. Agents took over the professional's work. This gives them the professional's pricing.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 2. PROCESS ============================ -->
+<section class="surface-white" id="process">
+  <div class="wrap">
+    <p class="eyebrow">02 / How it works</p>
+    <h2>Job in. Price and reason out.</h2>
+    <p class="deck">Before the run starts, Quoted reads the job, prices it on the value it carries, and returns the number with the rule that set it, in words the user can read.</p>
+
+    <div class="statgrid c5 flow">
+      <div class="flow-rail" aria-hidden="true">
+        <svg class="rail-h" aria-hidden="true" focusable="false">
+          <line class="base" x1="0" y1="6" x2="100%" y2="6"/>
+          <line class="current" pathLength="1" x1="0" y1="6" x2="100%" y2="6"/>
+        </svg>
+        <svg class="rail-v" aria-hidden="true" focusable="false">
+          <line class="base" x1="6" y1="0" x2="6" y2="100%"/>
+          <line class="current" pathLength="1" x1="6" y1="0" x2="6" y2="100%"/>
+        </svg>
+      </div>
+      <div class="stat">
+        <svg class="chip" width="73" height="73" viewBox="0 0 73 73" aria-hidden="true" focusable="false"><g transform="translate(.5,.5)" stroke="#1741d6" stroke-opacity="0.4" stroke-width="1" shape-rendering="crispEdges"><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="72" y2="0"/><line vector-effect="non-scaling-stroke" x1="0" y1="72" x2="72" y2="72"/><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="0" y2="72"/><line vector-effect="non-scaling-stroke" x1="72" y1="0" x2="72" y2="72"/></g><svg x="21" y="21" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#1741d6" stroke-opacity="0.75" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7 H31 V24 H16 L9 30 V24 H5 Z"/><path d="M11 13 H25 M11 18 H21"/></g></svg></svg>
+        <p class="lbl">1 &middot; A job comes in</p>
+        <p class="sub">Your user asks for something. The job and its metadata go to Quoted before the run.</p>
+      </div>
+      <div class="stat">
+        <svg class="chip" width="73" height="73" viewBox="0 0 73 73" aria-hidden="true" focusable="false"><g transform="translate(.5,.5)" stroke="#1741d6" stroke-opacity="0.4" stroke-width="1" shape-rendering="crispEdges"><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="72" y2="0"/><line vector-effect="non-scaling-stroke" x1="0" y1="72" x2="72" y2="72"/><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="0" y2="72"/><line vector-effect="non-scaling-stroke" x1="72" y1="0" x2="72" y2="72"/></g><svg x="21" y="21" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#1741d6" stroke-opacity="0.75" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4 H28 V29 L24.6 26.5 21.2 29 17.8 26.5 14.4 29 11 26.5 8 29 Z"/><path d="M12 11 H24 M12 16 H24 M12 21 H19"/></g></svg></svg>
+        <p class="lbl">2 &middot; Quoted estimates the cost</p>
+        <p class="sub">What serving this job will cost you, learned from jobs like it, tail included. This sets the floor.</p>
+      </div>
+      <div class="stat">
+        <svg class="chip" width="73" height="73" viewBox="0 0 73 73" aria-hidden="true" focusable="false"><g transform="translate(.5,.5)" stroke="#1741d6" stroke-opacity="0.4" stroke-width="1" shape-rendering="crispEdges"><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="72" y2="0"/><line vector-effect="non-scaling-stroke" x1="0" y1="72" x2="72" y2="72"/><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="0" y2="72"/><line vector-effect="non-scaling-stroke" x1="72" y1="0" x2="72" y2="72"/></g><svg x="21" y="21" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#1741d6" stroke-opacity="0.75" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 V30"/><path d="M8 11 H28"/><path d="M8 11 L4 21 H12 Z"/><path d="M28 11 L24 21 H32 Z"/></g></svg></svg>
+        <p class="lbl">3 &middot; Quoted estimates the value</p>
+        <p class="sub">What the result is worth to this user: the scope of the ask, and the declared attributes of who is asking. This sets the ceiling.</p>
+      </div>
+      <div class="stat">
+        <svg class="chip" width="73" height="73" viewBox="0 0 73 73" aria-hidden="true" focusable="false"><g transform="translate(.5,.5)" stroke="#1741d6" stroke-opacity="0.4" stroke-width="1" shape-rendering="crispEdges"><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="72" y2="0"/><line vector-effect="non-scaling-stroke" x1="0" y1="72" x2="72" y2="72"/><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="0" y2="72"/><line vector-effect="non-scaling-stroke" x1="72" y1="0" x2="72" y2="72"/></g><svg x="21" y="21" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#1741d6" stroke-opacity="0.75" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 29 C13 29 15 8 31 8"/><circle cx="20" cy="17.5" r="2.6"/></g></svg></svg>
+        <p class="lbl">4 &middot; Quoted picks the price between them</p>
+        <p class="sub">Never below your cost plus your margin. As close to the value as this user will accept, learned from every yes and no before.</p>
+      </div>
+      <div class="stat">
+        <svg class="chip" width="73" height="73" viewBox="0 0 73 73" aria-hidden="true" focusable="false"><g transform="translate(.5,.5)" stroke="#1741d6" stroke-opacity="0.4" stroke-width="1" shape-rendering="crispEdges"><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="72" y2="0"/><line vector-effect="non-scaling-stroke" x1="0" y1="72" x2="72" y2="72"/><line vector-effect="non-scaling-stroke" x1="0" y1="0" x2="0" y2="72"/><line vector-effect="non-scaling-stroke" x1="72" y1="0" x2="72" y2="72"/></g><svg x="21" y="21" width="30" height="30" viewBox="0 0 36 36"><g fill="none" stroke="#1741d6" stroke-opacity="0.75" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15 L15 4 H30 V19 L19 30 Z"/><circle cx="24" cy="10" r="2.6"/></g></svg></svg>
+        <p class="lbl">5 &middot; A price and the reason come back</p>
+        <p class="sub">A value-based price plus an explanation you can show your user, returned before the run starts.</p>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+
+<!-- ============================ 3. MECHANISM ============================ -->
+<section class="surface-white" id="mechanism">
+  <div class="wrap">
+    <p class="eyebrow">03 / The mechanism</p>
+    <h2>How a price gets set.</h2>
+    <p class="deck">Four parts behind one price. Three of them each answer one question about the job. The fourth picks the number, and says why. One of the four runs today; three are designed.</p>
+  </div>
+
+  <!-- The four parts are windows merged out of one grid, exactly like the
+       four ways above: shared surviving lines, no box drawn on top of
+       anything. Each card's icon is the closed cell above its left edge, a
+       real cell of this grid, and it lights with the window. The note
+       closes the panel as a full-width window. -->
+  <div class="gridpanel ways-grid mech-grid mt7" data-ways data-mode="light" data-mincols="6">
+    <div class="frame">
+      <div class="grid-svg-host" aria-hidden="true"></div>
+      <div class="cellbox way-box feat-win" data-chip="receipt">
+        <p class="feat-q">What will the job cost to serve?</p>
+        <h3>Cost prediction</h3>
+        <p class="feat-b">Finds the jobs that look like this one and returns what they actually cost, tail included. The tail sets the number, not the average, so the floor holds on the expensive runs too.</p>
+        <p class="feat-out"><span>Returns</span> the floor</p>
+        <p class="feat-st">Running prototype</p>
+      </div>
+      <div class="cellbox way-box feat-win" data-chip="scales">
+        <p class="feat-q">What is it worth to the buyer?</p>
+        <h3>Value prediction</h3>
+        <p class="feat-b">Reads the scope of the ask and the declared attributes of who is asking. A whole campaign is worth more than the sum of its images, because the specification is the part they came to buy.</p>
+        <p class="feat-out"><span>Returns</span> the ceiling</p>
+        <p class="feat-st">Designed, not built</p>
+      </div>
+      <div class="cellbox way-box feat-win" data-chip="percent">
+        <p class="feat-q">What does the price list allow?</p>
+        <h3>Rule-based pricing</h3>
+        <p class="feat-b">The published price list, as rules the decision has to obey: tiers, volume steps, contracted rates, minimum margin, caps. Nothing it returns falls outside what a customer could read on the pricing page.</p>
+        <p class="feat-out"><span>Returns</span> the bounds</p>
+        <p class="feat-st">Designed, not built</p>
+      </div>
+      <div class="cellbox way-box feat-win" data-chip="curve">
+        <p class="feat-q">Where in the band does it land?</p>
+        <h3>The decision</h3>
+        <p class="feat-b">Not the highest price. The highest price times the odds this buyer accepts it, learned from every offer made, including the ones that came back no. Every price comes back with the rule that produced it, in words the product can put in front of the user.</p>
+        <p class="feat-out"><span>Returns</span> the price, and the reason</p>
+        <p class="feat-st">Designed, not built</p>
+      </div>
+      <div class="cellbox way-box way-wide way-note">
+        <p class="mech-note"><strong>Rejections are the asset.</strong> Every no is a point on the demand curve, and today most products throw them away. For a product that does not store rejected prices, the first step is not a model. It is starting to store them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 4. OBJECTIONS ============================ -->
+<section class="surface-white" id="objections">
+  <div class="wrap">
+    <p class="eyebrow">04 / Questions</p>
+    <h2>The hard parts, up front.</h2>
+  </div>
+
+
+  <div class="wrap fit">
+    <dl>
+      <div>
+        <dt>Who this is for</dt>
+        <dd><b>An open task space</b>, where the user asks in free text and the work varies by orders of magnitude. A charge <b>decided in real time, before the run starts</b>. And <b>an agent loop</b> doing the work, not a fixed pipeline.</dd>
+      </div>
+      <div>
+        <dt>Who this is not for</dt>
+        <dd><b>A closed set of intents</b>, where a fixed price per intent is enough. <b>One clear task per call</b>, where the ask is always the same shape and a formula on the inputs already gets the price right. <b>Enterprise passthrough with caps</b>, where the risk already sits with the customer and there is no pain to solve.</dd>
+      </div>
+    </dl>
+
+  </div>
+
+  <div class="wrap">
+    <div class="objs">
+      <details class="obj">
+        <summary>This explodes in procurement.</summary>
+        <div class="ans-wrap"><div class="ans">
+          <p>Nobody is priced by identity. The price derives from declared attributes that are printed in the price list (average deal value, vertical, scope, close rate, LTV, sales cycle length) and the buyer classifies itself.</p>
+          <p>Identity-based pricing dies at the first invoice comparison and the first MFN clause. Attribute-based pricing is the version both customers can read.</p>
+        </div></div>
+      </details>
+      <details class="obj">
+        <summary>We will build it ourselves.</summary>
+        <div class="ans-wrap"><div class="ans">
+          <p>The floor, probably. The acceptance curves have no source: a new customer of yours has no history, so the prior has to come from similar sellers, matched on the same declared attributes that set the price.</p>
+          <p>That is cross-customer data, and it only exists for a party sitting with many customers. Here it is a condition of the thing working, not a nice-to-have.</p>
+        </div></div>
+      </details>
+      <details class="obj">
+        <summary>Users will split one big job into small ones.</summary>
+        <div class="ans-wrap"><div class="ans">
+          <p>To split "a campaign for every social network" into 100 image jobs, they have to already know which 100. That knowledge is the thing they came to buy.</p>
+          <p>The commercial precedent is the partner's hourly rate against the analyst's, same deliverable, published rate card. Volume buyers get a volume tier that prices them directly.</p>
+        </div></div>
+      </details>
+      <details class="obj">
+        <summary>I do not want users thinking about price.</summary>
+        <div class="ans-wrap"><div class="ans">
+          <p>They will not. The band is internal and what surfaces is a credit charge, not a dollar figure. Your users already see a credit count on every run.</p>
+        </div></div>
+      </details>
+      <details class="obj">
+        <summary>Who decides what counts as delivered?</summary>
+        <div class="ans-wrap"><div class="ans">
+          <p>Differential pricing starts arguments, and today the vendor rules on its own invoice. Outcome-based billing in support already had this fight: resolutions were counted that the customer would not have called resolutions, and the definition had to be rewritten in public.</p>
+          <p>Once prices differ per job, a third party that both sides can read is worth more than an in-house dashboard.</p>
+        </div></div>
+      </details>
+    </div>
+
+  </div>
+
+  
+
+</section>
+
+<!-- ============================ 5. CLOSE ============================ -->
+<!-- The close and the footer are one grid, not two bands with a strip of
+     bare surface between them. Three windows merged out of the same field:
+     the ask, the full width of the stage with the copy on the left and the
+     rest open, one closed row under it, then the meta window and the name
+     cell. The meta window is two rows tall on the stage and four under
+     1200, where the cell is smaller and the name cell is four by two, so
+     the stage sentence wraps inside it. -->
+<section class="close-sec gridpanel" id="close"
+         data-rows="9" data-rows-md="11" data-rows-sm="12" data-mode="light" data-mincols="6"
+         data-merges="0,1,c,r-4|0,r-2,c-2,2|c-2,r-1,2,1"
+         data-merges-md="0,1,c,r-6|0,r-4,c-4,4|c-4,r-2,4,2"
+         data-merges-sm="0,1,c,r-6|0,r-4,c,3|0,r-1,c,1">
+  <div class="frame">
+    <div class="grid-svg-host" aria-hidden="true"></div>
+
+    <div class="cellbox close-win" data-cell="0,1,c,r-4" data-cell-md="0,1,c,r-6" data-cell-sm="0,1,c,r-6">
+      <h2 class="h-limelt">Thirty minutes on how you price today.</h2>
+      <p>We go through what you charge now, where in the flow the price is decided, and which jobs you already suspect you are underpricing. You leave with the spread we think is sitting inside your current pricing and what it would take to capture it. No deck.</p>
+      <p class="mt5 cta-row">
+        <button type="button" class="btn btn-primary btn-full js-getquoted">Book a working session</button>
+      </p>
+    </div>
+
+    <footer role="contentinfo">
+      <span class="cellbox foot-meta" data-cell="0,r-2,c-2,2" data-cell-md="0,r-4,c-4,4" data-cell-sm="0,r-4,c,3">
+        <span>Thesis v5, 21 August 2026.</span>
+        <span class="stage">Quoted is a working name and a thesis, not a company yet. The cost floor exists as a running prototype; the rest is designed.</span>
+      </span>
+      <span class="cellbox foot-word" data-cell="c-2,r-1,2,1" data-cell-md="c-4,r-2,4,2" data-cell-sm="0,r-1,c,1">Quoted</span>
+    </footer>
+  </div>
+</section>
+
+</main>
+
+<div class="gq" id="gq" role="dialog" aria-modal="true" aria-labelledby="gq-title" hidden>
+  <div class="gq-scrim" aria-hidden="true"></div>
+  <div class="gq-in">
+    <button type="button" class="gq-x" id="gq-x" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M2 2 L16 16 M16 2 L2 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+    </button>
+    <div class="gq-ask" id="gq-ask">
+      <h2 id="gq-title" class="h-lime">Book the session.</h2>
+      <p class="gq-sub">Leave your details and we come back with two times that work.</p>
+      <form class="gq-form" id="gq-form" novalidate>
+        <label>Name
+          <input type="text" name="name" id="gq-name" autocomplete="name" required>
+        </label>
+        <label>Email
+          <input type="email" name="email" id="gq-email" autocomplete="email" required>
+        </label>
+        <label>Phone <span class="opt">(optional)</span>
+          <input type="tel" name="phone" id="gq-phone" autocomplete="tel">
+        </label>
+        <label>Company <span class="opt">(optional)</span>
+          <input type="text" name="company" id="gq-company" autocomplete="organization">
+        </label>
+        <button type="submit" class="btn btn-primary">Send by email</button>
+        <p class="gq-note" id="gq-err" role="alert" hidden>Name and email are the two that are needed.</p>
+        <p class="gq-note">Opens your mail app with the request filled in. Nothing is sent from this page.</p>
+      </form>
+    </div>
+    <div class="gq-done" id="gq-done" hidden>
+      <h2 id="gq-done-title" class="h-lime">Check your mail app.</h2>
+      <p class="gq-sub">The request is filled in and waiting there. Send it, and two times come back by reply.</p>
+      <p class="gq-note">If nothing opened, the request has not gone anywhere: close this and try again.</p>
+      <button type="button" class="btn btn-primary" id="gq-done-x">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   v4 script. One block: the grid engine from v2/v3 (icons, edges,
+   merge, the stage, the ways panels, the row snap), then the page
+   behaviour rebuilt on CSS transitions: the load sequence, scroll
+   reveals, the process rail, the nav underline, the sheet, the
+   menu, the accordion, the form. No spring engine, no timers that
+   never end. Everything here is additive: the page reads without it.
+   ============================================================ */
+(function(){
+  'use strict';
+
+  var NS = 'http://www.w3.org/2000/svg';
+  var root = document.documentElement;
+  var REDUCED = !!(window.matchMedia &&
+                   window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  /* ---------- brand icon vocabulary, the only ten ---------- */
+  var ICONS = {
+    percent: '<circle cx="10" cy="10" r="4"/><circle cx="26" cy="26" r="4"/><path d="M28 6 L8 30"/>',
+    tag:     '<path d="M4 15 L15 4 H30 V19 L19 30 Z"/><circle cx="24" cy="10" r="2.6"/>',
+    quote:   '<path d="M5 7 H31 V24 H16 L9 30 V24 H5 Z"/><path d="M11 13 H25 M11 18 H21"/>',
+    curve:   '<path d="M5 29 C13 29 15 8 31 8"/><circle cx="20" cy="17.5" r="2.6"/>',
+    receipt: '<path d="M8 4 H28 V29 L24.6 26.5 21.2 29 17.8 26.5 14.4 29 11 26.5 8 29 Z"/><path d="M12 11 H24 M12 16 H24 M12 21 H19"/>',
+    scales:  '<path d="M18 6 V30"/><path d="M8 11 H28"/><path d="M8 11 L4 21 H12 Z"/><path d="M28 11 L24 21 H32 Z"/>',
+    coins:   '<ellipse cx="18" cy="9" rx="11" ry="4"/><path d="M7 9 V18 C7 20.2 11.9 22 18 22 C24.1 22 29 20.2 29 18 V9"/><path d="M7 18 V27 C7 29.2 11.9 31 18 31 C24.1 31 29 29.2 29 27 V18"/>',
+    clock:   '<circle cx="18" cy="18" r="13"/><path d="M18 10 V18 L24 21"/>',
+    layers:  '<path d="M18 4 L32 12 L18 20 L4 12 Z"/><path d="M4 19 L18 27 L32 19"/>',
+    bolt:    '<path d="M20 3 L8 20 H17 L15 33 L28 15 H19 Z"/>'
+  };
+  var ICON_NAMES = Object.keys(ICONS);
+
+  /* ---------- helpers ---------- */
+  function cellPx(){
+    var v = parseFloat(getComputedStyle(root).getPropertyValue('--cell'));
+    return isNaN(v) ? 60 : v;
+  }
+  function hdrPx(){
+    var h = document.querySelector('.hdr');
+    return h ? h.offsetHeight : 56;
+  }
+  /* The column count is the constant, not the cell. Twenty-four columns of
+     the viewport: two of margin on each side and twenty of content. The
+     hero draws all 24 edge to edge; every panel under it draws the middle
+     twenty. Below 768 the margin is zero and the module leads again. */
+  var GRID_COLS = 24;
+  var MARGIN_COLS = 2;
+  function marginCols(){ return root.clientWidth < 768 ? 0 : MARGIN_COLS; }
+  function publishStage(){
+    var vw = root.clientWidth;
+    var pad = marginCols() * cellPx();
+    root.style.setProperty('--vw-full', vw + 'px');
+    root.style.setProperty('--page-x', pad + 'px');
+    root.style.setProperty('--stage', (vw - 2 * pad) + 'px');
+    root.style.setProperty('--vw', (vw - 2 * pad) + 'px');
+  }
+  function stagePx(){
+    var v = parseFloat(getComputedStyle(root).getPropertyValue('--stage'));
+    return isNaN(v) ? root.clientWidth : v;
+  }
+  function fitCell(){
+    var vw = root.clientWidth;
+    var cols;
+    if (vw >= 768){
+      cols = GRID_COLS;
+    } else {
+      var base = parseFloat(getComputedStyle(root).getPropertyValue('--cell-base'));
+      if (isNaN(base) || base <= 0) base = 42;
+      cols = Math.max(1, Math.round(vw / base));
+      if (cols % 2) cols += 1;
+    }
+    root.style.setProperty('--cell', (vw / cols) + 'px');
+    publishStage();
+  }
+  /* "c-2" -> cols-2, "r-1" -> rows-1, "5" -> 5 */
+  function resolveTok(tok, cols, rows){
+    tok = String(tok).trim();
+    if (tok.charAt(0) === 'c') return cols + (parseInt(tok.slice(1), 10) || 0);
+    if (tok.charAt(0) === 'r') return rows + (parseInt(tok.slice(1), 10) || 0);
+    return parseInt(tok, 10) || 0;
+  }
+  function parseRects(spec, cols, rows){
+    if (!spec) return [];
+    return spec.split('|').map(function(part){
+      return part.split(',').map(function(t){ return resolveTok(t, cols, rows); });
+    });
+  }
+  /* three widths, one attribute each: sm under 768, md under 1200, else the base */
+  function pick(ds, base){
+    var vw = root.clientWidth;
+    if (vw < 768 && ds[base + 'Sm']) return ds[base + 'Sm'];
+    if (vw < 1200 && ds[base + 'Md']) return ds[base + 'Md'];
+    return ds[base];
+  }
+  /* a small seeded generator, so a re-layout at the same size deals the
+     same hand of icons instead of reshuffling them in front of the reader */
+  function rng(seed){
+    var a = seed | 0;
+    return function(){
+      a = (a + 0x6D2B79F5) | 0;
+      var t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  /* one seed for the page and a step per panel, so every load deals the
+     same hand and a relayout at the same size deals it again */
+  var SEED = 20260902, seedN = 0;
+  function seedOf(panel){
+    if (!panel._seed) panel._seed = SEED + (++seedN) * 7919;
+    return panel._seed;
+  }
+
+  /* ---------- build one grid of real per-edge lines ---------- */
+  function buildSvg(cols, rows, CELL, mode){
+    var w = cols * CELL, h = rows * CELL;
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('width', w);
+    svg.setAttribute('height', h);
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    /* The four boundary lines are pulled a pixel inside the box. Drawn on
+       the box edge they land half a pixel outside it, where the panel's
+       own clip eats half the stroke and the closing line reads lighter
+       than every line beside it. */
+    function edge(v, max){ return Math.min(v, max - 1); }
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('focusable', 'false');
+    svg.style.pointerEvents = 'none';
+
+    var g = document.createElementNS(NS, 'g');
+    g.setAttribute('class', 'grid');
+    g.setAttribute('transform', 'translate(0.5,0.5)');
+
+    var stroke = (mode === 'light') ? '#1741d6' : '#ffffff';
+    var op     = (mode === 'light') ? '0.4' : '0.3';
+
+    var gv = document.createElementNS(NS, 'g');
+    gv.setAttribute('class', 'vertical-edges');
+    var gh = document.createElementNS(NS, 'g');
+    gh.setAttribute('class', 'horizontal-edges');
+    [gv, gh].forEach(function(grp){
+      grp.setAttribute('stroke', stroke);
+      grp.setAttribute('stroke-opacity', op);
+      grp.setAttribute('stroke-width', '1');
+      grp.setAttribute('shape-rendering', 'crispEdges');
+    });
+
+    var c, r, ln, x, y;
+    var index = {};
+    for (c = 0; c <= cols; c++){
+      x = edge(c * CELL, w);
+      for (r = 0; r < rows; r++){
+        ln = document.createElementNS(NS, 'line');
+        ln.setAttribute('pathLength', '1');
+        ln.style.setProperty('--r', r);
+        ln.setAttribute('x1', x); ln.setAttribute('x2', x);
+        ln.setAttribute('y1', r * CELL); ln.setAttribute('y2', Math.min((r + 1) * CELL, h));
+        ln._c = c; ln._r = r;
+        index['v' + c + ':' + r] = ln;
+        gv.appendChild(ln);
+      }
+    }
+    for (r = 0; r <= rows; r++){
+      y = edge(r * CELL, h);
+      for (c = 0; c < cols; c++){
+        ln = document.createElementNS(NS, 'line');
+        ln.setAttribute('pathLength', '1');
+        ln.style.setProperty('--r', r);
+        ln.setAttribute('y1', y); ln.setAttribute('y2', y);
+        ln.setAttribute('x1', c * CELL); ln.setAttribute('x2', Math.min((c + 1) * CELL, w));
+        ln._c = c; ln._r = r;
+        index['h' + c + ':' + r] = ln;
+        gh.appendChild(ln);
+      }
+    }
+    g.appendChild(gv); g.appendChild(gh);
+    svg.appendChild(g);
+    svg._gridRoot = g;
+    svg._index = index;
+    return svg;
+  }
+
+  /* The merge: delete the interior edges of a rectangle of cells.
+     Nothing is drawn on top, nothing is hidden. The nodes are removed,
+     dropped from the index so no icon can ever land beside them, and
+     handed back so the hero can show them going. */
+  function merge(svg, x, y, w, h){
+    var c, r, idx = svg._index, gone = [];
+    function drop(k){
+      var el = idx[k];
+      if (!el) return;
+      delete idx[k];
+      if (el.parentNode) el.parentNode.removeChild(el);
+      gone.push(el);
+    }
+    for (c = x + 1; c < x + w; c++){
+      for (r = y; r < y + h; r++){ drop('v' + c + ':' + r); }
+    }
+    for (r = y + 1; r < y + h; r++){
+      for (c = x; c < x + w; c++){ drop('h' + c + ':' + r); }
+    }
+    return gone;
+  }
+  /* An icon may only sit in a square whose four edges all survived. */
+  function isClosed(svg, c, r){
+    var idx = svg._index;
+    return !!(idx['v' + c + ':' + r] && idx['v' + (c + 1) + ':' + r] &&
+              idx['h' + c + ':' + r] && idx['h' + c + ':' + (r + 1)]);
+  }
+  /* one icon, centred in one cell, at the brand's 30/72 of the cell */
+  function drawIcon(svg, c, r, CELL, mode, name, op, cls){
+    var draw = Math.max(20, Math.round(CELL * 30 / 72));
+    var off  = (CELL - draw) / 2;
+    var inner = document.createElementNS(NS, 'svg');
+    inner.setAttribute('x', c * CELL + off);
+    inner.setAttribute('y', r * CELL + off);
+    inner.setAttribute('width', draw);
+    inner.setAttribute('height', draw);
+    inner.setAttribute('viewBox', '0 0 36 36');
+    var ig = document.createElementNS(NS, 'g');
+    ig.setAttribute('fill', 'none');
+    ig.setAttribute('stroke', mode === 'light' ? '#1741d6' : '#ffffff');
+    ig.setAttribute('stroke-opacity', op);
+    ig.setAttribute('stroke-width', '1.7');
+    ig.setAttribute('stroke-linecap', 'round');
+    ig.setAttribute('stroke-linejoin', 'round');
+    if (cls) ig.setAttribute('class', cls);
+    ig.innerHTML = ICONS[name];
+    inner.appendChild(ig);
+    svg._gridRoot.appendChild(inner);
+    return ig;
+  }
+
+  /* ---------- icons: a seeded scatter, still once placed ----------
+     Count is closed squares over ten. The same glyph never sits next to
+     itself. Rows under the fixed header are skipped, so nothing sits
+     behind the wordmark. */
+  function scatterIcons(svg, cols, rows, CELL, mode, panel, skipRows, reserved){
+    var closed = [], c, r, res = {};
+    (reserved || []).forEach(function(k){ res[k[0] + ':' + k[1]] = 1; });
+    for (r = skipRows || 0; r < rows; r++){
+      for (c = 0; c < cols; c++){ if (!res[c + ':' + r] && isClosed(svg, c, r)) closed.push([c, r]); }
+    }
+    if (!closed.length) return;
+    var rand = rng(seedOf(panel));
+    var count = Math.max(1, Math.round(closed.length / 10));
+    var taken = {}, placed = [];
+    var draw = Math.max(20, Math.round(CELL * 30 / 72));
+    var off  = (CELL - draw) / 2;
+    var grp = document.createElementNS(NS, 'g');
+    grp.setAttribute('class', 'icons');
+
+    function clashes(name, cc, rr){
+      return placed.some(function(p){
+        return p.name === name && Math.abs(p.c - cc) + Math.abs(p.r - rr) === 1;
+      });
+    }
+    var guard = 0;
+    while (placed.length < count && guard++ < 400){
+      var pick = closed[Math.floor(rand() * closed.length)];
+      var key = pick[0] + ':' + pick[1];
+      if (taken[key]) continue;
+      var name = ICON_NAMES[Math.floor(rand() * ICON_NAMES.length)];
+      if (clashes(name, pick[0], pick[1])) continue;
+      taken[key] = 1;
+      placed.push({ c: pick[0], r: pick[1], name: name });
+    }
+    placed.forEach(function(p){
+      var inner = document.createElementNS(NS, 'svg');
+      inner.setAttribute('x', p.c * CELL + off);
+      inner.setAttribute('y', p.r * CELL + off);
+      inner.setAttribute('width', draw);
+      inner.setAttribute('height', draw);
+      inner.setAttribute('viewBox', '0 0 36 36');
+      var ig = document.createElementNS(NS, 'g');
+      ig.setAttribute('fill', 'none');
+      ig.setAttribute('stroke', mode === 'light' ? '#1741d6' : '#ffffff');
+      ig.setAttribute('stroke-opacity', mode === 'light' ? '0.5' : '0.55');
+      ig.setAttribute('stroke-width', '1.7');
+      ig.setAttribute('stroke-linecap', 'round');
+      ig.setAttribute('stroke-linejoin', 'round');
+      ig.innerHTML = ICONS[p.name];
+      inner.appendChild(ig);
+      grp.appendChild(inner);
+    });
+    svg._gridRoot.appendChild(grp);
+  }
+
+  /* ---------- the load sequence, once ----------
+     The hero is built with every edge present: the ones its windows
+     delete are kept for the moment in a #ghost group. Then, in order,
+     the lines draw in row by row (380ms plus 22ms a row), the ghosts
+     fade (300ms from 440ms), which is the merge performed in front of
+     the reader, the icons fade up, and the copy rises with its own
+     stagger from 480ms. At 1000ms the ghosts are removed and the
+     classes dropped, so the SVG that remains is exactly the one the
+     engine would have drawn. The reveal floor in the head still shows
+     the copy at 600ms if none of this runs. */
+  var seqPending = !REDUCED;
+  var seqUntil = 0;
+  function heroSequence(){
+    var hero = document.querySelector('.hero.gridpanel');
+    if (!hero) return;
+    if (!hero.querySelector('#ghost')){ revealHeroNow(hero); return; }
+    window.__seq = true;
+    seqUntil = Date.now() + 1050;
+    hero.classList.add('pre');
+    void hero.offsetWidth;
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ hero.classList.add('drawn'); }); });
+    setTimeout(function(){ hero.classList.add('merging'); }, 440);
+    setTimeout(function(){ revealHeroNow(hero); }, 480);
+    setTimeout(function(){
+      var g = hero.querySelector('#ghost');
+      if (g && g.parentNode) g.parentNode.removeChild(g);
+      hero.classList.remove('pre', 'drawn', 'merging');
+    }, 1000);
+  }
+  function revealHeroNow(panel){
+    [].slice.call(panel.querySelectorAll('.rise')).forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---------- panel assembly ---------- */
+  var panels = [].slice.call(document.querySelectorAll('.gridpanel')).filter(function(p){ return !p.hasAttribute('data-ways'); });
+
+  function placeBoxes(panel, cols, rows, CELL){
+    [].slice.call(panel.querySelectorAll('.cellbox')).forEach(function(box){
+      var cs = pick(box.dataset, 'cell');
+      /* a window that does not exist at this width is simply not there */
+      if (!cs || cs === 'none'){ box.style.display = 'none'; return; }
+      box.style.display = '';
+      var rect = parseRects(cs, cols, rows)[0];
+      if (!rect) return;
+      box.style.left   = (rect[0] * CELL) + 'px';
+      box.style.top    = (rect[1] * CELL) + 'px';
+      box.style.width  = (rect[2] * CELL) + 'px';
+      box.style.height = (rect[3] * CELL) + 'px';
+    });
+  }
+
+  function layoutPanel(panel, extraRows){
+    var CELL = cellPx();
+    var vw = root.clientWidth;
+    var sm = vw < 768;
+    var minCols = parseInt(panel.dataset.mincols || '6', 10);
+    var span = panel.hasAttribute('data-fullbleed') ? vw : stagePx();
+    var cols = Math.max(minCols, Math.round(span / CELL));
+    var baseRows = parseInt(pick(panel.dataset, 'rows') || '6', 10);
+    var rows = baseRows + (extraRows || 0);
+    var mode = panel.dataset.mode || 'dark';
+    var spec = pick(panel.dataset, 'merges');
+    var skipRows = panel.dataset.iconsSkip === 'hdr' ? Math.ceil((hdrPx() - 0.5) / CELL) : 0;
+
+    panel.style.setProperty('--cols', cols);
+    panel.style.setProperty('--rows', rows);
+
+    var host = panel.querySelector('.grid-svg-host');
+    var key = [cols, rows, CELL.toFixed(3), mode, spec, skipRows].join('|');
+    /* same grid as last time: keep the lines (and the sequence running on
+       them) and only re-place the windows */
+    if (panel._key === key && host.firstElementChild && host.firstElementChild._index){
+      placeBoxes(panel, cols, rows, CELL);
+      return;
+    }
+    panel._key = key;
+
+    var svg = buildSvg(cols, rows, CELL, mode);
+    var ghosts = [];
+    parseRects(spec, cols, rows).forEach(function(m){ ghosts = ghosts.concat(merge(svg, m[0], m[1], m[2], m[3])); });
+
+    /* First paint of the hero: the edges its windows deleted go into a
+       group of their own, out of the index so nothing else can find them.
+       They draw in with the rest of the grid and then fade. heroSequence()
+       removes the group when it is done. */
+    if (seqPending && panel.classList.contains('hero') && ghosts.length){
+      var gg = document.createElementNS(NS, 'g');
+      gg.setAttribute('id', 'ghost');
+      gg.setAttribute('stroke', mode === 'light' ? '#1741d6' : '#ffffff');
+      gg.setAttribute('stroke-opacity', mode === 'light' ? '0.4' : '0.3');
+      gg.setAttribute('stroke-width', '1');
+      gg.setAttribute('shape-rendering', 'crispEdges');
+      ghosts.forEach(function(l){ gg.appendChild(l); });
+      svg._gridRoot.appendChild(gg);
+    }
+
+    placeBoxes(panel, cols, rows, CELL);
+
+    /* the grid runs under the transparent header; only the icons keep
+       clear of the bar */
+    if (panel.dataset.icons !== 'none'){
+      scatterIcons(svg, cols, rows, CELL, mode, panel, skipRows);
+    }
+
+    host.textContent = '';
+    host.appendChild(svg);
+  }
+
+  /* If the copy is taller than its window, the frame grows by whole
+     cells. It never clips and never spills across a live line. */
+  function fitPanel(panel){
+    var CELL = cellPx();
+    var extra = 0;
+    for (var pass = 0; pass < 4; pass++){
+      layoutPanel(panel, extra);
+      var boxes = [].slice.call(panel.querySelectorAll('.cellbox.hero-win, .cellbox.close-win'));
+      if (!boxes.length) return;
+      var grow = 0;
+      boxes.forEach(function(box){
+        var have = box.offsetHeight;
+        box.style.height = 'auto';
+        var need = box.offsetHeight;
+        box.style.height = have + 'px';
+        if (need - have > 1) grow = Math.max(grow, Math.ceil((need - have) / CELL));
+      });
+      if (!grow) return;
+      extra += grow;
+    }
+  }
+
+  /* The process rail: from the first icon to the last, behind the chips.
+     Horizontal when the five steps share a row, vertical when they stack. */
+  function railFlow(){
+    var flow = document.querySelector('.flow');
+    if (!flow) return;
+    var rail = flow.querySelector('.flow-rail');
+    if (!rail) return;
+    var chips = [].slice.call(flow.querySelectorAll('.stat .chip'));
+    if (chips.length < 2){ rail.style.display = 'none'; return; }
+    var fr = flow.getBoundingClientRect();
+    var a = chips[0].getBoundingClientRect();
+    var b = chips[chips.length - 1].getBoundingClientRect();
+    var horiz = Math.abs(a.top - b.top) < 2;
+    /* each step lights as the current reaches its icon: the delay is the
+       icon's position along the rail, as a share of the two second pass */
+    var span = horiz ? (b.left + b.width / 2 - a.left) : (b.top + b.height / 2 - a.top);
+    chips.forEach(function(ch){
+      var cr = ch.getBoundingClientRect();
+      var pos = horiz ? (cr.left + cr.width / 2 - a.left) : (cr.top + cr.height / 2 - a.top);
+      var frac = span > 0 ? Math.max(0, Math.min(1, pos / span)) : 0;
+      var st = ch.closest('.stat');
+      if (st) st.style.setProperty('--kt', Math.max(0, Math.round(frac * 2000 - 150)) + 'ms');
+    });
+    rail.classList.remove('h','v');
+    if (horiz){
+      rail.classList.add('h');
+      rail.style.left = '0px';
+      rail.style.top = (a.top - fr.top + a.height/2 - 6) + 'px';
+      rail.style.width = (b.left - fr.left + b.width/2) + 'px';
+      rail.style.height = '12px';
+    } else {
+      rail.classList.add('v');
+      rail.style.left = (a.left - fr.left + a.width/2 - 6) + 'px';
+      rail.style.top = (a.top - fr.top + a.height/2) + 'px';
+      rail.style.width = '12px';
+      rail.style.height = (b.top - a.top) + 'px';
+    }
+    rail.style.display = 'block';
+  }
+
+  /* A windows panel: one closed grid, the windows merged out of it.
+     Boxes go k to a row, k chosen so a window is never narrower than
+     about 236px and never more than two to a row under 1100; a .way-open
+     or .way-wide box takes a whole row. Every surviving line is shared.
+     A box with data-chip gets its icon in the closed cell above its left
+     edge: a cell of this grid, whose four edges light with the window.
+     A chip row carries chips and nothing else, so a scattered icon can
+     never sit beside one and read as a fifth card. */
+  function fitWaysPanel(panel){
+    var CELL = cellPx();
+    var vw = root.clientWidth;
+    var sm = vw < 768;
+    var minCols = parseInt(panel.dataset.mincols || '6', 10);
+    var cols = Math.max(minCols, Math.round(stagePx() / CELL));
+    var mode = panel.dataset.mode || 'light';
+    var boxes = [].slice.call(panel.querySelectorAll('.way-box'));
+    var chipped = boxes.some(function(b){ return !!b.dataset.chip; });
+    var MINW = 236;
+
+    var k;
+    if (sm) k = 1;
+    else if (Math.floor(cols / 4) * CELL >= MINW) k = 4;
+    else if (Math.floor(cols / 2) * CELL >= MINW) k = 2;
+    else k = 1;
+    if (vw < 1100 && k > 2) k = 2;
+
+    var wallW = Math.floor(cols / k), rem = cols - wallW * k;
+    var widths = [], offs = [], acc = 0, wi;
+    for (wi = 0; wi < k; wi++){
+      var cw = wallW + (wi < rem ? 1 : 0);
+      widths.push(cw); offs.push(acc); acc += cw;
+    }
+    var measure = function(b, wpx){
+      b.style.left = '0px'; b.style.top = '0px';
+      b.style.width = wpx + 'px'; b.style.height = 'auto';
+      return Math.max(2, Math.ceil(b.offsetHeight / CELL));
+    };
+    var rects = [], chips = [], y = 1, band = [];
+    function flush(){
+      if (!band.length) return;
+      /* every band after the first gets a closed row above it for its chips;
+         the first band's chips sit in the frame row */
+      if (chipped && rects.length) y += 1;
+      var H = 0;
+      band.forEach(function(b, i){ H = Math.max(H, measure(b, widths[i] * CELL)); });
+      band.forEach(function(b, i){
+        rects.push({ box:b, x:offs[i], y:y, w:widths[i], h:H });
+        if (b.dataset.chip) chips.push({ box:b, c:offs[i], r:y - 1, name:b.dataset.chip });
+      });
+      y += H; band = [];
+    }
+    boxes.forEach(function(b){
+      if (b.classList.contains('way-open') || b.classList.contains('way-wide')){
+        flush();
+        var h = measure(b, cols * CELL);
+        rects.push({ box:b, x:0, y:y, w:cols, h:h });
+        y += h;
+      } else {
+        band.push(b);
+        if (band.length === k) flush();
+      }
+    });
+    flush();
+
+    var rows = y + 1;
+    panel.style.setProperty('--cols', cols);
+    panel.style.setProperty('--rows', rows);
+    rects.forEach(function(rc){
+      rc.box.style.left = (rc.x * CELL) + 'px';
+      rc.box.style.top = (rc.y * CELL) + 'px';
+      rc.box.style.width = (rc.w * CELL) + 'px';
+      rc.box.style.height = (rc.h * CELL) + 'px';
+    });
+    var host = panel.querySelector('.grid-svg-host');
+    var key = [cols, rows, CELL.toFixed(3), mode].concat(rects.map(function(rc){ return rc.x + ',' + rc.y + ',' + rc.w + ',' + rc.h; })).join('|');
+    if (panel._key === key && host.firstElementChild) return;
+    panel._key = key;
+    var svg = buildSvg(cols, rows, CELL, mode);
+    rects.forEach(function(rc){ merge(svg, rc.x, rc.y, rc.w, rc.h); });
+
+    var reserved = [];
+    chips.forEach(function(ch){
+      for (var cc = 0; cc < cols; cc++){ reserved.push([cc, ch.r]); }
+      var idx = svg._index;
+      var ico = drawIcon(svg, ch.c, ch.r, CELL, mode, ch.name, '0.75', 'chip-ico');
+      var edges = [
+        idx['v' + ch.c + ':' + ch.r], idx['v' + (ch.c + 1) + ':' + ch.r],
+        idx['h' + ch.c + ':' + ch.r], idx['h' + ch.c + ':' + (ch.r + 1)]
+      ].filter(Boolean);
+      edges.forEach(function(e){ e.setAttribute('class', 'chip-edge'); });
+      ch.box._cell = { edges:edges, ico:ico };
+      if (!ch.box._lit){
+        ch.box._lit = true;
+        var lit = function(on){
+          return function(){
+            var cell = ch.box._cell; if (!cell) return;
+            cell.edges.forEach(function(e){ e.classList.toggle('lit', on); });
+            cell.ico.classList.toggle('lit', on);
+          };
+        };
+        ch.box.addEventListener('mouseenter', lit(true));
+        ch.box.addEventListener('mouseleave', lit(false));
+        ch.box.addEventListener('focusin', lit(true));
+        ch.box.addEventListener('focusout', lit(false));
+      }
+    });
+
+    scatterIcons(svg, cols, rows, CELL, mode, panel, 0, reserved);
+    host.textContent = '';
+    host.appendChild(svg);
+  }
+  function fitWays(){
+    [].slice.call(document.querySelectorAll('[data-ways]')).forEach(fitWaysPanel);
+  }
+
+  /* A section whose height is not a whole number of cells shifts every
+     row line under it. Measure, then top the section up to the next row. */
+  function snapSections(){
+    var secs = [].slice.call(document.querySelectorAll('main > section'));
+    secs.forEach(function(sec){ sec.style.paddingBottom = ''; });
+    if (root.clientWidth < 768) return;
+    var CELL = cellPx();
+    secs.forEach(function(sec){
+      var h = sec.getBoundingClientRect().height;
+      var add = Math.ceil(h / CELL) * CELL - h;
+      if (add > 0.5){
+        var base = parseFloat(getComputedStyle(sec).paddingBottom) || 0;
+        sec.style.paddingBottom = (base + add) + 'px';
+      }
+    });
+  }
+
+  function layoutAll(){
+    fitCell();          /* publishes --cell, --stage, --vw, --vw-full, --page-x */
+    panels.forEach(fitPanel);
+    if (seqPending){ seqPending = false; heroSequence(); }
+    fitWays();
+    railFlow();
+    snapSections();
+    placeUnderline();
+  }
+
+  /* The grid is never allowed to take the page down with it. If measurement
+     throws, every panel falls back to the flat, unmerged band and the hero
+     copy shows at once. A layout pass that lands while the load sequence is
+     running (fonts.ready, load) waits for it, so the sequence is never
+     rebuilt out from under itself. */
+  var deferT = null;
+  function safeLayout(){
+    var wait = seqUntil - Date.now();
+    if (wait > 0){ clearTimeout(deferT); deferT = setTimeout(safeLayout, wait + 20); return; }
+    try { layoutAll(); }
+    catch (err){
+      panels.forEach(function(pn){ pn.classList.add('nojs-flat'); });
+      [].slice.call(document.querySelectorAll('[data-ways]')).forEach(function(pn){ pn.classList.add('nojs-flat'); });
+      var hero = document.getElementById('top'); if (hero) revealHeroNow(hero);
+    }
+  }
+
+  safeLayout();
+  if (REDUCED){ var h0 = document.getElementById('top'); if (h0) revealHeroNow(h0); }
+  if (document.fonts && document.fonts.ready){
+    document.fonts.ready.then(function(){ requestAnimationFrame(safeLayout); });
+  }
+  window.addEventListener('load', function(){ requestAnimationFrame(safeLayout); });
+
+  var t = null;
+  function scheduleLayout(){
+    clearTimeout(t);
+    t = setTimeout(function(){ requestAnimationFrame(safeLayout); }, 150);
+  }
+  window.addEventListener('resize', scheduleLayout);
+  window.addEventListener('orientationchange', scheduleLayout);
+
+  /* ============================================================
+     SHEETS. The Get Quoted panel and the menu. 260ms in, with the
+     scrim; Escape closes; Tab is trapped; the page behind is inert;
+     focus goes back to the control that opened it.
+     ============================================================ */
+  var main = document.getElementById('main');
+  var hdr = document.querySelector('.hdr');
+  var openCount = 0;
+  function setInert(on){
+    [main, hdr].forEach(function(el){ if (el) el.inert = on; });
+  }
+  function visible(el){ return !!(el && el.offsetParent !== null); }
+  function makeSheet(overlay, opts){
+    opts = opts || {};
+    var opener = null, timer = null;
+    function focusables(){
+      return [].slice.call(overlay.querySelectorAll('a[href], button, input, textarea, select, [tabindex]:not([tabindex="-1"])'))
+        .filter(function(el){ return !el.disabled && visible(el); });
+    }
+    function open(trigger){
+      opener = trigger || document.activeElement;
+      clearTimeout(timer);
+      if (overlay.hidden){ openCount++; }
+      overlay.hidden = false;
+      void overlay.getBoundingClientRect();   /* start state committed before the end state */
+      overlay.classList.add('open');
+      root.classList.add('sheet-open');
+      setInert(true);
+      if (opts.onOpen) opts.onOpen();
+      var f = opts.initial ? overlay.querySelector(opts.initial) : null;
+      if (!visible(f)) f = focusables()[0];
+      if (f) f.focus({ preventScroll:true });
+    }
+    function close(){
+      if (overlay.hidden) return;
+      overlay.classList.remove('open');
+      openCount = Math.max(0, openCount - 1);
+      if (!openCount){ root.classList.remove('sheet-open'); setInert(false); }
+      var finished = false;
+      var done = function(){
+        if (finished) return; finished = true;
+        overlay.hidden = true; if (opts.onClosed) opts.onClosed();
+      };
+      if (REDUCED) done();
+      else {
+        /* the transition says when it is over; the timer is the fallback */
+        var mover = opts.panel ? overlay.querySelector(opts.panel) : overlay;
+        var onEnd = function(ev){ if (ev.target !== mover) return; mover.removeEventListener('transitionend', onEnd); done(); };
+        if (mover) mover.addEventListener('transitionend', onEnd);
+        timer = setTimeout(done, 340);
+      }
+      var back = visible(opener) ? opener : (opts.fallbackFocus ? document.querySelector(opts.fallbackFocus) : null);
+      if (back && back.focus) back.focus({ preventScroll:true });
+      if (opts.onClose) opts.onClose();
+    }
+    overlay.addEventListener('keydown', function(e){
+      if (e.key === 'Escape'){ e.preventDefault(); close(); return; }
+      if (e.key !== 'Tab') return;
+      var f = focusables();
+      if (!f.length){ e.preventDefault(); return; }
+      var first = f[0], last = f[f.length - 1], cur = document.activeElement;
+      if (e.shiftKey && (cur === first || !overlay.contains(cur))){ e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && (cur === last || !overlay.contains(cur))){ e.preventDefault(); first.focus(); }
+    });
+    return { open:open, close:close, isOpen:function(){ return !overlay.hidden; } };
+  }
+
+  /* ---------- Get Quoted ---------- */
+  var gq = document.getElementById('gq');
+  var gqForm = document.getElementById('gq-form');
+  var gqErr = document.getElementById('gq-err');
+  var gqAsk = document.getElementById('gq-ask');
+  var gqDone = document.getElementById('gq-done');
+  var gqSheet = null;
+  if (gq && gqForm){
+    gqSheet = makeSheet(gq, {
+      panel:'.gq-in',
+      initial:'#gq-name',
+      fallbackFocus:'#mnav-open',
+      onOpen:function(){
+        /* every opening starts at the form, never at last time's confirmation */
+        if (gqAsk) gqAsk.hidden = false;
+        if (gqDone) gqDone.hidden = true;
+        if (gqErr) gqErr.hidden = true;
+        gq.setAttribute('aria-labelledby', 'gq-title');
+      }
+    });
+    [].slice.call(document.querySelectorAll('.js-getquoted')).forEach(function(b){
+      b.addEventListener('click', function(e){ e.preventDefault(); gqSheet.open(e.currentTarget); });
+    });
+    document.getElementById('gq-x').addEventListener('click', function(){ gqSheet.close(); });
+    var doneX = document.getElementById('gq-done-x');
+    if (doneX) doneX.addEventListener('click', function(){ gqSheet.close(); });
+    /* a press on the scrim, outside the panel, closes */
+    gq.addEventListener('pointerdown', function(e){
+      if (e.target === gq || (e.target.classList && e.target.classList.contains('gq-scrim'))) gqSheet.close();
+    });
+    gqForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      var name = document.getElementById('gq-name').value.trim();
+      var email = document.getElementById('gq-email').value.trim();
+      var phone = document.getElementById('gq-phone').value.trim();
+      var company = document.getElementById('gq-company').value.trim();
+      var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!name || !emailOk){
+        gqErr.hidden = false;
+        (name ? document.getElementById('gq-email') : document.getElementById('gq-name')).focus();
+        return;
+      }
+      gqErr.hidden = true;
+      var body = 'Name: ' + name + '\nEmail: ' + email +
+                 (phone ? '\nPhone: ' + phone : '') +
+                 (company ? '\nCompany: ' + company : '');
+      /* mailto is the transport: there is no endpoint yet. The address lives
+         here and nowhere the page shows. */
+      window.location.href = 'mailto:d.farjun@gmail.com?subject=' +
+        encodeURIComponent('Get Quoted: ' + name + (company ? ', ' + company : '')) +
+        '&body=' + encodeURIComponent(body);
+      if (gqAsk && gqDone){
+        gqAsk.hidden = true; gqDone.hidden = false;
+        gq.setAttribute('aria-labelledby', 'gq-done-title');
+        if (doneX) doneX.focus({ preventScroll:true });
+      } else {
+        gqSheet.close();
+      }
+    });
+  }
+
+  /* ---------- menu ---------- */
+  var mnav = document.getElementById('mnav');
+  var mnavOpenBtn = document.getElementById('mnav-open');
+  if (mnav && mnavOpenBtn){
+    var mnavSheet = makeSheet(mnav, {
+      initial:'.mnav-in a',
+      onClose:function(){ mnavOpenBtn.setAttribute('aria-expanded', 'false'); }
+    });
+    mnavOpenBtn.addEventListener('click', function(e){
+      mnavSheet.open(e.currentTarget);
+      mnavOpenBtn.setAttribute('aria-expanded', 'true');
+    });
+    document.getElementById('mnav-x').addEventListener('click', function(){ mnavSheet.close(); });
+    [].slice.call(mnav.querySelectorAll('a')).forEach(function(a){
+      a.addEventListener('click', function(){ mnavSheet.close(); });
+    });
+    /* Get Quoted inside the menu: the menu closes, then the sheet opens
+       from the burger, which is where focus will come back to */
+    [].slice.call(mnav.querySelectorAll('.js-getquoted')).forEach(function(b){
+      b.addEventListener('click', function(e){
+        e.stopImmediatePropagation();
+        mnavSheet.close();
+        if (gqSheet) setTimeout(function(){ gqSheet.open(mnavOpenBtn); }, REDUCED ? 0 : 120);
+      }, true);
+    });
+  }
+
+  /* ============================================================
+     HEADER. Transparent over the hero, white with a hairline past
+     it. One underline that slides between the nav items, placed
+     off the link the observer marks current.
+     ============================================================ */
+  var hero = document.getElementById('top');
+  if (hdr && hero && 'IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      hdr.classList.toggle('past-hero', !entries[0].isIntersecting);
+    }, { rootMargin: '-' + hdrPx() + 'px 0px 0px 0px' }).observe(hero);
+  } else if (hdr){
+    hdr.classList.add('past-hero');
+  }
+
+  /* The observer names the current section. The underline is one element,
+     translated to an item and scaled to the width of its word: it visits
+     the hovered or focused item and goes home to the current one on leave.
+     Over the hero, and over the close, nothing is current and it shrinks
+     to nothing where it stands. */
+  var nav = document.querySelector('.hdr-nav');
+  var ul = nav ? nav.querySelector('.hdr-ul') : null;
+  var links = nav ? [].slice.call(nav.querySelectorAll('a')) : [];
+  var current = null, heroOn = false;
+  function placeUl(a){
+    if (!ul) return;
+    if (!a || !visible(a)){
+      ul.style.transform = (ul.style.transform || '').replace(/scaleX\([^)]*\)/, '') + ' scaleX(0)';
+      return;
+    }
+    var cs = getComputedStyle(a);
+    var pl = parseFloat(cs.paddingLeft) || 0, pr = parseFloat(cs.paddingRight) || 0;
+    var x = a.offsetLeft + pl, w = Math.max(0, a.offsetWidth - pl - pr);
+    ul.style.transform = 'translateX(' + x.toFixed(1) + 'px) scaleX(' + (w / 100).toFixed(4) + ')';
+  }
+  function placeUnderline(){ placeUl(current); }
+  links.forEach(function(a){
+    a.addEventListener('mouseenter', function(){ placeUl(a); });
+    a.addEventListener('focus', function(){ placeUl(a); });
+  });
+  if (nav){
+    nav.addEventListener('mouseleave', function(){ placeUl(current); });
+    nav.addEventListener('focusout', function(){ placeUl(current); });
+  }
+  function setCurrent(a){
+    links.forEach(function(l){ l.removeAttribute('aria-current'); });
+    current = a || null;
+    if (a) a.setAttribute('aria-current', 'true');
+    placeUl(current);
+  }
+  if (links.length && 'IntersectionObserver' in window){
+    var map = {};
+    links.forEach(function(a){
+      var id = a.getAttribute('href').slice(1);
+      if (document.getElementById(id)) map[id] = a;
+    });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (!en.isIntersecting) return;
+        setCurrent(heroOn ? null : (map[en.target.id] || null));
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    Object.keys(map).forEach(function(id){ io.observe(document.getElementById(id)); });
+    /* the hero and the close carry no nav item: over them the underline goes */
+    if (hero) io.observe(hero);
+    var closeSec = document.getElementById('close');
+    if (closeSec) io.observe(closeSec);
+    /* and while half the hero is on screen nothing is current, whatever the
+       section observer last said */
+    if (hero){
+      new IntersectionObserver(function(entries){
+        heroOn = entries[0].isIntersecting && entries[0].intersectionRatio >= 0.5;
+        if (heroOn) setCurrent(null);
+      }, { threshold:[0.5] }).observe(hero);
+    }
+  }
+
+  /* ---------- press: feedback on pointer-down, not on release ----------
+     Highlight on pointer-down, commit on pointer-up, and a drag away
+     cancels it. Waiting for click to show anything is the cheapest way
+     to make an interface feel dead. */
+  var PRESSABLE = '.btn, .hdr-nav a, .mnav-in a, .obj > summary, .gq-x, .hdr-burger, .hdr-word';
+  var pressed = null, pressAt = null;
+  function unpress(){ if (pressed){ pressed.classList.remove('press'); pressed = null; } }
+  document.addEventListener('pointerdown', function(e){
+    var el = e.target.closest && e.target.closest(PRESSABLE);
+    if (!el) return;
+    unpress();
+    pressed = el; pressAt = { x:e.clientX, y:e.clientY };
+    el.classList.add('press');
+  }, true);
+  document.addEventListener('pointermove', function(e){
+    if (!pressed) return;
+    if (Math.abs(e.clientX - pressAt.x) + Math.abs(e.clientY - pressAt.y) > 14) unpress();
+  }, true);
+  ['pointerup','pointercancel','blur'].forEach(function(t){
+    window.addEventListener(t, unpress, true);
+  });
+
+
+  /* ============================================================
+     ACCORDION. grid-template-rows 0fr to 1fr over 220ms, chevron
+     turns 180 with it. The .acc class tells the CSS a script is
+     running the transition; without it a native open still shows.
+     ============================================================ */
+  [].slice.call(document.querySelectorAll('details.obj')).forEach(function(d){
+    var sum = d.querySelector('summary');
+    if (!sum) return;
+    d.classList.add('acc');
+    if (d.open) d.classList.add('is-open');
+    sum.addEventListener('click', function(e){
+      e.preventDefault();
+      if (d.open && d.classList.contains('is-open')){
+        d.classList.remove('is-open');
+        d._closing = true;
+        clearTimeout(d._t);
+        var wrap = d.querySelector('.ans-wrap');
+        var fin = function(){
+          if (!d._closing) return;
+          d._closing = false; clearTimeout(d._t);
+          if (!d.classList.contains('is-open')) d.open = false;
+        };
+        if (REDUCED){ fin(); }
+        else {
+          /* the transition says when the row has reached zero; the timer
+             is the fallback */
+          if (wrap) wrap.addEventListener('transitionend', function h(ev){
+            if (ev.target !== wrap) return;
+            wrap.removeEventListener('transitionend', h); fin();
+          });
+          d._t = setTimeout(fin, 320);
+        }
+      } else {
+        clearTimeout(d._t); d._closing = false;
+        d.open = true;
+        void d.getBoundingClientRect();
+        requestAnimationFrame(function(){ d.classList.add('is-open'); });
+      }
+    });
+    /* opened by the browser itself (find in page, a hash): show it */
+    d.addEventListener('toggle', function(){
+      if (d.open && !d._closing) d.classList.add('is-open');
+    });
+  });
+
+  /* ============================================================
+     SCROLL REVEALS. Every kicker, headline, lead and card below the
+     fold rises 12px and fades in, 220ms, staggered inside its group,
+     once, at 15% visibility. Set from here, never in the markup, so
+     without script nothing is hidden. The hero has its own sequence.
+     ============================================================ */
+  var flow = document.querySelector('.flow');
+  if (!REDUCED && 'IntersectionObserver' in window){
+    var fold = window.innerHeight * 0.9;
+    var targets = [];
+    function mark(el, d){
+      if (!el || el.closest('.hero')) return;
+      if (el.getBoundingClientRect().top <= fold) return;
+      el.classList.add('rv');
+      el.style.setProperty('--d', d + 'ms');
+      targets.push(el);
+    }
+    function group(els, step, from){
+      els.forEach(function(el, i){ mark(el, (from || 0) + i * step); });
+    }
+    /* section intros */
+    [].slice.call(document.querySelectorAll('section > .wrap')).forEach(function(w){
+      group([].slice.call(w.children).filter(function(c){
+        return c.matches('.eyebrow, h2, .deck, .mech-note');
+      }), 60);
+    });
+    /* windows: the four ways 60ms apart; the mechanism 120ms apart, floor,
+       ceiling, bounds, price, with the "Returns" line last in each card */
+    [].slice.call(document.querySelectorAll('[data-ways]')).forEach(function(panel){
+      var step = panel.classList.contains('mech-grid') ? 120 : 60;
+      [].slice.call(panel.querySelectorAll('.way-box')).forEach(function(box, i){
+        var kids = [];
+        [].slice.call(box.children).forEach(function(k){
+          if (k.tagName === 'DIV') kids = kids.concat([].slice.call(k.children));
+          else kids.push(k);
+        });
+        kids.forEach(function(k){
+          if (k.classList.contains('feat-out')) mark(k, i * step + 220);
+          else if (k.classList.contains('feat-st')) mark(k, i * step + 340);
+          else mark(k, i * step);
+        });
+      });
+    });
+    /* the five steps, the fit pairs, the questions, the close */
+    group([].slice.call(document.querySelectorAll('.flow > .stat')), 60);
+    group([].slice.call(document.querySelectorAll('.fit dl > div')), 60);
+    group([].slice.call(document.querySelectorAll('.objs > .obj')), 60);
+    group([].slice.call(document.querySelectorAll('.close-win > *')), 60);
+    group([].slice.call(document.querySelectorAll('.foot-meta, .foot-word')), 60, 180);
+
+    var rio = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (!en.isIntersecting) return;
+        en.target.classList.add('in');
+        rio.unobserve(en.target);
+      });
+    }, { threshold: 0.15 });
+    targets.forEach(function(el){ rio.observe(el); });
+
+    /* the process rail runs once, when the steps come into view */
+    if (flow){
+      var fio = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if (!en.isIntersecting) return;
+          fio.unobserve(flow);
+          /* after the steps themselves have risen */
+          setTimeout(function(){ flow.classList.add('run'); }, 400);
+        });
+      }, { threshold: 0.15 });
+      fio.observe(flow);
+    }
+  }
+})();
+</script>
+
+</body>
+</html>
