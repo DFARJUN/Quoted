@@ -1,0 +1,2 @@
+Remove the background from this image. Keep all foreground subjects unchanged and fully intact, with clean, smooth edges. Make the background transparent. Deliver true alpha transparency, not a checkerboard pattern. Preserve exact original foreground pixels and full silhouette.
+Built-in image model. Output verified RGBA with transparent corner pixels.
